@@ -1,17 +1,38 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="game.cpp" />
     <ClCompile Include="Base\EglContext.cpp">
       <Filter>Base</Filter>
     </ClCompile>
     <ClCompile Include="Base\stdafx.cpp">
       <Filter>Base</Filter>
     </ClCompile>
+    <ClCompile Include="app.cpp" />
+    <ClCompile Include="Script\game.cpp">
+      <Filter>Script</Filter>
+    </ClCompile>
+    <ClCompile Include="Script\scene.cpp">
+      <Filter>Script</Filter>
+    </ClCompile>
+    <ClCompile Include="Scenes\Start\StartScene.cpp">
+      <Filter>Scenes\Start</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\pak.cpp">
+      <Filter>Base</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Base">
       <UniqueIdentifier>{cada8c63-df12-4ce0-93ec-9dc8a446a2d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script">
+      <UniqueIdentifier>{69064165-5e1c-4ceb-8d34-e6c0b08f245f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes">
+      <UniqueIdentifier>{98c06a4e-c969-44e4-9688-78a41088a7d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\Start">
+      <UniqueIdentifier>{6c2c4265-ef29-4c96-a50f-d39a3c529195}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -21,5 +42,25 @@
     <ClInclude Include="Base\stdafx.h">
       <Filter>Base</Filter>
     </ClInclude>
+    <ClInclude Include="Script\game.hpp">
+      <Filter>Script</Filter>
+    </ClInclude>
+    <ClInclude Include="Script\scene.hpp">
+      <Filter>Script</Filter>
+    </ClInclude>
+    <ClInclude Include="Scenes\Start\StartScene.hpp">
+      <Filter>Scenes\Start</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\pak.hpp">
+      <Filter>Base</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Scenes\Start\start.frag">
+      <Filter>Scenes\Start</Filter>
+    </None>
+    <None Include="Scenes\Start\start.vert">
+      <Filter>Scenes\Start</Filter>
+    </None>
   </ItemGroup>
 </Project>

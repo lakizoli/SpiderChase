@@ -90,7 +90,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)SDK\Framework;$(SolutionDir)SDK\External;$(SolutionDir)SDK\Builds\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)SDK\Framework;$(SolutionDir)SDK\External;$(SolutionDir)SDK\Builds\Include;$(ProjectDir)Base;$(ProjectDir)Script;$(ProjectDir)Scenes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -111,7 +111,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)SDK\Framework;$(SolutionDir)SDK\External;$(SolutionDir)SDK\Builds\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)SDK\Framework;$(SolutionDir)SDK\External;$(SolutionDir)SDK\Builds\Include;$(ProjectDir)Base;$(ProjectDir)Script;$(ProjectDir)Scenes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -134,7 +134,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)SDK\Framework;$(SolutionDir)SDK\External;$(SolutionDir)SDK\Builds\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)SDK\Framework;$(SolutionDir)SDK\External;$(SolutionDir)SDK\Builds\Include;$(ProjectDir)Base;$(ProjectDir)Script;$(ProjectDir)Scenes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -159,7 +159,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)SDK\Framework;$(SolutionDir)SDK\External;$(SolutionDir)SDK\Builds\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)SDK\Framework;$(SolutionDir)SDK\External;$(SolutionDir)SDK\Builds\Include;$(ProjectDir)Base;$(ProjectDir)Script;$(ProjectDir)Scenes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -175,18 +175,30 @@
     </PreLinkEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="app.cpp" />
     <ClCompile Include="Base\EglContext.cpp" />
+    <ClCompile Include="Base\pak.cpp" />
     <ClCompile Include="Base\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="game.cpp" />
+    <ClCompile Include="Scenes\Start\StartScene.cpp" />
+    <ClCompile Include="Script\game.cpp" />
+    <ClCompile Include="Script\scene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Base\EglContext.h" />
+    <ClInclude Include="Base\pak.hpp" />
     <ClInclude Include="Base\stdafx.h" />
+    <ClInclude Include="Scenes\Start\StartScene.hpp" />
+    <ClInclude Include="Script\game.hpp" />
+    <ClInclude Include="Script\scene.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Scenes\Start\start.frag" />
+    <None Include="Scenes\Start\start.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
