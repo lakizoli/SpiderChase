@@ -16,5 +16,6 @@ public:
 //Interface
 public:
 	bool Step (); //Have to return false, when exit needed
+	void Exit ();
 };
 

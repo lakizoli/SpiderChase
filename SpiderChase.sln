@@ -4,6 +4,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SpiderChase", "SpiderChase\SpiderChase.vcxproj", "{71986A33-41E5-47E5-BA97-4B5AD584B35A}"
+	ProjectSection(ProjectDependencies) = postProject
+		{76B77093-5A81-438F-A4E8-A7FBEFA53BAA} = {76B77093-5A81-438F-A4E8-A7FBEFA53BAA}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "pakmaker", "pakmaker\pakmaker.vcxproj", "{76B77093-5A81-438F-A4E8-A7FBEFA53BAA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +26,14 @@ Global
 		{71986A33-41E5-47E5-BA97-4B5AD584B35A}.Release|x64.Build.0 = Release|x64
 		{71986A33-41E5-47E5-BA97-4B5AD584B35A}.Release|x86.ActiveCfg = Release|Win32
 		{71986A33-41E5-47E5-BA97-4B5AD584B35A}.Release|x86.Build.0 = Release|Win32
+		{76B77093-5A81-438F-A4E8-A7FBEFA53BAA}.Debug|x64.ActiveCfg = Debug|x64
+		{76B77093-5A81-438F-A4E8-A7FBEFA53BAA}.Debug|x64.Build.0 = Debug|x64
+		{76B77093-5A81-438F-A4E8-A7FBEFA53BAA}.Debug|x86.ActiveCfg = Debug|Win32
+		{76B77093-5A81-438F-A4E8-A7FBEFA53BAA}.Debug|x86.Build.0 = Debug|Win32
+		{76B77093-5A81-438F-A4E8-A7FBEFA53BAA}.Release|x64.ActiveCfg = Release|x64
+		{76B77093-5A81-438F-A4E8-A7FBEFA53BAA}.Release|x64.Build.0 = Release|x64
+		{76B77093-5A81-438F-A4E8-A7FBEFA53BAA}.Release|x86.ActiveCfg = Release|Win32
+		{76B77093-5A81-438F-A4E8-A7FBEFA53BAA}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

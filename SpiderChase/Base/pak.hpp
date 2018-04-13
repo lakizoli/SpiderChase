@@ -10,7 +10,7 @@ public:
 		uint32_t offset;
 		uint32_t size;
 
-		Header ();
+		Header () : mimeID { 0,0,0,0 }, offset (0), size (0) {}
 	};
 
 	struct FileEntry {
@@ -18,7 +18,9 @@ public:
 		uint32_t offset;
 		uint32_t size;
 
-		FileEntry ();
+		FileEntry () : offset (0), size (0) {
+			memset (path, 0, sizeof (path));
+		}
 	};
 
 private:
@@ -26,12 +28,20 @@ private:
 	std::fstream _stream;
 	Header _header;
 
+	Pak () {}
+
+//Read interface
 public:
-	Pak (const std::string& path);
-	~Pak ();
+	static std::shared_ptr<Pak> OpenForRead (const std::string& path);
 
 	bool IsValid () const;
+	bool ReadDirectory (std::vector<FileEntry>& dir);
+	bool ReadFile (const FileEntry& fileEntry, std::function<void (std::istream&)> callback);
 
-	void EnumerateDirectory (std::function<bool (const FileEntry&)> callback);
-	bool ReadFile (const std::string& path, std::function<bool (const std::string&, std::istream&)> callback);
+//Write interface
+public:
+	static bool CreateEmpty (const std::string& path);
+	static bool AddFiles (const std::string& path, const std::vector<std::string>& names, std::function<void (const std::string&, std::ostream&)> writer);
+	static bool MarkFilesToDelete (const std::string& path, const std::set<std::string>& names);
+	static bool DeleteMarkedFiles (const std::string& path);
 };

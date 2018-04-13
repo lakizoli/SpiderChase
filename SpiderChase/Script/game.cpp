@@ -35,3 +35,7 @@ bool Game::Step () {
 
 	return false; //Exit game
 }
+
+void Game::Exit () {
+	_scene = nullptr;
+}
