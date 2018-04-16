@@ -1,0 +1,219 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Base\ComplexTypes.h" />
+    <ClInclude Include="..\..\Base\Defines.h" />
+    <ClInclude Include="..\..\Base\Hash_.h" />
+    <ClInclude Include="..\..\Base\RefCounted.h" />
+    <ClInclude Include="..\..\Base\ReinterpretBits.h" />
+    <ClInclude Include="..\..\Base\SizedPointer.h" />
+    <ClInclude Include="..\..\Base\StackTrace.h" />
+    <ClInclude Include="..\..\Base\Time_.h" />
+    <ClInclude Include="..\..\Base\Types.h" />
+    <ClInclude Include="..\..\CoreIncludes.h" />
+    <ClInclude Include="..\..\DataStructures.h" />
+    <ClInclude Include="..\..\DataStructures\ContiguousMap.h" />
+    <ClInclude Include="..\..\DataStructures\FreeValue.h" />
+    <ClInclude Include="..\..\DataStructures\IndexedArray.h" />
+    <ClInclude Include="..\..\DataStructures\MultiObject.h" />
+    <ClInclude Include="..\..\DataStructures\RingBuffer.h" />
+    <ClInclude Include="..\..\DataStructures\SortedArray.h" />
+    <ClInclude Include="..\..\Interfaces\IAssetProvider.h" />
+    <ClInclude Include="..\..\IO.h" />
+    <ClInclude Include="..\..\IO\Asset.h" />
+    <ClInclude Include="..\..\IO\AssetReader.h" />
+    <ClInclude Include="..\..\IO\AssetWriter.h" />
+    <ClInclude Include="..\..\IO\BufferStream.h" />
+    <ClInclude Include="..\..\IO\FilePath.h" />
+    <ClInclude Include="..\..\IO\FileStream.h" />
+    <ClInclude Include="..\..\IO\FileWrapStream.h" />
+    <ClInclude Include="..\..\Log.h" />
+    <ClInclude Include="..\..\Maths.h" />
+    <ClInclude Include="..\..\Math\AxisAlignedBox.h" />
+    <ClInclude Include="..\..\Math\BoundingSphere.h" />
+    <ClInclude Include="..\..\Math\Plane.h" />
+    <ClInclude Include="..\..\Math\Rectangle.h" />
+    <ClInclude Include="..\..\Math\Rectangle3D.h" />
+    <ClInclude Include="..\..\PixelFormat.h" />
+    <ClInclude Include="..\..\PVRCore.h" />
+    <ClInclude Include="..\..\Stream.h" />
+    <ClInclude Include="..\..\StringFunctions.h" />
+    <ClInclude Include="..\..\Strings\StringHash.h" />
+    <ClInclude Include="..\..\Strings\UnicodeConverter.h" />
+    <ClInclude Include="..\..\Texture.h" />
+    <ClInclude Include="..\..\Texture\FileDefinesBMP.h" />
+    <ClInclude Include="..\..\Texture\FileDefinesDDS.h" />
+    <ClInclude Include="..\..\Texture\FileDefinesKTX.h" />
+    <ClInclude Include="..\..\Texture\FileDefinesPVR.h" />
+    <ClInclude Include="..\..\Texture\FileDefinesTGA.h" />
+    <ClInclude Include="..\..\Texture\FileDefinesXNB.h" />
+    <ClInclude Include="..\..\Texture\MetaData.h" />
+    <ClInclude Include="..\..\Texture\PVRTDecompress.h" />
+    <ClInclude Include="..\..\Texture\TextureDefines.h" />
+    <ClInclude Include="..\..\Texture\TextureHeader.h" />
+    <ClInclude Include="..\..\TGAWriter.h" />
+    <ClInclude Include="..\..\Threading.h" />
+    <ClInclude Include="..\..\Windows\WindowsResourceStream.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\Base\PixelFormat.cpp" />
+    <ClCompile Include="..\..\Base\Time.cpp" />
+    <ClCompile Include="..\..\IO\BufferStream.cpp" />
+    <ClCompile Include="..\..\IO\FilePath.cpp" />
+    <ClCompile Include="..\..\IO\FileStream.cpp" />
+    <ClCompile Include="..\..\IO\FileWrapStream.cpp" />
+    <ClCompile Include="..\..\Strings\StringFunctions.cpp" />
+    <ClCompile Include="..\..\Strings\UnicodeConverter.cpp" />
+    <ClCompile Include="..\..\Texture\MetaData.cpp" />
+    <ClCompile Include="..\..\Texture\PVRTDecompress.cpp" />
+    <ClCompile Include="..\..\Texture\Texture.cpp" />
+    <ClCompile Include="..\..\Texture\TextureHeader.cpp" />
+    <ClCompile Include="..\..\Windows\StackTraceWindows.cpp" />
+    <ClCompile Include="..\..\Windows\WindowsResourceStream.cpp" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{5CAFF01D-B160-BAD0-C0DE-000000F1A5C0}</ProjectGuid>
+    <RootNamespace>PVRCore</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.40219.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\..\..\Bin\Windows\$(Configuration)_$(PlatformArchitecture)\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">..\..\..\Bin\Windows\$(Configuration)_$(PlatformArchitecture)\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\..\..\Bin\Windows\$(Configuration)_$(PlatformArchitecture)\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">..\..\..\Bin\Windows\$(Configuration)_$(PlatformArchitecture)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Platform)\$(Configuration)\Intermediate\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Platform)\$(Configuration)\Intermediate\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Platform)\$(Configuration)\Intermediate\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Platform)\$(Configuration)\Intermediate\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>DEBUG;_CRT_SECURE_NO_WARNINGS;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>..\..\..;..\..\..\..\Builds\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>DEBUG;_CRT_SECURE_NO_WARNINGS;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>..\..\..;..\..\..\..\Builds\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>..\..\..;..\..\..\..\Builds\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>..\..\..;..\..\..\..\Builds\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

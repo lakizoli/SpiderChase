@@ -61,7 +61,6 @@ arithmetic types, enumerations, character types).
 #include "../External/glm/gtc/matrix_access.hpp"
 #include "../External/glm/gtx/quaternion.hpp"
 #include "../External/glm/gtx/transform.hpp"
-#include "../External/glm/gtx/transform.hpp"
 #include "../External/glm/gtx/simd_vec4.hpp"
 #include "../External/glm/gtx/simd_mat4.hpp"
 #include "../External/glm/gtx/fast_trigonometry.hpp"
