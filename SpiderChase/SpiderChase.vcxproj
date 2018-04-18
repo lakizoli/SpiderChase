@@ -90,14 +90,14 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)SDK\Framework;$(SolutionDir)SDK\External;$(SolutionDir)SDK\Builds\Include;$(ProjectDir)Base;$(ProjectDir)Script;$(ProjectDir)Scenes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Assimp\Include;$(SolutionDir)SDK\Framework;$(SolutionDir)SDK\External;$(SolutionDir)SDK\Builds\Include;$(ProjectDir)Base;$(ProjectDir)Script;$(ProjectDir)Scenes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)SDK\Framework\Bin\$(TargetPlatformIdentifier)\$(Configuration)_$(PlatformArchitecture);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>PVRAssets.lib;PVRCamera.lib;PVRCore.lib;PVRShell.lib;PVRUtilsGles.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)SDK\Framework\Bin\$(TargetPlatformIdentifier)\$(Configuration)_$(PlatformArchitecture);$(SolutionDir)Assimp\$(TargetPlatformIdentifier)\$(Configuration)_$(PlatformArchitecture);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>zlibstaticd.lib;assimp-vc141-mt.lib;PVRAssets.lib;PVRCamera.lib;PVRCore.lib;PVRShell.lib;PVRUtilsGles.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreLinkEvent>
       <Command>xcopy $(SolutionDir)SDK\dlls\$(TargetPlatformIdentifier)_$(PlatformArchitecture)\*.dll $(OutputPath) /Y /R /D</Command>
@@ -111,14 +111,14 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)SDK\Framework;$(SolutionDir)SDK\External;$(SolutionDir)SDK\Builds\Include;$(ProjectDir)Base;$(ProjectDir)Script;$(ProjectDir)Scenes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Assimp\Include;$(SolutionDir)SDK\Framework;$(SolutionDir)SDK\External;$(SolutionDir)SDK\Builds\Include;$(ProjectDir)Base;$(ProjectDir)Script;$(ProjectDir)Scenes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)SDK\Framework\Bin\$(TargetPlatformIdentifier)\$(Configuration)_$(PlatformArchitecture);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>PVRAssets.lib;PVRCamera.lib;PVRCore.lib;PVRShell.lib;PVRUtilsGles.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)SDK\Framework\Bin\$(TargetPlatformIdentifier)\$(Configuration)_$(PlatformArchitecture);$(SolutionDir)Assimp\$(TargetPlatformIdentifier)\$(Configuration)_$(PlatformArchitecture);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>zlibstaticd.lib;assimp-vc141-mt.lib;PVRAssets.lib;PVRCamera.lib;PVRCore.lib;PVRShell.lib;PVRUtilsGles.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreLinkEvent>
       <Command>xcopy $(SolutionDir)SDK\dlls\$(TargetPlatformIdentifier)_$(PlatformArchitecture)\*.dll $(OutputPath) /Y /R /D</Command>
@@ -134,7 +134,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)SDK\Framework;$(SolutionDir)SDK\External;$(SolutionDir)SDK\Builds\Include;$(ProjectDir)Base;$(ProjectDir)Script;$(ProjectDir)Scenes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Assimp\Include;$(SolutionDir)SDK\Framework;$(SolutionDir)SDK\External;$(SolutionDir)SDK\Builds\Include;$(ProjectDir)Base;$(ProjectDir)Script;$(ProjectDir)Scenes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -142,8 +142,8 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)SDK\Framework\Bin\$(TargetPlatformIdentifier)\$(Configuration)_$(PlatformArchitecture);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>PVRAssets.lib;PVRCamera.lib;PVRCore.lib;PVRShell.lib;PVRUtilsGles.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)SDK\Framework\Bin\$(TargetPlatformIdentifier)\$(Configuration)_$(PlatformArchitecture);$(SolutionDir)Assimp\$(TargetPlatformIdentifier)\$(Configuration)_$(PlatformArchitecture);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>zlibstatic.lib;assimp-vc141-mt.lib;PVRAssets.lib;PVRCamera.lib;PVRCore.lib;PVRShell.lib;PVRUtilsGles.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreLinkEvent>
       <Command>xcopy $(SolutionDir)SDK\dlls\$(TargetPlatformIdentifier)_$(PlatformArchitecture)\*.dll $(OutputPath) /Y /R /D</Command>
@@ -159,7 +159,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)SDK\Framework;$(SolutionDir)SDK\External;$(SolutionDir)SDK\Builds\Include;$(ProjectDir)Base;$(ProjectDir)Script;$(ProjectDir)Scenes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Assimp\Include;$(SolutionDir)SDK\Framework;$(SolutionDir)SDK\External;$(SolutionDir)SDK\Builds\Include;$(ProjectDir)Base;$(ProjectDir)Script;$(ProjectDir)Scenes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -167,8 +167,8 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)SDK\Framework\Bin\$(TargetPlatformIdentifier)\$(Configuration)_$(PlatformArchitecture);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>PVRAssets.lib;PVRCamera.lib;PVRCore.lib;PVRShell.lib;PVRUtilsGles.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)SDK\Framework\Bin\$(TargetPlatformIdentifier)\$(Configuration)_$(PlatformArchitecture);$(SolutionDir)Assimp\$(TargetPlatformIdentifier)\$(Configuration)_$(PlatformArchitecture);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>zlibstatic.lib;assimp-vc141-mt.lib;PVRAssets.lib;PVRCamera.lib;PVRCore.lib;PVRShell.lib;PVRUtilsGles.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreLinkEvent>
       <Command>xcopy $(SolutionDir)SDK\dlls\$(TargetPlatformIdentifier)_$(PlatformArchitecture)\*.dll $(OutputPath) /Y /R /D</Command>
