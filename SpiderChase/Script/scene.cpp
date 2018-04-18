@@ -2,6 +2,8 @@
 #include "scene.hpp"
 #include "pak.hpp"
 #include "EglContext.h"
+#include <assimp/Importer.hpp>
+#include <assimp/postprocess.h>
 
 std::map<std::string, Scene::SceneCreator>& Scene::GetCreatorMap () {
 	static std::map<std::string, SceneCreator> creators;
@@ -168,6 +170,30 @@ bool Scene::LoadProgram (const std::string& programName, std::istream& stream, u
 	return true;
 }
 
+bool Scene::LoadCollada (const std::string& colladaName, std::istream& stream, uint64_t len, std::shared_ptr<Assets> assets) {
+	std::vector<uint8_t> data;
+	data.resize (len);
+
+	stream.read ((char*) &data[0], len);
+	if (!stream) {
+		return false;
+	}
+
+	Assimp::Importer importer;
+	const aiScene* scene = importer.ReadFileFromMemory (&data[0], data.size (),
+		aiProcess_CalcTangentSpace |
+		aiProcess_Triangulate |
+		aiProcess_JoinIdenticalVertices |
+		aiProcess_SortByPType);
+
+	if (!scene) {
+		return false;
+	}
+
+	assets->colladaScenes.emplace (colladaName, std::shared_ptr<const aiScene> (scene));
+	return true;
+}
+
 std::shared_ptr<Scene::Assets> Scene::LoadPak (const std::string& name, std::function<void (uint32_t programID)> shaderBindCallback) {
 	Log (LogLevel::Information, "*** loading pak file (%s.pak) ***", name.c_str ());
 
@@ -219,8 +245,13 @@ std::shared_ptr<Scene::Assets> Scene::LoadPak (const std::string& name, std::fun
 				Log (LogLevel::Error, "Cannot load shader: %s from %s pak!", entryPath.filename ().string ().c_str (), name.c_str ());
 				return nullptr;
 			}
-		} else if (ext == ".pod") {
-			//TODO: implement pod file loading...
+		} else if (ext == ".dae") {
+			if (!pak->ReadFile (entry, [&entryPath, &entry, assets] (std::istream& stream) -> bool {
+				return LoadCollada (entryPath.filename ().string (), stream, entry.size, assets);
+			})) {
+				Log (LogLevel::Error, "Cannot load collada: %s from %s pak!", entryPath.filename ().string ().c_str (), name.c_str ());
+				return nullptr;
+			}
 		}
 	}
 

@@ -56,17 +56,17 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Scenes\Start\start.program">
+      <Filter>Scenes\Start</Filter>
+    </None>
     <None Include="Scenes\Start\start.frag">
       <Filter>Scenes\Start</Filter>
     </None>
     <None Include="Scenes\Start\start.vert">
       <Filter>Scenes\Start</Filter>
     </None>
-    <None Include="Scenes\Start\pak.list">
-      <Filter>Scenes\Start</Filter>
-    </None>
-    <None Include="Scenes\Start\start.program">
-      <Filter>Scenes\Start</Filter>
-    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="Scenes\Start\pak.list" />
   </ItemGroup>
 </Project>
