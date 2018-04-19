@@ -13,6 +13,7 @@
 
 class Scene {
 	bool _isInited;
+	double _lastFrameTime; ///< The timestamp of the last frame [seconds].
 	std::string _nextSceneID; ///< The ID of the scene have to execute after release of the current scene instance. When empty, then the game exits...
 
 //Definitions
@@ -37,13 +38,13 @@ public:
 
 //Game management interface
 public:
-	SceneResults Step ();
+	SceneResults Step (double currentTimeInSec);
 
 protected:
 	virtual void Init () {};
 	virtual void Release () {};
 
-	virtual SceneResults Update (double frameTime) {
+	virtual SceneResults Update (double currentTimeInSec) {
 		return SceneResults::EndScene;
 	}
 

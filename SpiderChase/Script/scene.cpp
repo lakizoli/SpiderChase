@@ -31,16 +31,13 @@ std::shared_ptr<Scene> Scene::Create (const std::string& sceneID) {
 	return it->second ();
 }
 
-Scene::SceneResults Scene::Step () {
+Scene::SceneResults Scene::Step (double currentTimeInSec) {
 	if (!_isInited) {
 		Init ();
-
-		//TODO: measure time
-
 		_isInited = true;
 	}
 
-	SceneResults updateRes = Update (0);
+	SceneResults updateRes = Update (currentTimeInSec);
 	if (updateRes != SceneResults::Continue) { //Have to exit scene...
 		Release ();
 

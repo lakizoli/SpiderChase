@@ -15,7 +15,7 @@ public:
 
 //Interface
 public:
-	bool Step (); //Have to return false, when exit needed
+	bool Step (double currentTimeInSec); //Have to return false, when exit needed
 	void Exit ();
 };
 

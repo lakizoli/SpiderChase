@@ -4,7 +4,10 @@
 
 IMPLEMENT_SCENE (StartScene, "start");
 
-StartScene::StartScene () {
+StartScene::StartScene () :
+	_lastTime (-1),
+	_xRot (0)
+{
 }
 
 void StartScene::Init () {
@@ -32,25 +35,34 @@ void StartScene::Release () {
 	ReleaseAssets (_assets);
 }
 
-Scene::SceneResults StartScene::Update (double frameTime) {
+Scene::SceneResults StartScene::Update (double currentTimeInSec) {
+	float deltaTime = 0;
+	if (_lastTime < 0) {
+		_lastTime = currentTimeInSec;
+		_xRot = 0;
+	} else {
+		deltaTime = (float) (currentTimeInSec - _lastTime);
+		_lastTime = currentTimeInSec;
+	}
+
+	if (deltaTime > 0) {
+		float velocity = 2.0f * glm::pi<float> () / 5.0f;
+		_xRot += velocity * deltaTime;
+	}
+
 	//TODO: ...
+
 	return SceneResults::Continue;
 }
 
 void StartScene::Render () {
 	// Matrix used for view projection
-	GLfloat afIdentity[] =
-	{
-		0.2f, 0, 0, 0,
-		0, 0.2f, 0, 0,
-		0, 0, 0.2f, 0,
-		0, 0, 0, 1.f
-	};
+	glm::mat4x4 viewProjection = glm::scale (glm::mat4 (1.0f), { .2f, .2f, .2f });
+	viewProjection = glm::rotate (viewProjection, _xRot, { 1.0f, 0.0f, 0.0f });
 
 	//  Clears the color buffer. glClear() can also be used to clear the depth or stencil buffer
 	//  (GL_DEPTH_BUFFER_BIT or GL_STENCIL_BUFFER_BIT)
 	gl::Clear (GL_COLOR_BUFFER_BIT);
-
 
 	//  Bind the projection model view matrix (PMVMatrix) to
 	//  the associated uniform variable in the shader
@@ -59,7 +71,7 @@ void StartScene::Render () {
 	int32_t i32Location = gl::GetUniformLocation (programID, "mvpMatrix");
 
 	// Then passes the matrix to that variable
-	gl::UniformMatrix4fv (i32Location, 1, GL_FALSE, afIdentity);
+	gl::UniformMatrix4fv (i32Location, 1, GL_FALSE, &viewProjection[0][0]);
 
 	// Render our mesh
 	_mesh->Render ();

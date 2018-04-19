@@ -18,10 +18,10 @@ Game& Game::Get () {
 	return inst;
 }
 
-bool Game::Step () {
+bool Game::Step (double currentTimeInSec) {
 	if (_scene) {
 		//Step the scene
-		if (_scene->Step () == Scene::SceneResults::Continue) { //If scene continued
+		if (_scene->Step (currentTimeInSec) == Scene::SceneResults::Continue) { //If scene continued
 			return true; //continue the scene
 		}
 
