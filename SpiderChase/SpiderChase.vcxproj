@@ -177,6 +177,7 @@
   <ItemGroup>
     <ClCompile Include="app.cpp" />
     <ClCompile Include="Base\EglContext.cpp" />
+    <ClCompile Include="Base\gamemesh.cpp" />
     <ClCompile Include="Base\pak.cpp" />
     <ClCompile Include="Base\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -190,6 +191,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Base\EglContext.h" />
+    <ClInclude Include="Base\gamemesh.hpp" />
     <ClInclude Include="Base\pak.hpp" />
     <ClInclude Include="Base\stdafx.h" />
     <ClInclude Include="Scenes\Start\StartScene.hpp" />

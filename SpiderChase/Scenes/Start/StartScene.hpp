@@ -1,16 +1,22 @@
 #pragma once
 
 #include "scene.hpp"
+#include "gamemesh.hpp"
 
 class StartScene : public Scene {
 	DECLARE_SCENE (StartScene);
 
-	//Vertex layout
-	const uint32_t VertexArray = 0;
-
-	//Data
 	std::shared_ptr<Assets> _assets;
-	uint32_t _vbo; // VBO handle
+	std::shared_ptr<GameMesh> _mesh;
+
+	////Vertex layout
+	//const uint32_t VertexArray = 0;
+
+	////Data
+	//uint32_t _vbo; // VBO handle
+	//uint32_t _ibo; // IBO handle
+
+	//std::vector<GLuint> _indices;
 
 public:
 	StartScene ();

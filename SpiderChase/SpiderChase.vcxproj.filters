@@ -20,6 +20,9 @@
     <ClCompile Include="Base\pak.cpp">
       <Filter>Base</Filter>
     </ClCompile>
+    <ClCompile Include="Base\gamemesh.cpp">
+      <Filter>Base</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Base">
@@ -54,6 +57,9 @@
     <ClInclude Include="Base\pak.hpp">
       <Filter>Base</Filter>
     </ClInclude>
+    <ClInclude Include="Base\gamemesh.hpp">
+      <Filter>Base</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Scenes\Start\start.program">
@@ -67,6 +73,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="Scenes\Start\pak.list" />
+    <CustomBuild Include="Scenes\Start\pak.list">
+      <Filter>Scenes\Start</Filter>
+    </CustomBuild>
   </ItemGroup>
 </Project>
