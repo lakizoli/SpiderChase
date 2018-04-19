@@ -70,7 +70,7 @@ protected:
 		std::map<std::string, uint32_t> fragmentShaders;
 		std::map<std::string, uint32_t> vertexShaders;
 		std::map<std::string, uint32_t> programs;
-		std::map<std::string, std::shared_ptr<const aiScene>> colladaScenes;
+		std::map<std::string, std::shared_ptr<aiScene>> colladaScenes;
 	};
 
 private:

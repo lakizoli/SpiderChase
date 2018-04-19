@@ -36,6 +36,8 @@ Scene::SceneResults Scene::Step () {
 		Init ();
 
 		//TODO: measure time
+
+		_isInited = true;
 	}
 
 	SceneResults updateRes = Update (0);
@@ -190,7 +192,7 @@ bool Scene::LoadCollada (const std::string& colladaName, std::istream& stream, u
 		return false;
 	}
 
-	assets->colladaScenes.emplace (colladaName, std::shared_ptr<const aiScene> (scene));
+	assets->colladaScenes.emplace (colladaName, std::shared_ptr<aiScene> (importer.GetOrphanedScene ()));
 	return true;
 }
 
