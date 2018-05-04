@@ -13,6 +13,7 @@ StartScene::StartScene () :
 void StartScene::Init () {
 	_assets = LoadPak ("start", [&] (uint32_t programID) {
 		gl::BindAttribLocation (programID, 0, "pos");
+		gl::BindAttribLocation (programID, 1, "vNorm");
 	});
 
 	// Actually use the created program
@@ -28,6 +29,14 @@ void StartScene::Init () {
 
 	// Enable culling
 	gl::Enable (GL_CULL_FACE);
+	gl::CullFace(GL_BACK);
+	gl::FrontFace(GL_CW);
+
+	gl::DepthRangef(0.0, 1.0);
+	gl::Enable(GL_DEPTH_TEST);
+	gl::DepthFunc(GL_LESS);
+
+	
 }
 
 void StartScene::Release () {
@@ -62,7 +71,7 @@ void StartScene::Render () {
 
 	//  Clears the color buffer. glClear() can also be used to clear the depth or stencil buffer
 	//  (GL_DEPTH_BUFFER_BIT or GL_STENCIL_BUFFER_BIT)
-	gl::Clear (GL_COLOR_BUFFER_BIT);
+	gl::Clear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	//  Bind the projection model view matrix (PMVMatrix) to
 	//  the associated uniform variable in the shader
