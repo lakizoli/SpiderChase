@@ -2,3 +2,4 @@ start.frag=start.frag
 start.vert=start.vert
 start.program=start.program
 ../../../Assets/Characters/SpiderGood.dae=spidergood.dae
+../../../Assets/Characters/SpiderBad.dae=spiderbad.dae
