@@ -187,6 +187,7 @@
     </ClCompile>
     <ClCompile Include="Scenes\Start\StartScene.cpp" />
     <ClCompile Include="Script\game.cpp" />
+    <ClCompile Include="Script\firstpersoncamera.cpp" />
     <ClCompile Include="Script\scene.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -196,6 +197,7 @@
     <ClInclude Include="Base\stdafx.h" />
     <ClInclude Include="Scenes\Start\StartScene.hpp" />
     <ClInclude Include="Script\game.hpp" />
+    <ClInclude Include="Script\firstpersoncamera.hpp" />
     <ClInclude Include="Script\scene.hpp" />
   </ItemGroup>
   <ItemGroup>

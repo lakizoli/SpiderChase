@@ -27,6 +27,8 @@ void StartScene::Init () {
 	std::shared_ptr<aiScene> scene = _assets->colladaScenes["spiderbad.dae"];
 	_mesh = std::make_shared<GameMesh> (scene->mMeshes[0]);
 
+	_camera = std::make_shared<FirstPersonCamera> ();
+
 	// Enable culling
 	gl::Enable (GL_CULL_FACE);
 	gl::CullFace(GL_BACK);
@@ -44,7 +46,7 @@ void StartScene::Release () {
 	ReleaseAssets (_assets);
 }
 
-Scene::SceneResults StartScene::Update (double currentTimeInSec) {
+Scene::SceneResults StartScene::Update (double currentTimeInSec, std::map<uint8_t, bool> keys) {
 	float deltaTime = 0;
 	if (_lastTime < 0) {
 		_lastTime = currentTimeInSec;
@@ -55,6 +57,8 @@ Scene::SceneResults StartScene::Update (double currentTimeInSec) {
 	}
 
 	if (deltaTime > 0) {
+		_camera->Animate (deltaTime, keys);
+
 		float velocity = 2.0f * glm::pi<float> () / 5.0f;
 		_xRot += velocity * deltaTime;
 	}
@@ -73,14 +77,32 @@ void StartScene::Render () {
 	//  (GL_DEPTH_BUFFER_BIT or GL_STENCIL_BUFFER_BIT)
 	gl::Clear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	//  Bind the projection model view matrix (PMVMatrix) to
-	//  the associated uniform variable in the shader
-	// First gets the location of that variable in the shader using its name
-	uint32_t programID = _assets->programs["start.program"];
-	int32_t i32Location = gl::GetUniformLocation (programID, "mvpMatrix");
+	{
+		//  Bind the projection model view matrix (PMVMatrix) to
+		//  the associated uniform variable in the shader
+		// First gets the location of that variable in the shader using its name
+		uint32_t programID = _assets->programs["start.program"];
+		int32_t i32Location = gl::GetUniformLocation(programID, "model");
 
-	// Then passes the matrix to that variable
-	gl::UniformMatrix4fv (i32Location, 1, GL_FALSE, &viewProjection[0][0]);
+		// Then passes the matrix to that variable
+		gl::UniformMatrix4fv(i32Location, 1, GL_FALSE, &viewProjection[0][0]);
+	}
+
+	{
+		uint32_t programID = _assets->programs["start.program"];
+		int32_t i32Location = gl::GetUniformLocation(programID, "view");
+		gl::UniformMatrix4fv(i32Location, 1, GL_FALSE, &(glm::transpose(_camera->GetViewMatrix ()))[0][0]);
+	}
+
+	{
+		uint32_t programID = _assets->programs["start.program"];
+		int32_t i32Location = gl::GetUniformLocation(programID, "proj");
+		gl::UniformMatrix4fv(i32Location, 1, GL_FALSE, &(glm::transpose(_camera->GetProjectionMatrix ()))[0][0]);
+	}
+
+	glm::vec4 test = glm::vec4(1.0, 1.0, 1.0, 1.0) * glm::transpose(_camera->GetViewMatrix()) * glm::transpose((_camera->GetProjectionMatrix()));
+
+	
 
 	// Render our mesh
 	_mesh->Render ();

@@ -38,13 +38,13 @@ public:
 
 //Game management interface
 public:
-	SceneResults Step (double currentTimeInSec);
+	SceneResults Step (double currentTimeInSec, std::map<uint8_t, bool> keys);
 
 protected:
 	virtual void Init () {};
 	virtual void Release () {};
 
-	virtual SceneResults Update (double currentTimeInSec) {
+	virtual SceneResults Update (double currentTimeInSec, std::map<uint8_t, bool> keys) {
 		return SceneResults::EndScene;
 	}
 

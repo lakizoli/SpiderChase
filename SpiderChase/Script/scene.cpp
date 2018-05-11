@@ -31,13 +31,13 @@ std::shared_ptr<Scene> Scene::Create (const std::string& sceneID) {
 	return it->second ();
 }
 
-Scene::SceneResults Scene::Step (double currentTimeInSec) {
+Scene::SceneResults Scene::Step (double currentTimeInSec, std::map<uint8_t, bool> keys) {
 	if (!_isInited) {
 		Init ();
 		_isInited = true;
 	}
 
-	SceneResults updateRes = Update (currentTimeInSec);
+	SceneResults updateRes = Update (currentTimeInSec, keys);
 	if (updateRes != SceneResults::Continue) { //Have to exit scene...
 		Release ();
 
