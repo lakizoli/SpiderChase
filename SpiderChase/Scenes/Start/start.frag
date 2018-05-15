@@ -1,5 +1,5 @@
 
-precision mediump float; // Shit happens :D
+precision mediump float;
 
 varying vec3 fNorm;
 
