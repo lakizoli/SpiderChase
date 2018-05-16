@@ -23,7 +23,7 @@ void StartScene::Init () {
 	gl::ClearColor (0.00f, 0.70f, 0.67f, 1.0f);
 
 	// Create mesh from collada model
-	std::shared_ptr<aiScene> scene = _assets->colladaScenes["spiderbad.dae"];
+	std::shared_ptr<aiScene> scene = _assets->colladaScenes["spidergood.dae"];
 	_mesh = std::make_shared<Mesh> (scene->mMeshes[0]);
 
 	_camera = std::make_shared<FirstPersonCamera> ();
