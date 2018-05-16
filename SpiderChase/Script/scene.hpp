@@ -10,6 +10,7 @@
 	uint32_t cls::__register_result = Scene::RegisterSceneCreator (sceneID, cls::__create);
 
 #include <assimp/scene.h>
+#include "input.hpp"
 
 class Scene {
 	bool _isInited;
@@ -38,13 +39,13 @@ public:
 
 //Game management interface
 public:
-	SceneResults Step (double currentTimeInSec, std::map<uint8_t, bool> keys);
+	SceneResults Step (double currentTimeInSec, const InputState& _inputState);
 
 protected:
 	virtual void Init () {};
 	virtual void Release () {};
 
-	virtual SceneResults Update (double currentTimeInSec, std::map<uint8_t, bool> keys) {
+	virtual SceneResults Update (double currentTimeInSec, const InputState& _inputState) {
 		return SceneResults::EndScene;
 	}
 

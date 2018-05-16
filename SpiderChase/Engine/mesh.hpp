@@ -5,7 +5,7 @@
 
 struct aiMesh;
 
-class GameMesh {
+class Mesh {
 	GLuint _vbo; //Vertex buffer object id
 	GLuint _ibo; //Index buffer object id
 	GLuint _vao; //Vertex attrib object id
@@ -18,7 +18,7 @@ class GameMesh {
 	std::vector<GLuint> _indexArray;
 
 public:
-	GameMesh (const aiMesh* colladaMesh);
+	Mesh (const aiMesh* colladaMesh);
 
 	void Update (double frameTime);
 	void Render () const;

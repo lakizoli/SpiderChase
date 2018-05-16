@@ -20,11 +20,14 @@
     <ClCompile Include="Base\pak.cpp">
       <Filter>Base</Filter>
     </ClCompile>
-    <ClCompile Include="Base\gamemesh.cpp">
-      <Filter>Base</Filter>
+    <ClCompile Include="Engine\firstpersoncamera.cpp">
+      <Filter>Engine</Filter>
     </ClCompile>
-    <ClCompile Include="Script\firstpersoncamera.cpp">
-      <Filter>Script</Filter>
+    <ClCompile Include="Engine\input.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\mesh.cpp">
+      <Filter>Engine</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -39,6 +42,9 @@
     </Filter>
     <Filter Include="Scenes\Start">
       <UniqueIdentifier>{6c2c4265-ef29-4c96-a50f-d39a3c529195}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine">
+      <UniqueIdentifier>{8ffa1585-74e8-4c34-8671-65b3c843c511}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -60,11 +66,17 @@
     <ClInclude Include="Base\pak.hpp">
       <Filter>Base</Filter>
     </ClInclude>
-    <ClInclude Include="Base\gamemesh.hpp">
-      <Filter>Base</Filter>
+    <ClInclude Include="Engine\firstpersoncamera.hpp">
+      <Filter>Engine</Filter>
     </ClInclude>
-    <ClInclude Include="Script\firstpersoncamera.hpp">
-      <Filter>Script</Filter>
+    <ClInclude Include="Engine\input.hpp">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\mesh.hpp">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\flagsenum.hpp">
+      <Filter>Engine</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

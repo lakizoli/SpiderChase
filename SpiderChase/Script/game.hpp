@@ -1,8 +1,10 @@
 #pragma once
 
 #include "scene.hpp"
+#include "Input.hpp"
 
 class Game {
+	InputHandler _inputHandler; ///< The input handler of the game.
 	std::shared_ptr<Scene> _scene; ///< The current scene of the game.
 
 //Construction
@@ -13,9 +15,13 @@ public:
 	static Game& Get ();
 	~Game () = default;
 
-//Interface
+	//Interface
 public:
-	bool Step (double currentTimeInSec, std::map<uint8_t, bool> keys); //Have to return false, when exit needed
+	bool Step (double currentTimeInSec); //Have to return false, when exit needed
 	void Exit ();
+
+	InputHandler& GetInputHandler () {
+		return _inputHandler;
+	}
 };
 

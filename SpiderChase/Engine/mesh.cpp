@@ -1,8 +1,8 @@
 #include "stdafx.h"
-#include "gamemesh.hpp"
+#include "Mesh.hpp"
 #include <assimp/mesh.h>
 
-GameMesh::GameMesh (const aiMesh* colladaMesh) {
+Mesh::Mesh (const aiMesh* colladaMesh) {
 	_attribCount = 6;
 	//if (colladaMesh->HasTextureCoords (0)) {
 	//	attribCount += 2;
@@ -62,11 +62,11 @@ GameMesh::GameMesh (const aiMesh* colladaMesh) {
 	gl::BindVertexArray (0);
 }
 
-void GameMesh::Update (double frameTime) {
+void Mesh::Update (double frameTime) {
 	//TODO: ...
 }
 
-void GameMesh::Render () const {
+void Mesh::Render () const {
 	// Render mesh
 	gl::BindVertexArray (_vao);
 	gl::BindBuffer (GL_ELEMENT_ARRAY_BUFFER, _ibo);
@@ -77,7 +77,7 @@ void GameMesh::Render () const {
 	gl::BindVertexArray (0);
 }
 
-void GameMesh::Release () {
+void Mesh::Release () {
 	gl::DeleteVertexArrays (1, &_vao);
 	_vao = 0;
 

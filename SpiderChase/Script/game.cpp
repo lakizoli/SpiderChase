@@ -18,10 +18,14 @@ Game& Game::Get () {
 	return inst;
 }
 
-bool Game::Step (double currentTimeInSec, std::map<uint8_t, bool> keys) {
+bool Game::Step (double currentTimeInSec) {
+	//Input handling
+	_inputHandler.Update (currentTimeInSec);
+
+	//Scene handling
 	if (_scene) {
 		//Step the scene
-		if (_scene->Step (currentTimeInSec, keys) == Scene::SceneResults::Continue) { //If scene continued
+		if (_scene->Step (currentTimeInSec, _inputHandler.GetState ()) == Scene::SceneResults::Continue) { //If scene continued
 			return true; //continue the scene
 		}
 

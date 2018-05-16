@@ -65,22 +65,31 @@ void FirstPersonCamera::SetAspect (float aspect) {
 	UpdateProjection();
 }
 
-void FirstPersonCamera::Animate (float dt, std::map<uint8_t, bool> keys) {
+void FirstPersonCamera::Animate (float deltaTimeInSec, FPSCameraAnimDirs dirs, float throttleFactor) {
 
-	bool shiftPressed = keys[16];
-	
-	if (keys['W'])
-		_position += _ahead * (shiftPressed ? _speed * 5.0f : _speed) * dt;
-	if (keys['S'])
-		_position -= _ahead * (shiftPressed ? _speed * 5.0f : _speed) * dt;
-	if (keys['A'])
-		_position -= _right * (shiftPressed ? _speed * 5.0f : _speed) * dt;
-	if (keys['D'])
-		_position += _right * (shiftPressed ? _speed * 5.0f : _speed) * dt;
-	if (keys['Q'])
-		_position -= glm::vec3 (0.0f, 1.0f, 0.0f) * (shiftPressed ? _speed * 5.0f : _speed) * dt;
-	if (keys['E'])
-		_position += glm::vec3 (0.0f, 1.0f, 0.0f) * (shiftPressed ? _speed * 5.0f : _speed) * dt;
+	if ((dirs | FPSCameraAnimDirs::Ahead) == FPSCameraAnimDirs::Ahead) {
+		_position += _ahead * throttleFactor * deltaTimeInSec;
+	}
+
+	if ((dirs | FPSCameraAnimDirs::Backward) == FPSCameraAnimDirs::Backward) {
+		_position -= _ahead * throttleFactor * deltaTimeInSec;
+	}
+
+	if ((dirs | FPSCameraAnimDirs::Left) == FPSCameraAnimDirs::Left) {
+		_position -= _right * throttleFactor * deltaTimeInSec;
+	}
+
+	if ((dirs | FPSCameraAnimDirs::Right) == FPSCameraAnimDirs::Right) {
+		_position += _right * throttleFactor * deltaTimeInSec;
+	}
+
+	if ((dirs | FPSCameraAnimDirs::Up) == FPSCameraAnimDirs::Up) {
+		_position -= glm::vec3 (0.0f, 1.0f, 0.0f) * throttleFactor * deltaTimeInSec;
+	}
+
+	if ((dirs | FPSCameraAnimDirs::Down) == FPSCameraAnimDirs::Down) {
+		_position += glm::vec3 (0.0f, 1.0f, 0.0f) * throttleFactor * deltaTimeInSec;
+	}
 	
 	/*
 	_yaw += mouseDelta.x * 0.02f;
@@ -92,7 +101,6 @@ void FirstPersonCamera::Animate (float dt, std::map<uint8_t, bool> keys) {
 	ahead = float3(sin(yaw)*cos(pitch), -sin(pitch), cos(yaw)*cos(pitch));
 	*/
 	UpdateView ();
-	
 }
 
 void FirstPersonCamera::UpdateView () {

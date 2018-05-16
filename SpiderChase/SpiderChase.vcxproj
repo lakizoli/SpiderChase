@@ -90,7 +90,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Assimp\Include;$(SolutionDir)SDK\Framework;$(SolutionDir)SDK\External;$(SolutionDir)SDK\Builds\Include;$(ProjectDir)Base;$(ProjectDir)Script;$(ProjectDir)Scenes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Assimp\Include;$(SolutionDir)SDK\Framework;$(SolutionDir)SDK\External;$(SolutionDir)SDK\Builds\Include;$(ProjectDir)Base;$(ProjectDir)Script;$(ProjectDir)Engine;$(ProjectDir)Scenes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -111,7 +111,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Assimp\Include;$(SolutionDir)SDK\Framework;$(SolutionDir)SDK\External;$(SolutionDir)SDK\Builds\Include;$(ProjectDir)Base;$(ProjectDir)Script;$(ProjectDir)Scenes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Assimp\Include;$(SolutionDir)SDK\Framework;$(SolutionDir)SDK\External;$(SolutionDir)SDK\Builds\Include;$(ProjectDir)Base;$(ProjectDir)Script;$(ProjectDir)Engine;$(ProjectDir)Scenes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -134,7 +134,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Assimp\Include;$(SolutionDir)SDK\Framework;$(SolutionDir)SDK\External;$(SolutionDir)SDK\Builds\Include;$(ProjectDir)Base;$(ProjectDir)Script;$(ProjectDir)Scenes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Assimp\Include;$(SolutionDir)SDK\Framework;$(SolutionDir)SDK\External;$(SolutionDir)SDK\Builds\Include;$(ProjectDir)Base;$(ProjectDir)Script;$(ProjectDir)Engine;$(ProjectDir)Scenes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -159,7 +159,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Assimp\Include;$(SolutionDir)SDK\Framework;$(SolutionDir)SDK\External;$(SolutionDir)SDK\Builds\Include;$(ProjectDir)Base;$(ProjectDir)Script;$(ProjectDir)Scenes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Assimp\Include;$(SolutionDir)SDK\Framework;$(SolutionDir)SDK\External;$(SolutionDir)SDK\Builds\Include;$(ProjectDir)Base;$(ProjectDir)Script;$(ProjectDir)Engine;$(ProjectDir)Scenes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -177,7 +177,6 @@
   <ItemGroup>
     <ClCompile Include="app.cpp" />
     <ClCompile Include="Base\EglContext.cpp" />
-    <ClCompile Include="Base\gamemesh.cpp" />
     <ClCompile Include="Base\pak.cpp" />
     <ClCompile Include="Base\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -185,19 +184,23 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Engine\firstpersoncamera.cpp" />
+    <ClCompile Include="Engine\input.cpp" />
+    <ClCompile Include="Engine\mesh.cpp" />
     <ClCompile Include="Scenes\Start\StartScene.cpp" />
     <ClCompile Include="Script\game.cpp" />
-    <ClCompile Include="Script\firstpersoncamera.cpp" />
     <ClCompile Include="Script\scene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Base\EglContext.h" />
-    <ClInclude Include="Base\gamemesh.hpp" />
     <ClInclude Include="Base\pak.hpp" />
     <ClInclude Include="Base\stdafx.h" />
+    <ClInclude Include="Engine\firstpersoncamera.hpp" />
+    <ClInclude Include="Engine\flagsenum.hpp" />
+    <ClInclude Include="Engine\input.hpp" />
+    <ClInclude Include="Engine\mesh.hpp" />
     <ClInclude Include="Scenes\Start\StartScene.hpp" />
     <ClInclude Include="Script\game.hpp" />
-    <ClInclude Include="Script\firstpersoncamera.hpp" />
     <ClInclude Include="Script\scene.hpp" />
   </ItemGroup>
   <ItemGroup>

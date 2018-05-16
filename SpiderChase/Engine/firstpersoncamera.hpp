@@ -1,8 +1,20 @@
 #pragma once
 
 #include "stdafx.h"
-
 #include <glm/glm.hpp>
+#include "flagsenum.hpp"
+
+enum class FPSCameraAnimDirs : uint8_t {
+	None = 0x0000,
+
+	Ahead = 0x0001,
+	Backward = 0x0002,
+	Left = 0x0004,
+	Right = 0x0008,
+	Up = 0x0010,
+	Down = 0x0020
+};
+FLAGS_ENUM (FPSCameraAnimDirs);
 
 class FirstPersonCamera {
 private:
@@ -42,7 +54,8 @@ public:
 	void SetSpeed (float speed);
 	void SetAspect (float aspect);
 
-	void Animate (float dt, std::map<uint8_t, bool> keys);
+public:
+	void Animate (float deltaTimeInSec, FPSCameraAnimDirs dirs, float throttleFactor = 1.0f);
 
 private:
 	void UpdateView ();
