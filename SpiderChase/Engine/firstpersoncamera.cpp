@@ -67,27 +67,27 @@ void FirstPersonCamera::SetAspect (float aspect) {
 
 void FirstPersonCamera::Animate (float deltaTimeInSec, FPSCameraAnimDirs dirs, float throttleFactor) {
 
-	if ((dirs | FPSCameraAnimDirs::Ahead) == FPSCameraAnimDirs::Ahead) {
+	if ((dirs & FPSCameraAnimDirs::Ahead) == FPSCameraAnimDirs::Ahead) {
 		_position += _ahead * throttleFactor * deltaTimeInSec;
 	}
 
-	if ((dirs | FPSCameraAnimDirs::Backward) == FPSCameraAnimDirs::Backward) {
+	if ((dirs & FPSCameraAnimDirs::Backward) == FPSCameraAnimDirs::Backward) {
 		_position -= _ahead * throttleFactor * deltaTimeInSec;
 	}
 
-	if ((dirs | FPSCameraAnimDirs::Left) == FPSCameraAnimDirs::Left) {
+	if ((dirs & FPSCameraAnimDirs::Left) == FPSCameraAnimDirs::Left) {
 		_position -= _right * throttleFactor * deltaTimeInSec;
 	}
 
-	if ((dirs | FPSCameraAnimDirs::Right) == FPSCameraAnimDirs::Right) {
+	if ((dirs & FPSCameraAnimDirs::Right) == FPSCameraAnimDirs::Right) {
 		_position += _right * throttleFactor * deltaTimeInSec;
 	}
 
-	if ((dirs | FPSCameraAnimDirs::Up) == FPSCameraAnimDirs::Up) {
+	if ((dirs & FPSCameraAnimDirs::Up) == FPSCameraAnimDirs::Up) {
 		_position -= glm::vec3 (0.0f, 1.0f, 0.0f) * throttleFactor * deltaTimeInSec;
 	}
 
-	if ((dirs | FPSCameraAnimDirs::Down) == FPSCameraAnimDirs::Down) {
+	if ((dirs & FPSCameraAnimDirs::Down) == FPSCameraAnimDirs::Down) {
 		_position += glm::vec3 (0.0f, 1.0f, 0.0f) * throttleFactor * deltaTimeInSec;
 	}
 	
