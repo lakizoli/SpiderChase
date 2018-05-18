@@ -72,15 +72,17 @@ Scene::SceneResults StartScene::Update (double currentTimeInSec, const InputStat
 			cameraAnimDirs |= FPSCameraAnimDirs::Backward;
 		}
 
-		if (_inputState.IsKeyDown (pvr::Keys::R)) {
+		if (_inputState.IsKeyDown (pvr::Keys::F)) {
 			cameraAnimDirs |= FPSCameraAnimDirs::Up;
 		}
 
-		if (_inputState.IsKeyDown (pvr::Keys::F)) {
+		if (_inputState.IsKeyDown (pvr::Keys::R)) {
 			cameraAnimDirs |= FPSCameraAnimDirs::Down;
 		}
 
-		_camera->Animate (deltaTime, cameraAnimDirs, _inputState.IsKeyDown (pvr::Keys::Shift) ? 5.0f : 1.0f);
+		Log(LogLevel::Information, "Start %f : %f /n", _inputState.GetPointerDelta().x, _inputState.GetPointerDelta().y);
+
+		_camera->Animate (deltaTime, cameraAnimDirs, _inputState.GetPointerDelta (), _inputState.IsKeyDown (pvr::Keys::Shift) ? 5.0f : 1.0f);
 
 		//Rotate test mesh
 		float velocity = 2.0f * glm::pi<float> () / 5.0f;
