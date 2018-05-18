@@ -6,11 +6,18 @@ class InputState {
 	std::set<pvr::Keys> _lastDownKeys; ///< The list of the keys was down in the last state.
 	std::set<pvr::Keys> _downKeys; ///< The list of the keys currently in down state.
 
+	bool _dragging;
+	bool _lastDragging;
+
+	pvr::Shell::PointerNormalisedLocation _pointerLocation;
+	pvr::Shell::PointerNormalisedLocation _lastPointerLocation;
+
 //Management
 public:
 	InputState () {}
 
 	void StepKeys (const std::set<pvr::Keys> keys);
+	void StepPointer (bool dragging, pvr::Shell::PointerNormalisedLocation pointerLocation);
 
 //Keyboard events
 public:
@@ -42,6 +49,17 @@ public:
 		return _lastDownKeys.find (key) != _lastDownKeys.end () && _downKeys.find (key) == _downKeys.end ();
 	}
 
+	glm::vec2 GetPointerDelta() const {
+
+		if (_dragging && _lastDragging) {
+			return glm::vec2 (_pointerLocation.x - _lastPointerLocation.x, _pointerLocation.y - _lastPointerLocation.y);
+
+		} else {
+			return glm::vec2(0, 0);
+
+		}
+	}
+
 //Mouse events
 public:
 	//TODO: implement mouse envent detectors...
@@ -54,7 +72,10 @@ public:
 class InputHandler {
 	std::set<pvr::Keys> _usedKeys; ///< The list of the used keys in the whole game.
 	std::set<pvr::Keys> _downKeys; ///< The list of the keys in down state.
+	bool _dragging;
 	InputState _state; ///< The per frame input state of the game.
+
+	std::function <pvr::Shell::PointerNormalisedLocation(void)> _pointerLocationGetter;
 
 public:
 	InputHandler ();
@@ -64,8 +85,9 @@ public:
 	void OnKeyDown (pvr::Keys key);
 	void OnKeyUp (pvr::Keys key);
 
-	//TODO: implement mouse envent handlers...
-	//TODO: implement touch envent handlers...
+	void DragStart ();
+	void DragFinished ();
+	void SetPointerLocationGetter (std::function <pvr::Shell::PointerNormalisedLocation(void)> getter);
 
 public:
 	const InputState& GetState () const {

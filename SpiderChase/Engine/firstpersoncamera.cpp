@@ -65,7 +65,7 @@ void FirstPersonCamera::SetAspect (float aspect) {
 	UpdateProjection();
 }
 
-void FirstPersonCamera::Animate (float deltaTimeInSec, FPSCameraAnimDirs dirs, float throttleFactor) {
+void FirstPersonCamera::Animate (float deltaTimeInSec, FPSCameraAnimDirs dirs, glm::vec2 pointerDelta, float throttleFactor) {
 
 	if ((dirs & FPSCameraAnimDirs::Ahead) == FPSCameraAnimDirs::Ahead) {
 		_position += _ahead * throttleFactor * deltaTimeInSec;
@@ -91,15 +91,20 @@ void FirstPersonCamera::Animate (float deltaTimeInSec, FPSCameraAnimDirs dirs, f
 		_position += glm::vec3 (0.0f, 1.0f, 0.0f) * throttleFactor * deltaTimeInSec;
 	}
 	
-	/*
-	_yaw += mouseDelta.x * 0.02f;
-	_pitch += mouseDelta.y * 0.02f;
-	_pitch = float1(pitch).clamp(-3.14f / 2.0f, +3.14f / 2.0f);
+	
+	_yaw += pointerDelta.x * 3.0f;
+	_pitch += pointerDelta.y * 3.0f;
 
-	mouseDelta = float2::zero;
+	// clamp [-3.14f / 2.0f, +3.14f / 2.0f]
+	if (_pitch < -3.14f / 2.0f) {
+		_pitch = -3.14f / 2.0f;
+	}
+	if (_pitch > +3.14f / 2.0f) {
+		_pitch = +3.14f / 2.0f;
+	}
 
-	ahead = float3(sin(yaw)*cos(pitch), -sin(pitch), cos(yaw)*cos(pitch));
-	*/
+	_ahead = glm::vec3 (sin(_yaw)*cos(_pitch), -sin(_pitch), cos(_yaw)*cos(_pitch));
+	
 	UpdateView ();
 }
 

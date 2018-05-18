@@ -55,7 +55,7 @@ public:
 	void SetAspect (float aspect);
 
 public:
-	void Animate (float deltaTimeInSec, FPSCameraAnimDirs dirs, float throttleFactor = 1.0f);
+	void Animate (float deltaTimeInSec, FPSCameraAnimDirs dirs, glm::vec2 pointerDelta, float throttleFactor = 1.0f);
 
 private:
 	void UpdateView ();

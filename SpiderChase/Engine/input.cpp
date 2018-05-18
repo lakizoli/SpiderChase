@@ -6,6 +6,14 @@ void InputState::StepKeys (const std::set<pvr::Keys> keys) {
 	_downKeys = keys;
 }
 
+void InputState::StepPointer (bool dragging, pvr::Shell::PointerNormalisedLocation pointerLocation) {
+	_lastDragging = _dragging;
+	_dragging = dragging;
+
+	_lastPointerLocation = _pointerLocation;
+	_pointerLocation = pointerLocation;
+}
+
 InputHandler::InputHandler () :
 	_usedKeys ({
 		pvr::Keys::Shift,
@@ -32,12 +40,16 @@ InputHandler::InputHandler () :
 
 		pvr::Keys::F1, pvr::Keys::F2, pvr::Keys::F3, pvr::Keys::F4, pvr::Keys::F5, pvr::Keys::F6,
 		pvr::Keys::F7, pvr::Keys::F8, pvr::Keys::F9, pvr::Keys::F10, pvr::Keys::F11, pvr::Keys::F12,
-	})
+	}),
+
+	_dragging (false)
+
 {
 }
 
 void InputHandler::Update (double currentTimeInSec) {
 	_state.StepKeys (_downKeys);
+	_state.StepPointer (_dragging, _pointerLocationGetter());
 }
 
 void InputHandler::OnKeyDown (pvr::Keys key) {
@@ -54,4 +66,16 @@ void InputHandler::OnKeyUp (pvr::Keys key) {
 	}
 
 	_downKeys.erase (key);
+}
+
+void InputHandler::DragStart() {
+	_dragging = true;
+}
+
+void InputHandler::DragFinished () {
+	_dragging = false;
+}
+
+void InputHandler::SetPointerLocationGetter(std::function <pvr::Shell::PointerNormalisedLocation(void)> getter) {
+	_pointerLocationGetter = getter;
 }
