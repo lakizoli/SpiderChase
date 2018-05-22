@@ -122,18 +122,14 @@ void StartScene::Render () {
 	{
 		uint32_t programID = _assets->programs["start.program"];
 		int32_t i32Location = gl::GetUniformLocation (programID, "view");
-		gl::UniformMatrix4fv (i32Location, 1, GL_FALSE, &(glm::transpose (_camera->GetViewMatrix ()))[0][0]);
+		gl::UniformMatrix4fv (i32Location, 1, GL_FALSE, &(_camera->GetViewMatrix ())[0][0]);
 	}
 
 	{
 		uint32_t programID = _assets->programs["start.program"];
 		int32_t i32Location = gl::GetUniformLocation (programID, "proj");
-		gl::UniformMatrix4fv (i32Location, 1, GL_FALSE, &(glm::transpose (_camera->GetProjectionMatrix ()))[0][0]);
+		gl::UniformMatrix4fv (i32Location, 1, GL_FALSE, &(_camera->GetProjectionMatrix ())[0][0]);
 	}
-
-	glm::vec4 test = glm::vec4 (1.0, 1.0, 1.0, 1.0) * glm::transpose (_camera->GetViewMatrix ()) * glm::transpose ((_camera->GetProjectionMatrix ()));
-
-
 
 	// Render our mesh
 	_mesh->Render ();

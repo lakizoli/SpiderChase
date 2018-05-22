@@ -113,10 +113,10 @@ void FirstPersonCamera::UpdateView () {
 	glm::vec3 xaxis = glm::normalize (glm::cross (glm::vec3 (0.0, 1.0f, 0.0f), (zaxis)));
 	glm::vec3 yaxis = glm::cross (zaxis, xaxis);
 
-	_view = glm::mat4 (	xaxis.x,						yaxis.x,						zaxis.x,						0.0f,
-						xaxis.y,						yaxis.y,						zaxis.y,						0.0f,
-						xaxis.z,						yaxis.z,						zaxis.z,						0.0f,
-						glm::dot (-xaxis, _position),	glm::dot (-yaxis, _position),	glm::dot (-zaxis, _position),	1.0f);
+	_view = glm::mat4 (	xaxis.x,	xaxis.y,	xaxis.z,	glm::dot(-xaxis, _position),
+						yaxis.x,	yaxis.y,	yaxis.z,	glm::dot(-yaxis, _position),
+						zaxis.x,	zaxis.y,	zaxis.z,	glm::dot(-zaxis, _position),
+						0.0f,		0.0f,		0.0f,		1.0f);
 
 
 	_right = glm::normalize (glm::cross (glm::vec3 (0.0f, 1.0f, 0.0f), _ahead));
@@ -127,108 +127,8 @@ void FirstPersonCamera::UpdateView () {
 void FirstPersonCamera::UpdateProjection () {
 	float yScale = 1.0f / ::tanf(_fov * 0.5f);
 	float xScale = yScale / _aspect;
-	_projection = glm::mat4 (	xScale,		0.0f,		0.0f,													0.0f,
-								0.0f,		yScale,		0.0f,													0.0f,
-								0.0f,		0.0f,		_farPlane / (_farPlane - _nearPlane),					1.0f,
-								0.0f,		0.0f,		-_nearPlane * _farPlane / (_farPlane - _nearPlane),		0.0f);
+	_projection = glm::mat4(xScale,	0.0f,	0.0f,									0.0f,
+							0.0f,	yScale,	0.0f,									0.0f,
+							0.0f,	0.0f,	_farPlane / (_farPlane - _nearPlane),	-_nearPlane * _farPlane / (_farPlane - _nearPlane) ,
+							0.0f,	0.0f,	1.0f,									0.0f);
 }
-/*
-
-
-void Cam::FirstPerson::processMessage(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
-{
-	if (uMsg == WM_KEYDOWN)
-	{
-		if (wParam == 'W')
-			wPressed = true;
-		else if (wParam == 'A')
-			aPressed = true;
-		else if (wParam == 'S')
-			sPressed = true;
-		else if (wParam == 'D')
-			dPressed = true;
-		else if (wParam == 'Q')
-			qPressed = true;
-		else if (wParam == 'E')
-			ePressed = true;
-		else if (wParam == VK_SHIFT)
-			shiftPressed = true;
-	}
-	else if (uMsg == WM_KEYUP)
-	{
-		if (wParam == 'W')
-			wPressed = false;
-		else if (wParam == 'A')
-			aPressed = false;
-		else if (wParam == 'S')
-			sPressed = false;
-		else if (wParam == 'D')
-			dPressed = false;
-		else if (wParam == 'Q')
-			qPressed = false;
-		else if (wParam == 'E')
-			ePressed = false;
-		else if (wParam == VK_SHIFT)
-			shiftPressed = false;
-		else if (wParam == VK_ADD)
-			speed *= 2;
-		else if (wParam == VK_SUBTRACT)
-			speed *= 0.5;
-	}
-	else if (uMsg == WM_KILLFOCUS)
-	{
-		wPressed = false;
-		aPressed = false;
-		sPressed = false;
-		dPressed = false;
-		qPressed = false;
-		ePressed = false;
-		shiftPressed = false;
-	}
-	else if (uMsg == WM_LBUTTONDOWN)
-	{
-		lastMousePos = int2(LOWORD(lParam), HIWORD(lParam));
-	}
-	else if (uMsg == WM_LBUTTONUP)
-	{
-		mouseDelta = float2::zero;
-	}
-	else if (uMsg == WM_MOUSEMOVE && (wParam & MK_LBUTTON))
-	{
-		int2 mousePos(LOWORD(lParam), HIWORD(lParam));
-		mouseDelta = mousePos - lastMousePos;
-
-		lastMousePos = mousePos;
-	}
-}
-
-
-
-
-
-static  view(const float3& eye, const float3& ahead, const float3& up)
-{
-	float3 zaxis = ahead.normalize();
-	float3 xaxis = up.cross(zaxis).normalize();
-	float3 yaxis = zaxis.cross(xaxis);
-
-	return float4x4(
-		xaxis.x, yaxis.x, zaxis.x, 0,
-		xaxis.y, yaxis.y, zaxis.y, 0,
-		xaxis.z, yaxis.z, zaxis.z, 0,
-		-xaxis.dot(eye), -yaxis.dot(eye), -zaxis.dot(eye), 1);
-}
-
-static float4x4 proj(float fovy, float aspect, float zn, float zf)
-{
-	float yScale = 1.0f / ::tanf(fovy * 0.5f);
-	float xScale = yScale / aspect;
-	return float4x4(
-		xScale, 0.0f, 0.0f, 0.0f,
-		0.0f, yScale, 0.0f, 0.0f,
-		0.0f, 0.0f, zf / (zf - zn), 1,
-		0.0f, 0.0f, -zn * zf / (zf - zn), 0);
-}
-
-//rayDirMatrix = (float4x4::view(float3::zero, ahead, float3::yUnit) * projMatrix).invert();
-*/
