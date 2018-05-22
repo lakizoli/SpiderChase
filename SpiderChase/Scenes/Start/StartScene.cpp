@@ -22,9 +22,14 @@ void StartScene::Init () {
 	// Sets the clear color
 	gl::ClearColor (0.00f, 0.70f, 0.67f, 1.0f);
 
-	// Create mesh from collada model
-	std::shared_ptr<aiScene> scene = _assets->colladaScenes["spidergood.dae"];
-	_mesh = std::make_shared<Mesh> (scene->mMeshes[0]);
+	// Create materials, mesh, camera from collada model
+	std::shared_ptr<aiScene> scene = _assets->colladaScenes["texbox.dae"];
+
+	for (uint32_t i = 0; i < scene->mNumMaterials; ++i) {
+		_materials.push_back (std::make_shared<Material> (scene->mMaterials[i]));
+	}
+
+	_mesh = std::make_shared<Mesh> (scene->mMeshes[0], _materials);
 
 	_camera = std::make_shared<FirstPersonCamera> ();
 

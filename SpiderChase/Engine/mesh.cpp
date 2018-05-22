@@ -1,12 +1,25 @@
 #include "stdafx.h"
 #include "Mesh.hpp"
+#include "Material.hpp"
 #include <assimp/mesh.h>
 
-Mesh::Mesh (const aiMesh* colladaMesh) {
+Mesh::Mesh (const aiMesh* colladaMesh, const std::vector<std::shared_ptr<Material>>& materials) {
+	//Management
+	_name = colladaMesh->mName.C_Str ();
+
+	if (colladaMesh->mMaterialIndex >= 0 && colladaMesh->mMaterialIndex < materials.size ()) {
+		_material = materials[colladaMesh->mMaterialIndex];
+	}
+
+	//Compose vertex array
+	_uvChannelCount = 0;
 	_attribCount = 6;
-	//if (colladaMesh->HasTextureCoords (0)) {
-	//	attribCount += 2;
-	//}
+	for (uint32_t ch = 0; ch < AI_MAX_NUMBER_OF_TEXTURECOORDS; ++ch) {
+		if (colladaMesh->HasTextureCoords (ch)) {
+			_attribCount += 2;
+			_uvChannelBufferSlotIndices[ch] = _uvChannelCount++;
+		}
+	}
 
 	_vertexCount = colladaMesh->mNumVertices;
 	for (uint32_t i = 0; i < _vertexCount; ++i) {
@@ -18,12 +31,15 @@ Mesh::Mesh (const aiMesh* colladaMesh) {
 		_vertexArray.push_back (colladaMesh->mNormals[i].y);
 		_vertexArray.push_back (colladaMesh->mNormals[i].z);
 
-		//if (colladaMesh->HasTextureCoords (0)) {
-		//	_vertexArray.push_back (colladaMesh->mTextureCoords[i][0].x);
-		//	_vertexArray.push_back (colladaMesh->mTextureCoords[i][0].y);
-		//}
+		for (uint32_t ch = 0; ch < AI_MAX_NUMBER_OF_TEXTURECOORDS; ++ch) {
+			if (colladaMesh->HasTextureCoords (ch)) {
+				_vertexArray.push_back (colladaMesh->mTextureCoords[ch][i].x);
+				_vertexArray.push_back (colladaMesh->mTextureCoords[ch][i].y);
+			}
+		}
 	}
 
+	//Compose index array
 	_faceCount = colladaMesh->mNumFaces;
 	for (uint32_t i = 0; i < colladaMesh->mNumFaces; ++i) {
 		_indexArray.push_back (colladaMesh->mFaces[i].mIndices[0]);
@@ -42,21 +58,24 @@ Mesh::Mesh (const aiMesh* colladaMesh) {
 
 	const size_t coord_offset = 0 * sizeof (GLfloat);
 	const size_t normal_offset = 3 * sizeof (GLfloat);
-	//const size_t uv_offset = 6 * sizeof (GLfloat);
+	const size_t uv_offset_base = 6 * sizeof (GLfloat);
 	const GLsizei stride = _attribCount * sizeof (GLfloat);
 
 	gl::GenVertexArrays (1, &_vao);
 	gl::BindVertexArray (_vao);
-	//gl::BindBuffer (GL_ELEMENT_ARRAY_BUFFER, _ibo);
 	gl::BindBuffer (GL_ARRAY_BUFFER, _vbo);
 	gl::VertexAttribPointer (0, 3, GL_FLOAT, GL_FALSE, stride, (void*) coord_offset);
 	gl::VertexAttribPointer (1, 3, GL_FLOAT, GL_FALSE, stride, (void*) normal_offset);
-	////gl::VertexAttribPointer (2, 2, GL_FLOAT, GL_FALSE, stride, (void*) uv_offset);
+	for (uint32_t i = 0; i < _uvChannelCount; ++i) {
+		gl::VertexAttribPointer (2 + i, 2, GL_FLOAT, GL_FALSE, stride, (void*) (uv_offset_base + i * 2 * sizeof (GLfloat)));
+	}
 	gl::EnableVertexAttribArray (0);
 	gl::EnableVertexAttribArray (1);
-	////gl::EnableVertexAttribArray (2);
+	for (uint32_t i = 0; i < _uvChannelCount; ++i) {
+		gl::EnableVertexAttribArray (2 + i);
+	}
 
-	// Unbind buffer objects
+	//Unbind buffer objects
 	gl::BindBuffer (GL_ARRAY_BUFFER, 0);
 	gl::BindBuffer (GL_ELEMENT_ARRAY_BUFFER, 0);
 	gl::BindVertexArray (0);

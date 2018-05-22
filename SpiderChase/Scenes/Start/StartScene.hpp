@@ -1,6 +1,7 @@
 #pragma once
 
 #include "scene.hpp"
+#include "material.hpp"
 #include "mesh.hpp"
 #include "firstpersoncamera.hpp"
 
@@ -8,6 +9,7 @@ class StartScene : public Scene {
 	DECLARE_SCENE (StartScene);
 
 	std::shared_ptr<Assets> _assets;
+	std::vector<std::shared_ptr<Material>> _materials;
 	std::shared_ptr<Mesh> _mesh;
 	std::shared_ptr<FirstPersonCamera> _camera;
 

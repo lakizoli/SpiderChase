@@ -1,5 +1,7 @@
 start.frag=start.frag
 start.vert=start.vert
 start.program=start.program
+../../../Assets/MaterialTest/TexBox.dae=texbox.dae
+../../../Assets/MaterialTest/BoxTexture.png=texbox.dae/BoxTexture.png
 ../../../Assets/Characters/SpiderGood.dae=spidergood.dae
 ../../../Assets/Characters/SpiderBad.dae=spiderbad.dae

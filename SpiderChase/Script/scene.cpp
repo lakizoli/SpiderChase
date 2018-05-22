@@ -251,6 +251,8 @@ std::shared_ptr<Scene::Assets> Scene::LoadPak (const std::string& name, std::fun
 				Log (LogLevel::Error, "Cannot load collada: %s from %s pak!", entryPath.filename ().string ().c_str (), name.c_str ());
 				return nullptr;
 			}
+		} else if (ext == ".png") {
+			//TODO: implement png texture loading...
 		}
 	}
 
