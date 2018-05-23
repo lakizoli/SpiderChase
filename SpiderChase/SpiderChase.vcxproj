@@ -178,6 +178,8 @@
     <ClCompile Include="app.cpp" />
     <ClCompile Include="Base\EglContext.cpp" />
     <ClCompile Include="Base\pak.cpp" />
+    <ClCompile Include="Base\pakiostream.cpp" />
+    <ClCompile Include="Base\pakiosystem.cpp" />
     <ClCompile Include="Base\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
@@ -195,6 +197,8 @@
   <ItemGroup>
     <ClInclude Include="Base\EglContext.h" />
     <ClInclude Include="Base\pak.hpp" />
+    <ClInclude Include="Base\pakiostream.hpp" />
+    <ClInclude Include="Base\pakiosystem.hpp" />
     <ClInclude Include="Base\stdafx.h" />
     <ClInclude Include="Engine\firstpersoncamera.hpp" />
     <ClInclude Include="Engine\flagsenum.hpp" />

@@ -32,6 +32,12 @@
     <ClCompile Include="Engine\material.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
+    <ClCompile Include="Base\pakiostream.cpp">
+      <Filter>Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\pakiosystem.cpp">
+      <Filter>Base</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Base">
@@ -83,6 +89,12 @@
     </ClInclude>
     <ClInclude Include="Engine\material.hpp">
       <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\pakiostream.hpp">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\pakiosystem.hpp">
+      <Filter>Base</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
