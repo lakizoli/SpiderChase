@@ -11,6 +11,7 @@
 
 #include <assimp/scene.h>
 #include "input.hpp"
+#include "bitmap.hpp"
 
 class Scene {
 	bool _isInited;
@@ -72,6 +73,7 @@ protected:
 		std::map<std::string, uint32_t> fragmentShaders;
 		std::map<std::string, uint32_t> vertexShaders;
 		std::map<std::string, uint32_t> programs;
+		std::map<std::string, std::shared_ptr<Bitmap>> bitmaps;
 		std::map<std::string, std::shared_ptr<aiScene>> colladaScenes;
 	};
 

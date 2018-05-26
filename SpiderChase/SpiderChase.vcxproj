@@ -97,7 +97,7 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)SDK\Framework\Bin\$(TargetPlatformIdentifier)\$(Configuration)_$(PlatformArchitecture);$(SolutionDir)Assimp\$(TargetPlatformIdentifier)\$(Configuration)_$(PlatformArchitecture);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>zlibstaticd.lib;assimp-vc141-mt.lib;PVRAssets.lib;PVRCamera.lib;PVRCore.lib;PVRShell.lib;PVRUtilsGles.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>zlibstaticd.lib;assimp-vc141-mt.lib;PVRAssets.lib;PVRCamera.lib;PVRCore.lib;PVRShell.lib;PVRUtilsGles.lib;Gdiplus.lib;Shlwapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreLinkEvent>
       <Command>xcopy $(SolutionDir)SDK\dlls\$(TargetPlatformIdentifier)_$(PlatformArchitecture)\*.dll $(OutputPath) /Y /R /D</Command>
@@ -118,7 +118,7 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)SDK\Framework\Bin\$(TargetPlatformIdentifier)\$(Configuration)_$(PlatformArchitecture);$(SolutionDir)Assimp\$(TargetPlatformIdentifier)\$(Configuration)_$(PlatformArchitecture);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>zlibstaticd.lib;assimp-vc141-mt.lib;PVRAssets.lib;PVRCamera.lib;PVRCore.lib;PVRShell.lib;PVRUtilsGles.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>zlibstaticd.lib;assimp-vc141-mt.lib;PVRAssets.lib;PVRCamera.lib;PVRCore.lib;PVRShell.lib;PVRUtilsGles.lib;Gdiplus.lib;Shlwapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreLinkEvent>
       <Command>xcopy $(SolutionDir)SDK\dlls\$(TargetPlatformIdentifier)_$(PlatformArchitecture)\*.dll $(OutputPath) /Y /R /D</Command>
@@ -143,7 +143,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)SDK\Framework\Bin\$(TargetPlatformIdentifier)\$(Configuration)_$(PlatformArchitecture);$(SolutionDir)Assimp\$(TargetPlatformIdentifier)\$(Configuration)_$(PlatformArchitecture);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>zlibstatic.lib;assimp-vc141-mt.lib;PVRAssets.lib;PVRCamera.lib;PVRCore.lib;PVRShell.lib;PVRUtilsGles.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>zlibstatic.lib;assimp-vc141-mt.lib;PVRAssets.lib;PVRCamera.lib;PVRCore.lib;PVRShell.lib;PVRUtilsGles.lib;Gdiplus.lib;Shlwapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreLinkEvent>
       <Command>xcopy $(SolutionDir)SDK\dlls\$(TargetPlatformIdentifier)_$(PlatformArchitecture)\*.dll $(OutputPath) /Y /R /D</Command>
@@ -168,7 +168,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)SDK\Framework\Bin\$(TargetPlatformIdentifier)\$(Configuration)_$(PlatformArchitecture);$(SolutionDir)Assimp\$(TargetPlatformIdentifier)\$(Configuration)_$(PlatformArchitecture);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>zlibstatic.lib;assimp-vc141-mt.lib;PVRAssets.lib;PVRCamera.lib;PVRCore.lib;PVRShell.lib;PVRUtilsGles.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>zlibstatic.lib;assimp-vc141-mt.lib;PVRAssets.lib;PVRCamera.lib;PVRCore.lib;PVRShell.lib;PVRUtilsGles.lib;Gdiplus.lib;Shlwapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreLinkEvent>
       <Command>xcopy $(SolutionDir)SDK\dlls\$(TargetPlatformIdentifier)_$(PlatformArchitecture)\*.dll $(OutputPath) /Y /R /D</Command>
@@ -177,6 +177,7 @@
   <ItemGroup>
     <ClCompile Include="app.cpp" />
     <ClCompile Include="Base\EglContext.cpp" />
+    <ClCompile Include="Base\imagereader.cpp" />
     <ClCompile Include="Base\pak.cpp" />
     <ClCompile Include="Base\pakiostream.cpp" />
     <ClCompile Include="Base\pakiosystem.cpp" />
@@ -186,6 +187,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Engine\bitmap.cpp" />
     <ClCompile Include="Engine\firstpersoncamera.cpp" />
     <ClCompile Include="Engine\input.cpp" />
     <ClCompile Include="Engine\material.cpp" />
@@ -196,10 +198,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Base\EglContext.h" />
+    <ClInclude Include="Base\imagereader.hpp" />
     <ClInclude Include="Base\pak.hpp" />
     <ClInclude Include="Base\pakiostream.hpp" />
     <ClInclude Include="Base\pakiosystem.hpp" />
     <ClInclude Include="Base\stdafx.h" />
+    <ClInclude Include="Engine\bitmap.hpp" />
     <ClInclude Include="Engine\firstpersoncamera.hpp" />
     <ClInclude Include="Engine\flagsenum.hpp" />
     <ClInclude Include="Engine\input.hpp" />

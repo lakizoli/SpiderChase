@@ -1,4 +1,5 @@
 #include "stdafx.h"
+#include "imagereader.hpp"
 #include "scene.hpp"
 #include "pak.hpp"
 #include "EglContext.h"
@@ -246,13 +247,19 @@ std::shared_ptr<Scene::Assets> Scene::LoadPak (const std::string& name, std::fun
 			}
 		} else if (ext == ".dae") {
 			if (!pak->ReadFile (entry, [&entryPath, &entry, assets] (std::istream& stream) -> bool {
+				//TODO: read whole collada scene to assets, no aiScene ref in assets...
 				return LoadCollada (entryPath.filename ().string (), stream, entry.size, assets);
 			})) {
 				Log (LogLevel::Error, "Cannot load collada: %s from %s pak!", entryPath.filename ().string ().c_str (), name.c_str ());
 				return nullptr;
 			}
 		} else if (ext == ".png") {
-			//TODO: implement png texture loading...
+			if (!pak->ReadFile (entry, [&entryPath, &entry, assets](std::istream& stream) -> bool {
+				return ImageReader::Get ().ReadImage (stream, entry.size); //TODO: read png texture from pak to assets...
+			})) {
+				Log (LogLevel::Error, "Cannot load png: %s from %s pak!", entryPath.filename ().string ().c_str (), name.c_str ());
+				return nullptr;
+			}
 		}
 	}
 

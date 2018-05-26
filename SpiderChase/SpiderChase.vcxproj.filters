@@ -38,6 +38,12 @@
     <ClCompile Include="Base\pakiosystem.cpp">
       <Filter>Base</Filter>
     </ClCompile>
+    <ClCompile Include="Engine\bitmap.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\imagereader.cpp">
+      <Filter>Base</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Base">
@@ -94,6 +100,12 @@
       <Filter>Base</Filter>
     </ClInclude>
     <ClInclude Include="Base\pakiosystem.hpp">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\bitmap.hpp">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\imagereader.hpp">
       <Filter>Base</Filter>
     </ClInclude>
   </ItemGroup>
