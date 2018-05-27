@@ -15,7 +15,7 @@ public:
 	static Game& Get ();
 	~Game () = default;
 
-	//Interface
+//Interface
 public:
 	bool Step (double currentTimeInSec); //Have to return false, when exit needed
 	void Exit ();

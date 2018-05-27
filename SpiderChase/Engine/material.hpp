@@ -7,11 +7,14 @@
 //We support only one texture in each slot at this time!
 //We use not all properties of the material!
 
+class Texture;
+
 class Material {
 	struct TextureInfo {
 		std::string name;
 		uint32_t uvChannel;
 		float blend;
+		std::shared_ptr<Texture> texture;
 
 		TextureInfo () : uvChannel ((uint32_t)-1), blend (1.0f) {}
 	};
@@ -46,8 +49,8 @@ class Material {
 	static glm::vec4 ReadColorProperty (const aiMaterial* colladaMaterial, const char* key, uint32_t type, uint32_t idx, const glm::vec4& defaultValue = { 0, 0, 0, 0 });
 	static float ReadFloatProperty (const aiMaterial* colladaMaterial, const char* key, uint32_t type, uint32_t idx, float defaultValue = 0.0f);
 	static uint32_t ReadUIntProperty (const aiMaterial* colladaMaterial, const char* key, uint32_t type, uint32_t idx, uint32_t defaultValue = 0);
-	static std::shared_ptr<TextureInfo> ReadTextureInfo (aiTextureType textureType, const aiMaterial* colladaMaterial);
+	static std::shared_ptr<TextureInfo> ReadTextureInfo (aiTextureType textureType, const aiMaterial* colladaMaterial, const std::map<std::string, std::shared_ptr<Texture>>& textures);
 
 public:
-	Material (const aiMaterial* colladaMaterial);
+	Material (const aiMaterial* colladaMaterial, const std::map<std::string, std::shared_ptr<Texture>>& textures);
 };

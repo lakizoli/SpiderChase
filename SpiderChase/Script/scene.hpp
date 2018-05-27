@@ -9,9 +9,10 @@
 #define IMPLEMENT_SCENE(cls, sceneID)					\
 	uint32_t cls::__register_result = Scene::RegisterSceneCreator (sceneID, cls::__create);
 
-#include <assimp/scene.h>
-#include "input.hpp"
-#include "bitmap.hpp"
+struct aiScene;
+class InputState;
+class Mesh;
+class Texture;
 
 class Scene {
 	bool _isInited;
@@ -73,8 +74,7 @@ protected:
 		std::map<std::string, uint32_t> fragmentShaders;
 		std::map<std::string, uint32_t> vertexShaders;
 		std::map<std::string, uint32_t> programs;
-		std::map<std::string, std::shared_ptr<Bitmap>> bitmaps;
-		std::map<std::string, std::shared_ptr<aiScene>> colladaScenes;
+		std::map<std::string, std::shared_ptr<Mesh>> meshes;
 	};
 
 private:
@@ -82,7 +82,8 @@ private:
 	static std::tuple<bool, uint32_t> LinkProgram (const std::vector<uint32_t>& shaderIDs, std::function<void (uint32_t programID)> bindCallback);
 	static bool LoadShader (const std::string& shaderName, uint32_t shaderType, std::istream& stream, uint64_t len, std::shared_ptr<Assets> assets);
 	static bool LoadProgram (const std::string& programName, std::istream& stream, uint64_t len, std::vector<std::string>& vertexShaders, std::vector<std::string>& fragmentShaders);
-	static bool LoadCollada (const std::string& colladaName, std::istream& stream, uint64_t len, std::shared_ptr<Assets> assets);
+	static std::shared_ptr<aiScene> LoadCollada (std::istream& stream, uint64_t len);
+	static std::shared_ptr<Texture> LoadTexture (const std::string& name, std::istream& stream, uint64_t len);
 
 protected:
 	static std::shared_ptr<Assets> LoadPak (const std::string& name, std::function<void (uint32_t programID)> shaderBindCallback);

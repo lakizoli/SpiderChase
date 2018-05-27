@@ -3,9 +3,9 @@
 #include "Material.hpp"
 #include <assimp/mesh.h>
 
-Mesh::Mesh (const aiMesh* colladaMesh, const std::vector<std::shared_ptr<Material>>& materials) {
+Mesh::Mesh (const std::string& name, const aiMesh* colladaMesh, const std::vector<std::shared_ptr<Material>>& materials) {
 	//Management
-	_name = colladaMesh->mName.C_Str ();
+	_name = name;
 
 	if (colladaMesh->mMaterialIndex >= 0 && colladaMesh->mMaterialIndex < materials.size ()) {
 		_material = materials[colladaMesh->mMaterialIndex];
@@ -17,7 +17,6 @@ Mesh::Mesh (const aiMesh* colladaMesh, const std::vector<std::shared_ptr<Materia
 	for (uint32_t ch = 0; ch < AI_MAX_NUMBER_OF_TEXTURECOORDS; ++ch) {
 		if (colladaMesh->HasTextureCoords (ch)) {
 			_attribCount += 2;
-			_uvChannelBufferSlotIndices[ch] = _uvChannelCount++;
 		}
 	}
 
@@ -82,10 +81,12 @@ Mesh::Mesh (const aiMesh* colladaMesh, const std::vector<std::shared_ptr<Materia
 }
 
 void Mesh::Update (double frameTime) {
-	//TODO: ...
+	//... not needed yet! ...
 }
 
 void Mesh::Render () const {
+	//TODO: render material...
+
 	// Render mesh
 	gl::BindVertexArray (_vao);
 	gl::BindBuffer (GL_ELEMENT_ARRAY_BUFFER, _ibo);

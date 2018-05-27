@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "StartScene.hpp"
 #include "EglContext.h"
+#include "input.hpp"
 
 IMPLEMENT_SCENE (StartScene, "start");
 
@@ -22,15 +23,10 @@ void StartScene::Init () {
 	// Sets the clear color
 	gl::ClearColor (0.00f, 0.70f, 0.67f, 1.0f);
 
-	// Create materials, mesh, camera from collada model
-	std::shared_ptr<aiScene> scene = _assets->colladaScenes["texbox.dae"];
+	// Get mesh to show
+	_mesh = _assets->meshes["texbox.dae"];
 
-	for (uint32_t i = 0; i < scene->mNumMaterials; ++i) {
-		_materials.push_back (std::make_shared<Material> (scene->mMaterials[i]));
-	}
-
-	_mesh = std::make_shared<Mesh> (scene->mMeshes[0], _materials);
-
+	// Create camera
 	_camera = std::make_shared<FirstPersonCamera> ();
 
 	// Enable culling

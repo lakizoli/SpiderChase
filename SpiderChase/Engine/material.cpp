@@ -37,7 +37,7 @@ uint32_t Material::ReadUIntProperty (const aiMaterial* colladaMaterial, const ch
 	return (uint32_t) val;
 }
 
-std::shared_ptr<Material::TextureInfo> Material::ReadTextureInfo (aiTextureType textureType, const aiMaterial* colladaMaterial) {
+std::shared_ptr<Material::TextureInfo> Material::ReadTextureInfo (aiTextureType textureType, const aiMaterial* colladaMaterial, const std::map<std::string, std::shared_ptr<Texture>>& textures) {
 	if (colladaMaterial->GetTextureCount (textureType) > 0) {
 		aiString path;
 		aiTextureMapping mapping = aiTextureMapping_UV;
@@ -48,24 +48,31 @@ std::shared_ptr<Material::TextureInfo> Material::ReadTextureInfo (aiTextureType 
 
 		aiReturn resCode = colladaMaterial->GetTexture (textureType, 0, &path, &mapping, &uvIndex, &blend /*, &operation, &mapMode*/);
 		if (resCode == aiReturn_SUCCESS && mapping == aiTextureMapping_UV) {
+			std::string texName = path.C_Str ();
+			std::transform (texName.begin (), texName.end (), texName.begin (), ::tolower);
+
 			std::shared_ptr<TextureInfo> info (std::make_shared<TextureInfo> ());
-			info->name = path.C_Str ();
+			info->name = texName;
 			info->uvChannel = uvIndex;
 			info->blend = blend;
 
-			return info;
+			auto it = textures.find (texName);
+			if (it != textures.end ()) {
+				info->texture = it->second;
+				return info;
+			}
 		}
 	}
 
 	return nullptr;
 }
 
-Material::Material (const aiMaterial* colladaMaterial) {
+Material::Material (const aiMaterial* colladaMaterial, const std::map<std::string, std::shared_ptr<Texture>>& textures) {
 	//Read texture maps
-	_ambientMap = ReadTextureInfo (aiTextureType_AMBIENT, colladaMaterial);
-	_diffuseMap = ReadTextureInfo (aiTextureType_DIFFUSE, colladaMaterial);
-	_normalMap = ReadTextureInfo (aiTextureType_NORMALS, colladaMaterial);
-	_lightMap = ReadTextureInfo (aiTextureType_LIGHTMAP, colladaMaterial);
+	_ambientMap = ReadTextureInfo (aiTextureType_AMBIENT, colladaMaterial, textures);
+	_diffuseMap = ReadTextureInfo (aiTextureType_DIFFUSE, colladaMaterial, textures);
+	_normalMap = ReadTextureInfo (aiTextureType_NORMALS, colladaMaterial, textures);
+	_lightMap = ReadTextureInfo (aiTextureType_LIGHTMAP, colladaMaterial, textures);
 
 	//Read material properties
 	_ambientColor = ReadColorProperty (colladaMaterial, AI_MATKEY_COLOR_AMBIENT);

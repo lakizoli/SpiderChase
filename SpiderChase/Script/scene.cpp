@@ -1,10 +1,43 @@
 #include "stdafx.h"
-#include "imagereader.hpp"
 #include "scene.hpp"
 #include "pak.hpp"
+
+#ifdef _WINDOWS
+#	include <windows.h>
+#	include <gdiplus.h>
+#	include <Shlwapi.h>
+#	include <atlbase.h>
+#endif //_WINDOWS
+
 #include "EglContext.h"
+#include "input.hpp"
+#include "texture.hpp"
+#include "material.hpp"
+#include "mesh.hpp"
+#include <assimp/scene.h>
 #include <assimp/Importer.hpp>
 #include <assimp/postprocess.h>
+
+#ifdef _WINDOWS
+
+class TechnologyIniter {
+	Gdiplus::GdiplusStartupInput _gdiplusStartupInput;
+	ULONG_PTR _gdiplusToken;
+	
+public:
+	TechnologyIniter () {
+		GdiplusStartup (&_gdiplusToken, &_gdiplusStartupInput, nullptr);
+	}
+
+	~TechnologyIniter () {
+		Gdiplus::GdiplusShutdown (_gdiplusToken);
+		_gdiplusToken = 0;
+	}
+} g_technologyIniter;
+
+#else //_WINDOWS
+#	error OS not implemented!
+#endif //_WINDOWS
 
 std::map<std::string, Scene::SceneCreator>& Scene::GetCreatorMap () {
 	static std::map<std::string, SceneCreator> creators;
@@ -170,13 +203,13 @@ bool Scene::LoadProgram (const std::string& programName, std::istream& stream, u
 	return true;
 }
 
-bool Scene::LoadCollada (const std::string& colladaName, std::istream& stream, uint64_t len, std::shared_ptr<Assets> assets) {
+std::shared_ptr<aiScene> Scene::LoadCollada (std::istream& stream, uint64_t len) {
 	std::vector<uint8_t> data;
 	data.resize (len);
 
 	stream.read ((char*) &data[0], len);
 	if (!stream) {
-		return false;
+		return nullptr;
 	}
 
 	Assimp::Importer importer;
@@ -187,11 +220,70 @@ bool Scene::LoadCollada (const std::string& colladaName, std::istream& stream, u
 		aiProcess_SortByPType);
 
 	if (!scene) {
-		return false;
+		return nullptr;
 	}
 
-	assets->colladaScenes.emplace (colladaName, std::shared_ptr<aiScene> (importer.GetOrphanedScene ()));
-	return true;
+	return std::shared_ptr<aiScene> (importer.GetOrphanedScene ());
+}
+
+std::shared_ptr<Texture> Scene::LoadTexture (const std::string& name, std::istream& stream, uint64_t len) {
+	std::vector<uint8_t> data;
+	data.resize (len);
+
+	stream.read ((char*) &data[0], len);
+	if (!stream) {
+		return nullptr;
+	}
+
+	std::shared_ptr<Texture> result;
+
+#ifdef _WINDOWS
+
+	CComPtr<IStream> memStream;
+	memStream.Attach (SHCreateMemStream (&data[0], (UINT)data.size ()));
+	if (memStream == nullptr) {
+		return nullptr;
+	}
+
+	std::shared_ptr<Gdiplus::Bitmap> img (Gdiplus::Bitmap::FromStream (memStream));
+	if (img == nullptr) {
+		return nullptr;
+	}
+
+	if (img->GetLastStatus () != Gdiplus::Ok) {
+		return nullptr;
+	}
+
+	uint32_t width = img->GetWidth ();
+	uint32_t height = img->GetHeight ();
+
+	bool hasAlpha = (img->GetPixelFormat () & PixelFormatAlpha) == PixelFormatAlpha;
+	Texture::PixelFormat texPixelFormat = hasAlpha ? Texture::PixelFormat::BGRA_8888 : Texture::PixelFormat::RGB_888;
+	uint32_t stride = hasAlpha ? 4 * width : 4 * ((width * 3 + 3) / 4);
+	std::vector<uint8_t> texData (height * stride);
+
+	Gdiplus::Rect frame (0, 0, width, height);
+	Gdiplus::BitmapData bitmapData;
+	bitmapData.Scan0 = &texData[0];
+	bitmapData.Width = width;
+	bitmapData.Height = height;
+	bitmapData.PixelFormat = hasAlpha ? PixelFormat32bppARGB : PixelFormat24bppRGB;
+	bitmapData.Stride = stride;
+	if (img->LockBits (&frame, Gdiplus::ImageLockModeRead | Gdiplus::ImageLockModeUserInputBuf, bitmapData.PixelFormat, &bitmapData) != Gdiplus::Ok) {
+		return nullptr;
+	}
+
+	if (img->UnlockBits (&bitmapData) != Gdiplus::Ok) {
+		return nullptr;
+	}
+
+	result = std::make_shared<Texture> (name, texPixelFormat, width, height, texData);
+
+#else //_WINDOWS
+#	error OS not implemented!
+#endif //_WINDOWS
+
+	return result;
 }
 
 std::shared_ptr<Scene::Assets> Scene::LoadPak (const std::string& name, std::function<void (uint32_t programID)> shaderBindCallback) {
@@ -215,6 +307,16 @@ std::shared_ptr<Scene::Assets> Scene::LoadPak (const std::string& name, std::fun
 	std::set<std::string> programs;
 	std::map<std::string, std::vector<std::string>> programVertexShaders;
 	std::map<std::string, std::vector<std::string>> programFragmentShaders;
+
+	struct ColladaSceneInfo {
+		std::string name;
+		std::shared_ptr<aiScene> scene;
+		std::vector<std::shared_ptr<Material>> materials;
+		std::map<std::string, std::shared_ptr<Texture>> textures;
+	};
+
+	std::map<std::string, std::shared_ptr<ColladaSceneInfo>> scenes;
+
 	for (const Pak::FileEntry& entry : entries) {
 		fs::path entryPath (entry.path);
 		Log (LogLevel::Information, "Load: %s", entryPath.string ().c_str ());
@@ -246,18 +348,62 @@ std::shared_ptr<Scene::Assets> Scene::LoadPak (const std::string& name, std::fun
 				return nullptr;
 			}
 		} else if (ext == ".dae") {
-			if (!pak->ReadFile (entry, [&entryPath, &entry, assets] (std::istream& stream) -> bool {
-				//TODO: read whole collada scene to assets, no aiScene ref in assets...
-				return LoadCollada (entryPath.filename ().string (), stream, entry.size, assets);
+			if (!pak->ReadFile (entry, [&entryPath, &entry, &scenes] (std::istream& stream) -> bool {
+				std::shared_ptr<aiScene> scene = LoadCollada (stream, entry.size);
+				if (scene == nullptr) {
+					return false;
+				}
+
+				std::string sceneName = entryPath.filename ().string ();
+
+				std::shared_ptr<ColladaSceneInfo> sceneInfo;
+				auto it = scenes.find (sceneName);
+				if (it == scenes.end ()) {
+					sceneInfo = std::make_shared<ColladaSceneInfo> ();
+					scenes.emplace (sceneName, sceneInfo);
+				} else {
+					sceneInfo = it->second;
+				}
+
+				if (sceneInfo == nullptr) {
+					return false;
+				}
+
+				sceneInfo->name = sceneName;
+				sceneInfo->scene = scene;
+				return true;
 			})) {
 				Log (LogLevel::Error, "Cannot load collada: %s from %s pak!", entryPath.filename ().string ().c_str (), name.c_str ());
 				return nullptr;
 			}
 		} else if (ext == ".png") {
-			if (!pak->ReadFile (entry, [&entryPath, &entry, assets](std::istream& stream) -> bool {
-				return ImageReader::Get ().ReadImage (stream, entry.size); //TODO: read png texture from pak to assets...
+			if (!pak->ReadFile (entry, [&entryPath, &entry, &scenes](std::istream& stream) -> bool {
+				std::string texName = entryPath.filename ().string ();
+				std::shared_ptr<Texture> tex = LoadTexture (texName, stream, entry.size);
+				if (tex == nullptr) {
+					return false;
+				}
+
+				std::string sceneName = entryPath.parent_path ().string ();
+
+				std::shared_ptr<ColladaSceneInfo> sceneInfo;
+				auto it = scenes.find (sceneName);
+				if (it == scenes.end ()) {
+					sceneInfo = std::make_shared<ColladaSceneInfo> ();
+					scenes.emplace (sceneName, sceneInfo);
+				} else {
+					sceneInfo = it->second;
+				}
+
+				if (sceneInfo == nullptr) {
+					return false;
+				}
+
+				sceneInfo->name = sceneName;
+				sceneInfo->textures.emplace (texName, tex);
+				return true;
 			})) {
-				Log (LogLevel::Error, "Cannot load png: %s from %s pak!", entryPath.filename ().string ().c_str (), name.c_str ());
+				Log (LogLevel::Error, "Cannot load png texture: %s from %s pak!", entryPath.filename ().string ().c_str (), name.c_str ());
 				return nullptr;
 			}
 		}
@@ -295,6 +441,18 @@ std::shared_ptr<Scene::Assets> Scene::LoadPak (const std::string& name, std::fun
 		}
 
 		assets->programs.emplace (program, std::get<1> (linkRes));
+	}
+
+	//Create material infos and meshes
+	for (auto& it : scenes) {
+		std::shared_ptr<ColladaSceneInfo> info = it.second;
+
+		std::vector<std::shared_ptr<Material>> materials;
+		for (uint32_t i = 0; i < info->scene->mNumMaterials; ++i) {
+			materials.push_back (std::make_shared<Material> (info->scene->mMaterials[i], info->textures));
+		}
+
+		assets->meshes.emplace (info->name, std::make_shared<Mesh> (info->name, info->scene->mMeshes[0], materials));
 	}
 
 	return assets;
