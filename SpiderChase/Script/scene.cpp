@@ -119,7 +119,7 @@ std::tuple<bool, uint32_t> Scene::CompileShader (uint32_t type, const char* sour
 	return std::make_tuple (true, shaderID);
 }
 
-std::tuple<bool, uint32_t> Scene::LinkProgram (const std::vector<uint32_t>& shaderIDs, std::function<void(uint32_t programID)> bindCallback) {
+std::tuple<bool, uint32_t> Scene::LinkProgram (const std::string& name, const std::vector<uint32_t>& shaderIDs, ShaderBindCallback bindCallback) {
 	// Create the shader program
 	uint32_t programID = gl::CreateProgram ();
 
@@ -130,7 +130,7 @@ std::tuple<bool, uint32_t> Scene::LinkProgram (const std::vector<uint32_t>& shad
 
 	// Bind the custom vertex attribute "myVertex" to location VERTEX_ARRAY
 	if (bindCallback) {
-		bindCallback (programID);
+		bindCallback (name, programID);
 	}
 
 	// Link the program
@@ -258,6 +258,7 @@ std::shared_ptr<Texture> Scene::LoadTexture (const std::string& name, std::istre
 	uint32_t height = img->GetHeight ();
 
 	bool hasAlpha = (img->GetPixelFormat () & PixelFormatAlpha) == PixelFormatAlpha;
+	hasAlpha = false; //TODO: 4 byte textures not working
 	Texture::PixelFormat texPixelFormat = hasAlpha ? Texture::PixelFormat::BGRA_8888 : Texture::PixelFormat::RGB_888;
 	uint32_t stride = hasAlpha ? 4 * width : 4 * ((width * 3 + 3) / 4);
 	std::vector<uint8_t> texData (height * stride);
@@ -273,31 +274,53 @@ std::shared_ptr<Texture> Scene::LoadTexture (const std::string& name, std::istre
 		return nullptr;
 	}
 
+	//FILE* fff = fopen ("c:\\temp\\juhu1", "wb");
+	//if (fff) {
+	//	fwrite (&texData[0], sizeof (uint8_t), texData.size (), fff);
+	//	fclose (fff);
+	//}
+
 	if (img->UnlockBits (&bitmapData) != Gdiplus::Ok) {
 		return nullptr;
 	}
 
-	
-	//TODO: I think this will be a boring texture :D
-	//I think the loading is wrong because full /0 char
-	texData.resize(1024 * 1024 * 3);
-	for (int i = 0; i < 1024 * 1024 * 3; i += 3) {
-		int x = i % 1024;
-		int y = i / 1024;
-
-		if (x / 32 % 2 == 0 ^ y / 32 % 2 == 0) {
-			texData[i] = 0xff;
-			texData[i + 1] = 0x00;
-			texData[i + 2] = 0x00;
-
-		}
-		else {
-			texData[i] = 0x00;
-			texData[i + 1] = 0xff;
-			texData[i + 2] = 0x00;
-
+	if (hasAlpha) { //Need to convert BGRA from ARGB
+		for (size_t i = 0, iEnd = texData.size () / 4; i < iEnd; ++i) {
+			uint32_t pixValue = *(uint32_t*)&texData[i * 4];
+			texData[i * 4 + 0] = (uint8_t)(pixValue >> 24 & 0xff);
+			texData[i * 4 + 1] = (uint8_t)(pixValue >> 16 & 0xff);
+			texData[i * 4 + 2] = (uint8_t)(pixValue >> 8 & 0xff);
+			texData[i * 4 + 3] = (uint8_t)(pixValue & 0xff);
 		}
 	}
+
+	//fff = fopen ("c:\\temp\\juhu2", "wb");
+	//if (fff) {
+	//	fwrite (&texData[0], sizeof (uint8_t), texData.size (), fff);
+	//	fclose (fff);
+	//}
+
+
+	////TODO: I think this will be a boring texture :D
+	////I think the loading is wrong because full /0 char
+	//texData.resize(1024 * 1024 * 3);
+	//for (int i = 0; i < 1024 * 1024 * 3; i += 3) {
+	//	int x = i % 1024;
+	//	int y = i / 1024;
+
+	//	if (x / 32 % 2 == 0 ^ y / 32 % 2 == 0) {
+	//		texData[i] = 0xff;
+	//		texData[i + 1] = 0x00;
+	//		texData[i + 2] = 0x00;
+
+	//	}
+	//	else {
+	//		texData[i] = 0x00;
+	//		texData[i + 1] = 0xff;
+	//		texData[i + 2] = 0x00;
+
+	//	}
+	//}
 
 	result = std::make_shared<Texture> (name, texPixelFormat, width, height, texData);
 
@@ -308,9 +331,7 @@ std::shared_ptr<Texture> Scene::LoadTexture (const std::string& name, std::istre
 	return result;
 }
 
-std::shared_ptr<Scene::Assets> Scene::LoadPak (const std::string& name,	std::function<void (uint32_t programID)> shaderBindCallback, 
-	std::function<std::string (const std::string& scene)> shaderForSceneCallback)
-{
+std::shared_ptr<Scene::Assets> Scene::LoadPak (const std::string& name, const SceneMaterialShaders& sceneMaterialShaders, ShaderBindCallback shaderBindCallback) {
 	Log (LogLevel::Information, "*** loading pak file (%s.pak) ***", name.c_str ());
 
 	std::shared_ptr<Pak> pak = Pak::OpenForRead (name + ".pak");
@@ -459,7 +480,7 @@ std::shared_ptr<Scene::Assets> Scene::LoadPak (const std::string& name,	std::fun
 			});
 		}
 
-		auto linkRes = LinkProgram (shaderIDs, shaderBindCallback);
+		auto linkRes = LinkProgram (program, shaderIDs, shaderBindCallback);
 		if (!std::get<0> (linkRes)) {
 			Log (LogLevel::Error, "Cannot link program: %s in %s pak!", program.c_str (), name.c_str ());
 		}
@@ -471,15 +492,23 @@ std::shared_ptr<Scene::Assets> Scene::LoadPak (const std::string& name,	std::fun
 	for (auto& it : scenes) {
 		std::shared_ptr<ColladaSceneInfo> info = it.second;
 
-		auto itProgram = assets->programs.find (shaderForSceneCallback (info->name));
-		uint32_t programID = 0;
-		if (itProgram != assets->programs.end ()) {
-			programID = itProgram->second;
+		std::map<std::string, uint32_t> materialShaderIDs;
+		auto itMaterialShader = sceneMaterialShaders.find (info->name);
+		if (itMaterialShader != sceneMaterialShaders.end ()) {
+			const std::map<std::string, std::string>& materialProgramNames = itMaterialShader->second;
+			for (auto& itMaterialProgramName : materialProgramNames) {
+				auto itProgram = assets->programs.find (itMaterialProgramName.second);
+				if (itProgram != assets->programs.end ()) {
+					uint32_t programID = itProgram->second;
+					materialShaderIDs.emplace (itMaterialProgramName.first, programID);
+				}
+			}
 		}
+
 
 		std::vector<std::shared_ptr<Material>> materials;
 		for (uint32_t i = 0; i < info->scene->mNumMaterials; ++i) {
-			materials.push_back (std::make_shared<Material> (info->scene->mMaterials[i], programID, info->textures));
+			materials.push_back (std::make_shared<Material> (info->scene->mMaterials[i], materialShaderIDs, info->textures));
 		}
 
 		assets->meshes.emplace (info->name, std::make_shared<Mesh> (info->name, info->scene->mMeshes[0], materials));

@@ -77,15 +77,18 @@ protected:
 		std::map<std::string, std::shared_ptr<Mesh>> meshes;
 	};
 
+	typedef std::function<void (const std::string& name, uint32_t programID)> ShaderBindCallback;
+	typedef std::map<std::string, std::map<std::string, std::string>> SceneMaterialShaders;
+
 private:
 	static std::tuple<bool, uint32_t> CompileShader (uint32_t type, const char* source);
-	static std::tuple<bool, uint32_t> LinkProgram (const std::vector<uint32_t>& shaderIDs, std::function<void (uint32_t programID)> bindCallback);
+	static std::tuple<bool, uint32_t> LinkProgram (const std::string& name, const std::vector<uint32_t>& shaderIDs, ShaderBindCallback bindCallback);
 	static bool LoadShader (const std::string& shaderName, uint32_t shaderType, std::istream& stream, uint64_t len, std::shared_ptr<Assets> assets);
 	static bool LoadProgram (const std::string& programName, std::istream& stream, uint64_t len, std::vector<std::string>& vertexShaders, std::vector<std::string>& fragmentShaders);
 	static std::shared_ptr<aiScene> LoadCollada (std::istream& stream, uint64_t len);
 	static std::shared_ptr<Texture> LoadTexture (const std::string& name, std::istream& stream, uint64_t len);
 
 protected:
-	static std::shared_ptr<Assets> LoadPak (const std::string& name, std::function<void (uint32_t programID)> shaderBindCallback, std::function<std::string (const std::string& scene)> shaderForSceneCallback);
+	static std::shared_ptr<Assets> LoadPak (const std::string& name, const SceneMaterialShaders& sceneMaterialShaders, ShaderBindCallback shaderBindCallback);
 	static void ReleaseAssets (std::shared_ptr<Assets>& assets);
 };

@@ -53,7 +53,7 @@ class Material {
 	static std::shared_ptr<TextureInfo> ReadTextureInfo (aiTextureType textureType, const aiMaterial* colladaMaterial, const std::map<std::string, std::shared_ptr<Texture>>& textures);
 
 public:
-	Material (const aiMaterial* colladaMaterial, uint32_t shader, const std::map<std::string, std::shared_ptr<Texture>>& textures);
+	Material (const aiMaterial* colladaMaterial, const std::map<std::string, uint32_t>& materialShaderIDs, const std::map<std::string, std::shared_ptr<Texture>>& textures);
 
 	void Update (double frameTime);
 	void Render () const;

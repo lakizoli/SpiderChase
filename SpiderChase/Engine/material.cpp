@@ -68,9 +68,15 @@ std::shared_ptr<Material::TextureInfo> Material::ReadTextureInfo (aiTextureType 
 	return nullptr;
 }
 
-Material::Material (const aiMaterial* colladaMaterial, GLuint shader, const std::map<std::string, std::shared_ptr<Texture>>& textures) {
+Material::Material (const aiMaterial* colladaMaterial, const std::map<std::string, uint32_t>& materialShaderIDs, const std::map<std::string, std::shared_ptr<Texture>>& textures) :
+	_shader (0)
+{
 	_name = ReadStringProperty (colladaMaterial, AI_MATKEY_NAME, std::string ());
-	_shader = shader;
+
+	auto itShader = materialShaderIDs.find (_name);
+	if (itShader != materialShaderIDs.end ()) {
+		_shader = itShader->second;
+	}
 
 	//Read texture maps
 	_ambientMap = ReadTextureInfo (aiTextureType_AMBIENT, colladaMaterial, textures);

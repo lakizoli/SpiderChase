@@ -11,14 +11,13 @@ StartScene::StartScene () :
 }
 
 void StartScene::Init () {
-	_assets = LoadPak ("start", [&](uint32_t programID) {
-		gl::BindAttribLocation (programID, 0, "pos");
-		gl::BindAttribLocation (programID, 1, "vNorm");
-	}, [](const std::string& scene) -> std::string {
-		if (scene == "texbox.dae") {
-			return "start.program";
+	_assets = LoadPak ("start", SceneMaterialShaders {
+		{ "texbox.dae", { { "BoxTexture", "start.program" } } },
+	}, [&](const std::string& name, uint32_t programID) {
+		if (name == "start.program") {
+			gl::BindAttribLocation (programID, 0, "pos");
+			gl::BindAttribLocation (programID, 1, "vNorm");
 		}
-		return std::string ();
 	});
 
 	// Actually use the created program
