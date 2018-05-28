@@ -286,7 +286,9 @@ std::shared_ptr<Texture> Scene::LoadTexture (const std::string& name, std::istre
 	return result;
 }
 
-std::shared_ptr<Scene::Assets> Scene::LoadPak (const std::string& name, std::function<void (uint32_t programID)> shaderBindCallback) {
+std::shared_ptr<Scene::Assets> Scene::LoadPak (const std::string& name,	std::function<void (uint32_t programID)> shaderBindCallback, 
+	std::function<std::string (const std::string& scene)> shaderForSceneCallback)
+{
 	Log (LogLevel::Information, "*** loading pak file (%s.pak) ***", name.c_str ());
 
 	std::shared_ptr<Pak> pak = Pak::OpenForRead (name + ".pak");
@@ -447,9 +449,15 @@ std::shared_ptr<Scene::Assets> Scene::LoadPak (const std::string& name, std::fun
 	for (auto& it : scenes) {
 		std::shared_ptr<ColladaSceneInfo> info = it.second;
 
+		auto itProgram = assets->programs.find (shaderForSceneCallback (info->name));
+		uint32_t programID = 0;
+		if (itProgram != assets->programs.end ()) {
+			programID = itProgram->second;
+		}
+
 		std::vector<std::shared_ptr<Material>> materials;
 		for (uint32_t i = 0; i < info->scene->mNumMaterials; ++i) {
-			materials.push_back (std::make_shared<Material> (info->scene->mMaterials[i], info->textures));
+			materials.push_back (std::make_shared<Material> (info->scene->mMaterials[i], programID, info->textures));
 		}
 
 		assets->meshes.emplace (info->name, std::make_shared<Mesh> (info->name, info->scene->mMeshes[0], materials));

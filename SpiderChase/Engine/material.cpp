@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "material.hpp"
+#include "texture.hpp"
 
 std::string Material::ReadStringProperty (const aiMaterial* colladaMaterial, const char* key, uint32_t type, uint32_t idx, const std::string& defaultValue) {
 	aiString str;
@@ -67,7 +68,10 @@ std::shared_ptr<Material::TextureInfo> Material::ReadTextureInfo (aiTextureType 
 	return nullptr;
 }
 
-Material::Material (const aiMaterial* colladaMaterial, const std::map<std::string, std::shared_ptr<Texture>>& textures) {
+Material::Material (const aiMaterial* colladaMaterial, GLuint shader, const std::map<std::string, std::shared_ptr<Texture>>& textures) {
+	_name = ReadStringProperty (colladaMaterial, AI_MATKEY_NAME, std::string ());
+	_shader = shader;
+
 	//Read texture maps
 	_ambientMap = ReadTextureInfo (aiTextureType_AMBIENT, colladaMaterial, textures);
 	_diffuseMap = ReadTextureInfo (aiTextureType_DIFFUSE, colladaMaterial, textures);
@@ -96,4 +100,100 @@ Material::Material (const aiMaterial* colladaMaterial, const std::map<std::strin
 	_opacity = ReadFloatProperty (colladaMaterial, AI_MATKEY_OPACITY, 1.0f);
 	_shininess = ReadFloatProperty (colladaMaterial, AI_MATKEY_SHININESS);
 	_shininess_strength = ReadFloatProperty (colladaMaterial, AI_MATKEY_SHININESS_STRENGTH, 1.0f);
+}
+
+void Material::Update (double frameTime) {
+	if (_ambientMap && _ambientMap->texture) {
+		_ambientMap->texture->Update (frameTime);
+	}
+
+	if (_diffuseMap && _diffuseMap->texture) {
+		_diffuseMap->texture->Update (frameTime);
+	}
+
+	if (_normalMap && _normalMap->texture) {
+		_normalMap->texture->Update (frameTime);
+	}
+
+	if (_lightMap && _lightMap->texture) {
+		_lightMap->texture->Update (frameTime);
+	}
+}
+
+void Material::Render () const {
+	if (_ambientMap && _ambientMap->texture) {
+		gl::ActiveTexture (GL_TEXTURE0 + _ambientMap->uvChannel);
+		_ambientMap->texture->Render ();
+
+		if (_shader > 0) {
+			GLint mapID = gl::GetUniformLocation (_shader, "ambientMap");
+			gl::Uniform1i (mapID, _ambientMap->uvChannel);
+		}
+	}
+
+	if (_diffuseMap && _diffuseMap->texture) {
+		gl::ActiveTexture (GL_TEXTURE0 + _diffuseMap->uvChannel);
+		_diffuseMap->texture->Render ();
+
+		if (_shader > 0) {
+			GLint juhu = gl::GetUniformLocation (_shader, "hasDiffuseMap");
+
+			GLint mapID = gl::GetUniformLocation (_shader, "diffuseMap");
+			gl::Uniform1i (mapID, _diffuseMap->uvChannel);
+		}
+	}
+
+	if (_normalMap && _normalMap->texture) {
+		gl::ActiveTexture (GL_TEXTURE0 + _normalMap->uvChannel);
+		_normalMap->texture->Render ();
+
+		if (_shader > 0) {
+			GLint mapID = gl::GetUniformLocation (_shader, "normalMap");
+			gl::Uniform1i (mapID, _normalMap->uvChannel);
+		}
+	}
+
+	if (_lightMap && _lightMap->texture) {
+		gl::ActiveTexture (GL_TEXTURE0 + _lightMap->uvChannel);
+		_lightMap->texture->Render ();
+
+		if (_shader > 0) {
+			GLint mapID = gl::GetUniformLocation (_shader, "lightMap");
+			gl::Uniform1i (mapID, _lightMap->uvChannel);
+		}
+	}
+}
+
+void Material::Release () {
+	if (_ambientMap) {
+		if (_ambientMap->texture) {
+			_ambientMap->texture->Release ();
+			_ambientMap->texture = nullptr;
+		}
+		_ambientMap = nullptr;
+	}
+
+	if (_diffuseMap) {
+		if (_diffuseMap->texture) {
+			_diffuseMap->texture->Release ();
+			_diffuseMap->texture = nullptr;
+		}
+		_diffuseMap = nullptr;
+	}
+
+	if (_normalMap) {
+		if (_normalMap->texture) {
+			_normalMap->texture->Release ();
+			_normalMap->texture = nullptr;
+		}
+		_normalMap = nullptr;
+	}
+
+	if (_lightMap) {
+		if (_lightMap->texture) {
+			_lightMap->texture->Release ();
+			_lightMap->texture = nullptr;
+		}
+		_lightMap = nullptr;
+	}
 }

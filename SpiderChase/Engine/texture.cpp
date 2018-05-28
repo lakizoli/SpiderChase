@@ -39,6 +39,8 @@ void Texture::Render () const {
 }
 
 void Texture::Release () {
-	gl::DeleteTextures (1, &_tex);
-	_tex = 0;
+	if (_tex > 0) {
+		gl::DeleteTextures (1, &_tex);
+		_tex = 0;
+	}
 }

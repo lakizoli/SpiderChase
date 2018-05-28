@@ -86,6 +86,6 @@ private:
 	static std::shared_ptr<Texture> LoadTexture (const std::string& name, std::istream& stream, uint64_t len);
 
 protected:
-	static std::shared_ptr<Assets> LoadPak (const std::string& name, std::function<void (uint32_t programID)> shaderBindCallback);
+	static std::shared_ptr<Assets> LoadPak (const std::string& name, std::function<void (uint32_t programID)> shaderBindCallback, std::function<std::string (const std::string& scene)> shaderForSceneCallback);
 	static void ReleaseAssets (std::shared_ptr<Assets>& assets);
 };

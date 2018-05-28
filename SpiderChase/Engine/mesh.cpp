@@ -12,11 +12,17 @@ Mesh::Mesh (const std::string& name, const aiMesh* colladaMesh, const std::vecto
 	}
 
 	//Compose vertex array
+	const uint32_t maxSupportedTextureCount = 4;
+
 	_uvChannelCount = 0;
 	_attribCount = 6;
 	for (uint32_t ch = 0; ch < AI_MAX_NUMBER_OF_TEXTURECOORDS; ++ch) {
 		if (colladaMesh->HasTextureCoords (ch)) {
 			_attribCount += 2;
+			++_uvChannelCount;
+			if (_uvChannelCount >= maxSupportedTextureCount) { //We support only 4 texture channel!
+				break;
+			}
 		}
 	}
 
@@ -81,11 +87,19 @@ Mesh::Mesh (const std::string& name, const aiMesh* colladaMesh, const std::vecto
 }
 
 void Mesh::Update (double frameTime) {
-	//... not needed yet! ...
+	// Update material
+	if (_material) {
+		_material->Update (frameTime);
+	}
+
+	//...
 }
 
 void Mesh::Render () const {
-	//TODO: render material...
+	// Render material
+	if (_material) {
+		_material->Render ();
+	}
 
 	// Render mesh
 	gl::BindVertexArray (_vao);
@@ -98,14 +112,25 @@ void Mesh::Render () const {
 }
 
 void Mesh::Release () {
-	gl::DeleteVertexArrays (1, &_vao);
-	_vao = 0;
+	if (_material) {
+		_material->Release ();
+		_material = nullptr;
+	}
 
-	gl::DeleteBuffers (1, &_ibo);
-	_ibo = 0;
+	if (_vao > 0) {
+		gl::DeleteVertexArrays (1, &_vao);
+		_vao = 0;
+	}
 
-	gl::DeleteBuffers (1, &_vbo);
-	_vbo = 0;
+	if (_ibo > 0) {
+		gl::DeleteBuffers (1, &_ibo);
+		_ibo = 0;
+	}
+
+	if (_vbo > 0) {
+		gl::DeleteBuffers (1, &_vbo);
+		_vbo = 0;
+	}
 
 	_vertexArray.clear ();
 	_indexArray.clear ();
