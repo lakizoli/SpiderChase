@@ -132,6 +132,12 @@ void StartScene::Render () {
 		gl::UniformMatrix4fv (i32Location, 1, GL_FALSE, &(_camera->GetProjectionMatrix ())[0][0]);
 	}
 
+	{
+		uint32_t programID = _assets->programs["start.program"];
+		int32_t i32Location = gl::GetUniformLocation(programID, "diffuseMap");
+		int x = 2;
+	}
+
 	// Render our mesh
 	_mesh->Render ();
 

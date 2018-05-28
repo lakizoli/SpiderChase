@@ -15,7 +15,9 @@ Texture::Texture (const std::string& name, PixelFormat pixelFormat, uint32_t wid
 		gl::TexImage2D (GL_TEXTURE_2D, 0, GL_RGB8, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, &data[0]); //Have to use 4 byte alignment!
 		break;
 	case PixelFormat::BGRA_8888:
-		gl::TexImage2D (GL_TEXTURE_2D, 0, GL_RGBA8, width, height, 0, GL_BGRA_EXT, GL_UNSIGNED_BYTE, &data[0]);
+		//gl::TexImage2D (GL_TEXTURE_2D, 0, GL_RGBA8, width, height, 0, GL_BGRA_EXT, GL_UNSIGNED_BYTE, &data[0]);
+		// TODO I used the RGB loading for RGBA data. 
+		gl::TexImage2D(GL_TEXTURE_2D, 0, GL_RGB8, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, &data[0]); //Have to use 4 byte alignment!
 		break;
 	default:
 		break;

@@ -14,7 +14,7 @@ Mesh::Mesh (const std::string& name, const aiMesh* colladaMesh, const std::vecto
 	//Compose vertex array
 	const uint32_t maxSupportedTextureCount = 4;
 
-	_uvChannelCount = 0;
+	_uvChannelCount = 1;
 	_attribCount = 6;
 	for (uint32_t ch = 0; ch < AI_MAX_NUMBER_OF_TEXTURECOORDS; ++ch) {
 		if (colladaMesh->HasTextureCoords (ch)) {

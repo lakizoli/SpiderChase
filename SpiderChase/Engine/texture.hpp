@@ -9,7 +9,7 @@ public:
 		RGB_888
 	};
 
-private:
+public:
 	std::string _name;
 
 	PixelFormat _pixelFormat;

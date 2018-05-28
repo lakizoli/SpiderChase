@@ -277,6 +277,28 @@ std::shared_ptr<Texture> Scene::LoadTexture (const std::string& name, std::istre
 		return nullptr;
 	}
 
+	
+	//TODO: I think this will be a boring texture :D
+	//I think the loading is wrong because full /0 char
+	texData.resize(1024 * 1024 * 3);
+	for (int i = 0; i < 1024 * 1024 * 3; i += 3) {
+		int x = i % 1024;
+		int y = i / 1024;
+
+		if (x / 32 % 2 == 0 ^ y / 32 % 2 == 0) {
+			texData[i] = 0xff;
+			texData[i + 1] = 0x00;
+			texData[i + 2] = 0x00;
+
+		}
+		else {
+			texData[i] = 0x00;
+			texData[i + 1] = 0xff;
+			texData[i + 2] = 0x00;
+
+		}
+	}
+
 	result = std::make_shared<Texture> (name, texPixelFormat, width, height, texData);
 
 #else //_WINDOWS

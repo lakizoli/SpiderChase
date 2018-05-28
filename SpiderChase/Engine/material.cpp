@@ -135,11 +135,16 @@ void Material::Render () const {
 		gl::ActiveTexture (GL_TEXTURE0 + _diffuseMap->uvChannel);
 		_diffuseMap->texture->Render ();
 
-		if (_shader > 0) {
-			GLint juhu = gl::GetUniformLocation (_shader, "hasDiffuseMap");
+		if (_shader > 0) {			
+			//gl::BindTexture(GL_TEXTURE_2D, _diffuseMap->texture->_tex);
 
-			GLint mapID = gl::GetUniformLocation (_shader, "diffuseMap");
-			gl::Uniform1i (mapID, _diffuseMap->uvChannel);
+			GLint toggleID = gl::GetUniformLocation(_shader, "hasDiffuseMap");
+			gl::Uniform1i(toggleID, 1);
+
+		}
+		else {
+			GLint toggleID = gl::GetUniformLocation(_shader, "hasDiffuseMap");
+			gl::Uniform1i(toggleID, 0);
 		}
 	}
 
