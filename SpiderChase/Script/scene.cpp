@@ -329,6 +329,23 @@ std::shared_ptr<Texture> Scene::LoadTexture (const std::string& name, std::istre
 	return result;
 }
 
+std::shared_ptr<Scene::ColladaSceneInfo> Scene::GetOrCreateSceneInfo (const std::string& name, std::map<std::string, std::shared_ptr<ColladaSceneInfo>>& scenes) {
+	std::shared_ptr<ColladaSceneInfo> sceneInfo;
+	auto it = scenes.find (name);
+	if (it == scenes.end ()) {
+		sceneInfo = std::make_shared<ColladaSceneInfo> ();
+		scenes.emplace (name, sceneInfo);
+	} else {
+		sceneInfo = it->second;
+	}
+
+	if (sceneInfo != nullptr) {
+		sceneInfo->name = name;
+	}
+
+	return sceneInfo;
+}
+
 std::shared_ptr<Scene::Assets> Scene::LoadPak (const std::string& name, const SceneMaterialShaders& sceneMaterialShaders, ShaderBindCallback shaderBindCallback) {
 	Log (LogLevel::Information, "*** loading pak file (%s.pak) ***", name.c_str ());
 
@@ -350,14 +367,6 @@ std::shared_ptr<Scene::Assets> Scene::LoadPak (const std::string& name, const Sc
 	std::set<std::string> programs;
 	std::map<std::string, std::vector<std::string>> programVertexShaders;
 	std::map<std::string, std::vector<std::string>> programFragmentShaders;
-
-	struct ColladaSceneInfo {
-		std::string name;
-		std::shared_ptr<aiScene> scene;
-		std::vector<std::shared_ptr<Material>> materials;
-		std::map<std::string, std::shared_ptr<Texture>> textures;
-	};
-
 	std::map<std::string, std::shared_ptr<ColladaSceneInfo>> scenes;
 
 	for (const Pak::FileEntry& entry : entries) {
@@ -397,22 +406,11 @@ std::shared_ptr<Scene::Assets> Scene::LoadPak (const std::string& name, const Sc
 					return false;
 				}
 
-				std::string sceneName = entryPath.filename ().string ();
-
-				std::shared_ptr<ColladaSceneInfo> sceneInfo;
-				auto it = scenes.find (sceneName);
-				if (it == scenes.end ()) {
-					sceneInfo = std::make_shared<ColladaSceneInfo> ();
-					scenes.emplace (sceneName, sceneInfo);
-				} else {
-					sceneInfo = it->second;
-				}
-
+				std::shared_ptr<ColladaSceneInfo> sceneInfo = GetOrCreateSceneInfo (entryPath.filename ().string (), scenes);
 				if (sceneInfo == nullptr) {
 					return false;
 				}
 
-				sceneInfo->name = sceneName;
 				sceneInfo->scene = scene;
 				return true;
 			})) {
@@ -427,22 +425,11 @@ std::shared_ptr<Scene::Assets> Scene::LoadPak (const std::string& name, const Sc
 					return false;
 				}
 
-				std::string sceneName = entryPath.parent_path ().string ();
-
-				std::shared_ptr<ColladaSceneInfo> sceneInfo;
-				auto it = scenes.find (sceneName);
-				if (it == scenes.end ()) {
-					sceneInfo = std::make_shared<ColladaSceneInfo> ();
-					scenes.emplace (sceneName, sceneInfo);
-				} else {
-					sceneInfo = it->second;
-				}
-
+				std::shared_ptr<ColladaSceneInfo> sceneInfo = GetOrCreateSceneInfo (entryPath.parent_path ().string (), scenes);
 				if (sceneInfo == nullptr) {
 					return false;
 				}
 
-				sceneInfo->name = sceneName;
 				sceneInfo->textures.emplace (texName, tex);
 				return true;
 			})) {

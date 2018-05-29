@@ -13,6 +13,7 @@ struct aiScene;
 class InputState;
 class Mesh;
 class Texture;
+class Material;
 
 class Scene {
 	bool _isInited;
@@ -87,6 +88,15 @@ private:
 	static bool LoadProgram (const std::string& programName, std::istream& stream, uint64_t len, std::vector<std::string>& vertexShaders, std::vector<std::string>& fragmentShaders);
 	static std::shared_ptr<aiScene> LoadCollada (std::istream& stream, uint64_t len);
 	static std::shared_ptr<Texture> LoadTexture (const std::string& name, std::istream& stream, uint64_t len);
+
+	struct ColladaSceneInfo {
+		std::string name;
+		std::shared_ptr<aiScene> scene;
+		std::vector<std::shared_ptr<Material>> materials;
+		std::map<std::string, std::shared_ptr<Texture>> textures;
+	};
+
+	static std::shared_ptr<ColladaSceneInfo> GetOrCreateSceneInfo (const std::string& name, std::map<std::string, std::shared_ptr<ColladaSceneInfo>>& scenes);
 
 protected:
 	static std::shared_ptr<Assets> LoadPak (const std::string& name, const SceneMaterialShaders& sceneMaterialShaders, ShaderBindCallback shaderBindCallback);
