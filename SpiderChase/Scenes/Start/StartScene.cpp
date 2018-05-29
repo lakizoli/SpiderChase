@@ -17,6 +17,7 @@ void StartScene::Init () {
 		if (name == "start.program") {
 			gl::BindAttribLocation (programID, 0, "pos");
 			gl::BindAttribLocation (programID, 1, "vNorm");
+			gl::BindAttribLocation (programID, 2, "vUV");
 		}
 	});
 
