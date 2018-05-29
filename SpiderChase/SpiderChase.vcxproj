@@ -97,7 +97,7 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)SDK\Framework\Bin\$(TargetPlatformIdentifier)\$(Configuration)_$(PlatformArchitecture);$(SolutionDir)Assimp\$(TargetPlatformIdentifier)\$(Configuration)_$(PlatformArchitecture);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>zlibstaticd.lib;assimp-vc141-mt.lib;PVRAssets.lib;PVRCamera.lib;PVRCore.lib;PVRShell.lib;PVRUtilsGles.lib;Gdiplus.lib;Shlwapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>zlibstaticd.lib;assimp-vc141-mt.lib;PVRAssets.lib;PVRCamera.lib;PVRCore.lib;PVRShell.lib;PVRUtilsGles.lib;Gdiplus.lib;Shlwapi.lib;Windowscodecs.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreLinkEvent>
       <Command>xcopy $(SolutionDir)SDK\dlls\$(TargetPlatformIdentifier)_$(PlatformArchitecture)\*.dll $(OutputPath) /Y /R /D</Command>
@@ -118,7 +118,7 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)SDK\Framework\Bin\$(TargetPlatformIdentifier)\$(Configuration)_$(PlatformArchitecture);$(SolutionDir)Assimp\$(TargetPlatformIdentifier)\$(Configuration)_$(PlatformArchitecture);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>zlibstaticd.lib;assimp-vc141-mt.lib;PVRAssets.lib;PVRCamera.lib;PVRCore.lib;PVRShell.lib;PVRUtilsGles.lib;Gdiplus.lib;Shlwapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>zlibstaticd.lib;assimp-vc141-mt.lib;PVRAssets.lib;PVRCamera.lib;PVRCore.lib;PVRShell.lib;PVRUtilsGles.lib;Gdiplus.lib;Shlwapi.lib;Windowscodecs.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreLinkEvent>
       <Command>xcopy $(SolutionDir)SDK\dlls\$(TargetPlatformIdentifier)_$(PlatformArchitecture)\*.dll $(OutputPath) /Y /R /D</Command>
@@ -143,7 +143,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)SDK\Framework\Bin\$(TargetPlatformIdentifier)\$(Configuration)_$(PlatformArchitecture);$(SolutionDir)Assimp\$(TargetPlatformIdentifier)\$(Configuration)_$(PlatformArchitecture);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>zlibstatic.lib;assimp-vc141-mt.lib;PVRAssets.lib;PVRCamera.lib;PVRCore.lib;PVRShell.lib;PVRUtilsGles.lib;Gdiplus.lib;Shlwapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>zlibstatic.lib;assimp-vc141-mt.lib;PVRAssets.lib;PVRCamera.lib;PVRCore.lib;PVRShell.lib;PVRUtilsGles.lib;Gdiplus.lib;Shlwapi.lib;Windowscodecs.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreLinkEvent>
       <Command>xcopy $(SolutionDir)SDK\dlls\$(TargetPlatformIdentifier)_$(PlatformArchitecture)\*.dll $(OutputPath) /Y /R /D</Command>
@@ -168,7 +168,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)SDK\Framework\Bin\$(TargetPlatformIdentifier)\$(Configuration)_$(PlatformArchitecture);$(SolutionDir)Assimp\$(TargetPlatformIdentifier)\$(Configuration)_$(PlatformArchitecture);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>zlibstatic.lib;assimp-vc141-mt.lib;PVRAssets.lib;PVRCamera.lib;PVRCore.lib;PVRShell.lib;PVRUtilsGles.lib;Gdiplus.lib;Shlwapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>zlibstatic.lib;assimp-vc141-mt.lib;PVRAssets.lib;PVRCamera.lib;PVRCore.lib;PVRShell.lib;PVRUtilsGles.lib;Gdiplus.lib;Shlwapi.lib;Windowscodecs.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreLinkEvent>
       <Command>xcopy $(SolutionDir)SDK\dlls\$(TargetPlatformIdentifier)_$(PlatformArchitecture)\*.dll $(OutputPath) /Y /R /D</Command>

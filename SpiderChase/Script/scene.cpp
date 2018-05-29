@@ -1,14 +1,6 @@
 #include "stdafx.h"
 #include "scene.hpp"
 #include "pak.hpp"
-
-#ifdef _WINDOWS
-#	include <windows.h>
-#	include <gdiplus.h>
-#	include <Shlwapi.h>
-#	include <atlbase.h>
-#endif //_WINDOWS
-
 #include "EglContext.h"
 #include "input.hpp"
 #include "texture.hpp"
@@ -19,19 +11,18 @@
 #include <assimp/postprocess.h>
 
 #ifdef _WINDOWS
+#	include <windows.h>
+#	include <wincodec.h>
+#	include <atlbase.h>
 
 class TechnologyIniter {
-	Gdiplus::GdiplusStartupInput _gdiplusStartupInput;
-	ULONG_PTR _gdiplusToken;
-	
 public:
 	TechnologyIniter () {
-		GdiplusStartup (&_gdiplusToken, &_gdiplusStartupInput, nullptr);
+		CoInitialize (nullptr);
 	}
 
 	~TechnologyIniter () {
-		Gdiplus::GdiplusShutdown (_gdiplusToken);
-		_gdiplusToken = 0;
+		CoUninitialize ();
 	}
 } g_technologyIniter;
 
@@ -239,88 +230,95 @@ std::shared_ptr<Texture> Scene::LoadTexture (const std::string& name, std::istre
 
 #ifdef _WINDOWS
 
-	CComPtr<IStream> memStream;
-	memStream.Attach (SHCreateMemStream (&data[0], (UINT)data.size ()));
-	if (memStream == nullptr) {
+	CComPtr<IWICImagingFactory> wicImagingFactory;
+	if (FAILED (wicImagingFactory.CoCreateInstance (CLSID_WICImagingFactory))) {
 		return nullptr;
 	}
 
-	std::shared_ptr<Gdiplus::Bitmap> img (Gdiplus::Bitmap::FromStream (memStream));
-	if (img == nullptr) {
+	CComPtr<IWICStream> wicStream;
+	if (FAILED (wicImagingFactory->CreateStream (&wicStream))) {
 		return nullptr;
 	}
 
-	if (img->GetLastStatus () != Gdiplus::Ok) {
+	if (FAILED (wicStream->InitializeFromMemory (&data[0], (DWORD) data.size ()))) {
 		return nullptr;
 	}
 
-	uint32_t width = img->GetWidth ();
-	uint32_t height = img->GetHeight ();
+	CComPtr<IWICBitmapDecoder> wicDecoder;
+	if (FAILED (wicImagingFactory->CreateDecoderFromStream (wicStream, nullptr, WICDecodeMetadataCacheOnLoad, &wicDecoder))) {
+		return nullptr;
+	}
 
-	bool hasAlpha = (img->GetPixelFormat () & PixelFormatAlpha) == PixelFormatAlpha;
-	hasAlpha = false; //TODO: 4 byte textures not working
-	Texture::PixelFormat texPixelFormat = hasAlpha ? Texture::PixelFormat::BGRA_8888 : Texture::PixelFormat::RGB_888;
-	uint32_t stride = hasAlpha ? 4 * width : 4 * ((width * 3 + 3) / 4);
+	uint32_t frameCount = 0;
+	if (FAILED (wicDecoder->GetFrameCount (&frameCount))) {
+		return nullptr;
+	}
+
+	if (frameCount < 1) {
+		return nullptr;
+	}
+
+	CComPtr<IWICBitmapFrameDecode> wicFrame;
+	if (FAILED (wicDecoder->GetFrame (0, &wicFrame))) {
+		return nullptr;
+	}
+
+	uint32_t width = 0;
+	uint32_t height = 0;
+	if (FAILED (wicFrame->GetSize (&width, &height))) {
+		return nullptr;
+	}
+
+	WICPixelFormatGUID pixelFormatID;
+	if (FAILED (wicFrame->GetPixelFormat (&pixelFormatID))) {
+		return nullptr;
+	}
+
+	CComPtr<IWICComponentInfo> componentInfo;
+	if (FAILED (wicImagingFactory->CreateComponentInfo (pixelFormatID, &componentInfo))) {
+		return nullptr;
+	}
+
+	CComPtr<IWICPixelFormatInfo> pixelFormatInfo;
+	if (FAILED (componentInfo->QueryInterface (IID_IWICPixelFormatInfo, (LPVOID*) &pixelFormatInfo))) {
+		return nullptr;
+	}
+
+	uint32_t channelCount = 0;
+	if (FAILED (pixelFormatInfo->GetChannelCount (&channelCount))) {
+		return nullptr;
+	}
+
+	Texture::PixelFormat texPixelFormat;
+	uint32_t stride;
+	WICPixelFormatGUID desiredWicPixelFormat;
+	if (channelCount == 1) { //ALPHA only
+		texPixelFormat = Texture::PixelFormat::ALPHA_8;
+		desiredWicPixelFormat = GUID_WICPixelFormat8bppGray;
+		stride = 4 * ((width + 3) / 4);
+	} else if (channelCount == 3) { //RGB
+		texPixelFormat = Texture::PixelFormat::RGB_888;
+		desiredWicPixelFormat = GUID_WICPixelFormat24bppRGB;
+		stride = 4 * ((width * 3 + 3) / 4);
+	} else { //RGBA
+		texPixelFormat = Texture::PixelFormat::RGBA_8888;
+		desiredWicPixelFormat = GUID_WICPixelFormat32bppRGBA;
+		stride = 4 * width;
+	}
+
+	CComPtr<IWICFormatConverter> wicConverter;
+	if (FAILED (wicImagingFactory->CreateFormatConverter (&wicConverter))) {
+		return nullptr;
+	}
+
+	if (FAILED (wicConverter->Initialize (wicFrame, desiredWicPixelFormat, WICBitmapDitherTypeNone, nullptr, 0.0f, WICBitmapPaletteTypeCustom))) {
+		return nullptr;
+	}
+
 	std::vector<uint8_t> texData (height * stride);
-
-	Gdiplus::Rect frame (0, 0, width, height);
-	Gdiplus::BitmapData bitmapData;
-	bitmapData.Scan0 = &texData[0];
-	bitmapData.Width = width;
-	bitmapData.Height = height;
-	bitmapData.PixelFormat = hasAlpha ? PixelFormat32bppARGB : PixelFormat24bppRGB;
-	bitmapData.Stride = stride;
-	if (img->LockBits (&frame, Gdiplus::ImageLockModeRead | Gdiplus::ImageLockModeUserInputBuf, bitmapData.PixelFormat, &bitmapData) != Gdiplus::Ok) {
+	if (FAILED (wicConverter->CopyPixels (nullptr, stride, (uint32_t)texData.size (), &texData[0]))) {
 		return nullptr;
 	}
-
-	//FILE* fff = fopen ("c:\\temp\\juhu1", "wb");
-	//if (fff) {
-	//	fwrite (&texData[0], sizeof (uint8_t), texData.size (), fff);
-	//	fclose (fff);
-	//}
-
-	if (img->UnlockBits (&bitmapData) != Gdiplus::Ok) {
-		return nullptr;
-	}
-
-	if (hasAlpha) { //Need to convert BGRA from ARGB
-		for (size_t i = 0, iEnd = texData.size () / 4; i < iEnd; ++i) {
-			uint32_t pixValue = *(uint32_t*)&texData[i * 4];
-			texData[i * 4 + 0] = (uint8_t)(pixValue >> 24 & 0xff);
-			texData[i * 4 + 1] = (uint8_t)(pixValue >> 16 & 0xff);
-			texData[i * 4 + 2] = (uint8_t)(pixValue >> 8 & 0xff);
-			texData[i * 4 + 3] = (uint8_t)(pixValue & 0xff);
-		}
-	}
-
-	//fff = fopen ("c:\\temp\\juhu2", "wb");
-	//if (fff) {
-	//	fwrite (&texData[0], sizeof (uint8_t), texData.size (), fff);
-	//	fclose (fff);
-	//}
-
-
-	////TODO: I think this will be a boring texture :D
-	////I think the loading is wrong because full /0 char
-	//texData.resize(1024 * 1024 * 3);
-	//for (int i = 0; i < 1024 * 1024 * 3; i += 3) {
-	//	int x = i % 1024;
-	//	int y = i / 1024;
-
-	//	if (x / 32 % 2 == 0 ^ y / 32 % 2 == 0) {
-	//		texData[i] = 0xff;
-	//		texData[i + 1] = 0x00;
-	//		texData[i + 2] = 0x00;
-
-	//	}
-	//	else {
-	//		texData[i] = 0x00;
-	//		texData[i + 1] = 0xff;
-	//		texData[i + 2] = 0x00;
-
-	//	}
-	//}
 
 	result = std::make_shared<Texture> (name, texPixelFormat, width, height, texData);
 
@@ -504,7 +502,6 @@ std::shared_ptr<Scene::Assets> Scene::LoadPak (const std::string& name, const Sc
 				}
 			}
 		}
-
 
 		std::vector<std::shared_ptr<Material>> materials;
 		for (uint32_t i = 0; i < info->scene->mNumMaterials; ++i) {

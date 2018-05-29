@@ -5,8 +5,9 @@
 class Texture {
 public:
 	enum class PixelFormat {
-		BGRA_8888,
-		RGB_888
+		RGB_888,
+		RGBA_8888,
+		ALPHA_8
 	};
 
 public:
