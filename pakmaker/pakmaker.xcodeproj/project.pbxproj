@@ -15,6 +15,7 @@
 		FDE179ED20D0F1760056EAE0 /* pack.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE179E520D0F1760056EAE0 /* pack.cpp */; };
 		FDE179EE20D0F1760056EAE0 /* unpack.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE179E620D0F1760056EAE0 /* unpack.cpp */; };
 		FDE179EF20D0F1760056EAE0 /* delfrompak.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE179E720D0F1760056EAE0 /* delfrompak.cpp */; };
+		FDE17A0C20D11F4B0056EAE0 /* pak.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE17A0B20D11F4B0056EAE0 /* pak.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -40,6 +41,8 @@
 		FDE179E520D0F1760056EAE0 /* pack.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = pack.cpp; sourceTree = "<group>"; };
 		FDE179E620D0F1760056EAE0 /* unpack.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = unpack.cpp; sourceTree = "<group>"; };
 		FDE179E720D0F1760056EAE0 /* delfrompak.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = delfrompak.cpp; sourceTree = "<group>"; };
+		FDE17A0A20D11F4B0056EAE0 /* pak.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = pak.hpp; path = ../SpiderChase/Base/pak.hpp; sourceTree = "<group>"; };
+		FDE17A0B20D11F4B0056EAE0 /* pak.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = pak.cpp; path = ../SpiderChase/Base/pak.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +75,8 @@
 		FDE179D720D0F10D0056EAE0 /* pakmaker */ = {
 			isa = PBXGroup;
 			children = (
+				FDE17A0B20D11F4B0056EAE0 /* pak.cpp */,
+				FDE17A0A20D11F4B0056EAE0 /* pak.hpp */,
 				FDE179DF20D0F1760056EAE0 /* addtopak.cpp */,
 				FDE179E720D0F1760056EAE0 /* delfrompak.cpp */,
 				FDE179E320D0F1760056EAE0 /* extractfrompak.cpp */,
@@ -144,6 +149,7 @@
 				FDE179EE20D0F1760056EAE0 /* unpack.cpp in Sources */,
 				FDE179E820D0F1760056EAE0 /* addtopak.cpp in Sources */,
 				FDE179EB20D0F1760056EAE0 /* stdafx.cpp in Sources */,
+				FDE17A0C20D11F4B0056EAE0 /* pak.cpp in Sources */,
 				FDE179ED20D0F1760056EAE0 /* pack.cpp in Sources */,
 				FDE179EF20D0F1760056EAE0 /* delfrompak.cpp in Sources */,
 				FDE179E920D0F1760056EAE0 /* list.cpp in Sources */,

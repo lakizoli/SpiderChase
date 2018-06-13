@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "Pak.hpp"
+#include "pak.hpp"
 
 static std::istream& operator >> (std::istream& stream, Pak::Header& header) {
 	stream.read (header.mimeID, 4);
