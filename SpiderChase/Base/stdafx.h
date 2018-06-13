@@ -14,7 +14,6 @@
 #include <map>
 #include <set>
 #include <deque>
-#include <filesystem>
 #include <cstdint>
 #include <fstream>
 #include <sstream>
@@ -23,10 +22,23 @@
 #include <algorithm>
 #include <functional>
 #include <cctype>
+#include <memory>
+
+#ifdef _WINDOWS
+
+#	include <filesystem>
+	namespace fs = std::experimental::filesystem;
+
+#elif __APPLE__
+
+#	include <boost/filesystem.hpp>
+	namespace fs = boost::filesystem;
+
+#else
+#	error "OS not implemented!"
+#endif
 
 //Helper functions
-
-namespace fs = std::experimental::filesystem;
 
 std::string Trim (const std::string& src);
 bool StringStartsWith (const std::string& str, const std::string& find);

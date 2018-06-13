@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		59F1F22D06F8B076550DD834 /* libPods-SpiderChase.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BA4B090B9C9DCC2A2E8F6EED /* libPods-SpiderChase.a */; };
 		FDE1795020CF9C830056EAE0 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = FDE1794F20CF9C830056EAE0 /* AppDelegate.mm */; };
 		FDE1795320CF9C830056EAE0 /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = FDE1795220CF9C830056EAE0 /* ViewController.mm */; };
 		FDE1795820CF9C850056EAE0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FDE1795720CF9C850056EAE0 /* Assets.xcassets */; };
@@ -16,9 +17,13 @@
 		FDE1797720CFA4130056EAE0 /* OpenGLView.mm in Sources */ = {isa = PBXBuildFile; fileRef = FDE1797620CFA4130056EAE0 /* OpenGLView.mm */; };
 		FDE1799C20CFAAF90056EAE0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FDE1799A20CFAAF90056EAE0 /* Main.storyboard */; };
 		FDE1799D20CFAAF90056EAE0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FDE1799B20CFAAF90056EAE0 /* LaunchScreen.storyboard */; };
+		FDE17A0F20D146B90056EAE0 /* stdafx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE17A0D20D146B90056EAE0 /* stdafx.cpp */; };
+		FDE17A1220D147D20056EAE0 /* pak.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE17A1120D147D20056EAE0 /* pak.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7D9CFA7A7D6DE403370B1FFF /* Pods-SpiderChase.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpiderChase.release.xcconfig"; path = "../Pods/Target Support Files/Pods-SpiderChase/Pods-SpiderChase.release.xcconfig"; sourceTree = "<group>"; };
+		BA4B090B9C9DCC2A2E8F6EED /* libPods-SpiderChase.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SpiderChase.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDE1794B20CF9C830056EAE0 /* SpiderChase.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpiderChase.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDE1794E20CF9C830056EAE0 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		FDE1794F20CF9C830056EAE0 /* AppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
@@ -33,6 +38,11 @@
 		FDE1797620CFA4130056EAE0 /* OpenGLView.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = OpenGLView.mm; sourceTree = "<group>"; };
 		FDE1799A20CFAAF90056EAE0 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		FDE1799B20CFAAF90056EAE0 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		FDE17A0D20D146B90056EAE0 /* stdafx.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = stdafx.cpp; sourceTree = "<group>"; };
+		FDE17A0E20D146B90056EAE0 /* stdafx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stdafx.h; sourceTree = "<group>"; };
+		FDE17A1020D147D20056EAE0 /* pak.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = pak.hpp; sourceTree = "<group>"; };
+		FDE17A1120D147D20056EAE0 /* pak.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = pak.cpp; sourceTree = "<group>"; };
+		FF1449866298AE0BD6142696 /* Pods-SpiderChase.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpiderChase.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-SpiderChase/Pods-SpiderChase.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,18 +52,29 @@
 			files = (
 				FDE1796820CF9CE20056EAE0 /* QuartzCore.framework in Frameworks */,
 				FDE1796620CF9CD10056EAE0 /* OpenGLES.framework in Frameworks */,
+				59F1F22D06F8B076550DD834 /* libPods-SpiderChase.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4DE1C44D9B62EA3EE95462B2 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				FF1449866298AE0BD6142696 /* Pods-SpiderChase.debug.xcconfig */,
+				7D9CFA7A7D6DE403370B1FFF /* Pods-SpiderChase.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		FDE1794220CF9C830056EAE0 = {
 			isa = PBXGroup;
 			children = (
 				FDE1799F20CFAB450056EAE0 /* SpiderChase */,
 				FDE1794C20CF9C830056EAE0 /* Products */,
 				FDE1796420CF9CD10056EAE0 /* Frameworks */,
+				4DE1C44D9B62EA3EE95462B2 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -70,6 +91,7 @@
 			children = (
 				FDE1796720CF9CE20056EAE0 /* QuartzCore.framework */,
 				FDE1796520CF9CD10056EAE0 /* OpenGLES.framework */,
+				BA4B090B9C9DCC2A2E8F6EED /* libPods-SpiderChase.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -107,6 +129,10 @@
 		FDE179A120CFABE40056EAE0 /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				FDE17A1120D147D20056EAE0 /* pak.cpp */,
+				FDE17A1020D147D20056EAE0 /* pak.hpp */,
+				FDE17A0D20D146B90056EAE0 /* stdafx.cpp */,
+				FDE17A0E20D146B90056EAE0 /* stdafx.h */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -147,6 +173,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FDE1796120CF9C850056EAE0 /* Build configuration list for PBXNativeTarget "SpiderChase" */;
 			buildPhases = (
+				29B41535A28CAF354C90F72E /* [CP] Check Pods Manifest.lock */,
 				FDE1794720CF9C830056EAE0 /* Sources */,
 				FDE1794820CF9C830056EAE0 /* Frameworks */,
 				FDE1794920CF9C830056EAE0 /* Resources */,
@@ -205,15 +232,38 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		29B41535A28CAF354C90F72E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SpiderChase-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		FDE1794720CF9C830056EAE0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FDE17A1220D147D20056EAE0 /* pak.cpp in Sources */,
 				FDE1795320CF9C830056EAE0 /* ViewController.mm in Sources */,
 				FDE1795E20CF9C850056EAE0 /* main.m in Sources */,
 				FDE1795020CF9C830056EAE0 /* AppDelegate.mm in Sources */,
 				FDE1797720CFA4130056EAE0 /* OpenGLView.mm in Sources */,
+				FDE17A0F20D146B90056EAE0 /* stdafx.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -226,7 +276,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -284,7 +334,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -332,6 +382,7 @@
 		};
 		FDE1796220CF9C850056EAE0 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FF1449866298AE0BD6142696 /* Pods-SpiderChase.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -349,6 +400,7 @@
 		};
 		FDE1796320CF9C850056EAE0 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7D9CFA7A7D6DE403370B1FFF /* Pods-SpiderChase.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

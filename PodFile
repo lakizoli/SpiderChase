@@ -1,0 +1,13 @@
+workspace 'SpiderChase.xcworkspace'
+
+target 'pakmaker' do
+	project 'pakmaker/pakmaker.xcodeproj'
+	platform :osx, '10.13'
+	pod 'boost'
+end
+
+target 'SpiderChase' do
+	project 'SpiderChase/SpiderChase.xcodeproj'
+	platform :ios, '11.3'
+	pod 'boost'
+end

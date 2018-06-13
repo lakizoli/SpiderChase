@@ -14,7 +14,6 @@
 #include <map>
 #include <set>
 #include <deque>
-#include <filesystem>
 #include <cstdint>
 #include <fstream>
 #include <sstream>
@@ -23,11 +22,24 @@
 #include <algorithm>
 #include <functional>
 #include <cctype>
+#include <memory>
+
+#ifdef _WINDOWS
+
+#	include <filesystem>
+	namespace fs = std::experimental::filesystem;
+
+#elif __APPLE__
+
+#	include <boost/filesystem.hpp>
+	namespace fs = boost::filesystem;
+
+#else
+#	error "OS not implemented!"
+#endif
 
 #define EXIT_SUCCESS 0
 #define EXIT_FAILURE 1
-
-namespace fs = std::experimental::filesystem;
 
 //Helper functions
 

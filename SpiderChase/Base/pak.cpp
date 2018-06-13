@@ -262,11 +262,22 @@ bool Pak::DeleteMarkedFiles (const std::string& path) {
 	fs::path delSourcePath (path);
 	delSourcePath += ".delSource";
 
+#ifdef _WINDOWS
 	std::error_code err;
 	fs::rename (fs::path (path), delSourcePath, err);
 	if (err) {
 		return false;
 	}
+#elif __APPLE__
+	boost::system::error_code err;
+	try {
+		fs::rename (fs::path (path), delSourcePath);
+	} catch (...) {
+		return false;
+	}
+#else
+#	error "OS not implemented!"
+#endif
 
 	//Create empty pak
 	if (!CreateEmpty (path)) {
