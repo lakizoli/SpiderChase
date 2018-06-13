@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:pakmaker/pakmaker.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:SpiderChase/SpiderChase.xcodeproj">
    </FileRef>
 </Workspace>

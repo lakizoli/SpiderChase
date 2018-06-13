@@ -1,0 +1,309 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		FDE179E820D0F1760056EAE0 /* addtopak.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE179DF20D0F1760056EAE0 /* addtopak.cpp */; };
+		FDE179E920D0F1760056EAE0 /* list.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE179E020D0F1760056EAE0 /* list.cpp */; };
+		FDE179EA20D0F1760056EAE0 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE179E120D0F1760056EAE0 /* main.cpp */; };
+		FDE179EB20D0F1760056EAE0 /* stdafx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE179E220D0F1760056EAE0 /* stdafx.cpp */; };
+		FDE179EC20D0F1760056EAE0 /* extractfrompak.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE179E320D0F1760056EAE0 /* extractfrompak.cpp */; };
+		FDE179ED20D0F1760056EAE0 /* pack.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE179E520D0F1760056EAE0 /* pack.cpp */; };
+		FDE179EE20D0F1760056EAE0 /* unpack.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE179E620D0F1760056EAE0 /* unpack.cpp */; };
+		FDE179EF20D0F1760056EAE0 /* delfrompak.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE179E720D0F1760056EAE0 /* delfrompak.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		FDE179D320D0F10D0056EAE0 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		FDE179D520D0F10D0056EAE0 /* pakmaker */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = pakmaker; sourceTree = BUILT_PRODUCTS_DIR; };
+		FDE179DF20D0F1760056EAE0 /* addtopak.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = addtopak.cpp; sourceTree = "<group>"; };
+		FDE179E020D0F1760056EAE0 /* list.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = list.cpp; sourceTree = "<group>"; };
+		FDE179E120D0F1760056EAE0 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		FDE179E220D0F1760056EAE0 /* stdafx.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = stdafx.cpp; sourceTree = "<group>"; };
+		FDE179E320D0F1760056EAE0 /* extractfrompak.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = extractfrompak.cpp; sourceTree = "<group>"; };
+		FDE179E420D0F1760056EAE0 /* stdafx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stdafx.h; sourceTree = "<group>"; };
+		FDE179E520D0F1760056EAE0 /* pack.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = pack.cpp; sourceTree = "<group>"; };
+		FDE179E620D0F1760056EAE0 /* unpack.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = unpack.cpp; sourceTree = "<group>"; };
+		FDE179E720D0F1760056EAE0 /* delfrompak.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = delfrompak.cpp; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FDE179D220D0F10D0056EAE0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		FDE179CC20D0F10D0056EAE0 = {
+			isa = PBXGroup;
+			children = (
+				FDE179D720D0F10D0056EAE0 /* pakmaker */,
+				FDE179D620D0F10D0056EAE0 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		FDE179D620D0F10D0056EAE0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FDE179D520D0F10D0056EAE0 /* pakmaker */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FDE179D720D0F10D0056EAE0 /* pakmaker */ = {
+			isa = PBXGroup;
+			children = (
+				FDE179DF20D0F1760056EAE0 /* addtopak.cpp */,
+				FDE179E720D0F1760056EAE0 /* delfrompak.cpp */,
+				FDE179E320D0F1760056EAE0 /* extractfrompak.cpp */,
+				FDE179E020D0F1760056EAE0 /* list.cpp */,
+				FDE179E120D0F1760056EAE0 /* main.cpp */,
+				FDE179E520D0F1760056EAE0 /* pack.cpp */,
+				FDE179E220D0F1760056EAE0 /* stdafx.cpp */,
+				FDE179E420D0F1760056EAE0 /* stdafx.h */,
+				FDE179E620D0F1760056EAE0 /* unpack.cpp */,
+			);
+			name = pakmaker;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		FDE179D420D0F10D0056EAE0 /* pakmaker */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FDE179DC20D0F10D0056EAE0 /* Build configuration list for PBXNativeTarget "pakmaker" */;
+			buildPhases = (
+				FDE179D120D0F10D0056EAE0 /* Sources */,
+				FDE179D220D0F10D0056EAE0 /* Frameworks */,
+				FDE179D320D0F10D0056EAE0 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = pakmaker;
+			productName = pakmaker;
+			productReference = FDE179D520D0F10D0056EAE0 /* pakmaker */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		FDE179CD20D0F10D0056EAE0 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0930;
+				ORGANIZATIONNAME = "Immortal Games";
+				TargetAttributes = {
+					FDE179D420D0F10D0056EAE0 = {
+						CreatedOnToolsVersion = 9.3;
+					};
+				};
+			};
+			buildConfigurationList = FDE179D020D0F10D0056EAE0 /* Build configuration list for PBXProject "pakmaker" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = FDE179CC20D0F10D0056EAE0;
+			productRefGroup = FDE179D620D0F10D0056EAE0 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FDE179D420D0F10D0056EAE0 /* pakmaker */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		FDE179D120D0F10D0056EAE0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FDE179EE20D0F1760056EAE0 /* unpack.cpp in Sources */,
+				FDE179E820D0F1760056EAE0 /* addtopak.cpp in Sources */,
+				FDE179EB20D0F1760056EAE0 /* stdafx.cpp in Sources */,
+				FDE179ED20D0F1760056EAE0 /* pack.cpp in Sources */,
+				FDE179EF20D0F1760056EAE0 /* delfrompak.cpp in Sources */,
+				FDE179E920D0F1760056EAE0 /* list.cpp in Sources */,
+				FDE179EC20D0F1760056EAE0 /* extractfrompak.cpp in Sources */,
+				FDE179EA20D0F1760056EAE0 /* main.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		FDE179DA20D0F10D0056EAE0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		FDE179DB20D0F10D0056EAE0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		FDE179DD20D0F10D0056EAE0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = H772F9T3GZ;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		FDE179DE20D0F10D0056EAE0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = H772F9T3GZ;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		FDE179D020D0F10D0056EAE0 /* Build configuration list for PBXProject "pakmaker" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FDE179DA20D0F10D0056EAE0 /* Debug */,
+				FDE179DB20D0F10D0056EAE0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FDE179DC20D0F10D0056EAE0 /* Build configuration list for PBXNativeTarget "pakmaker" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FDE179DD20D0F10D0056EAE0 /* Debug */,
+				FDE179DE20D0F10D0056EAE0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = FDE179CD20D0F10D0056EAE0 /* Project object */;
+}
