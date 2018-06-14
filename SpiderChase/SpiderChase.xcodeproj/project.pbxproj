@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		59F1F22D06F8B076550DD834 /* libPods-SpiderChase.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BA4B090B9C9DCC2A2E8F6EED /* libPods-SpiderChase.a */; };
+		FD7291F920D23DD800E0253F /* libboost_filesystem.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FD7291F720D23DD700E0253F /* libboost_filesystem.a */; };
+		FD7291FA20D23DD800E0253F /* libboost_system.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FD7291F820D23DD700E0253F /* libboost_system.a */; };
 		FDE1795020CF9C830056EAE0 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = FDE1794F20CF9C830056EAE0 /* AppDelegate.mm */; };
 		FDE1795320CF9C830056EAE0 /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = FDE1795220CF9C830056EAE0 /* ViewController.mm */; };
 		FDE1795820CF9C850056EAE0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FDE1795720CF9C850056EAE0 /* Assets.xcassets */; };
@@ -24,6 +26,8 @@
 /* Begin PBXFileReference section */
 		7D9CFA7A7D6DE403370B1FFF /* Pods-SpiderChase.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpiderChase.release.xcconfig"; path = "../Pods/Target Support Files/Pods-SpiderChase/Pods-SpiderChase.release.xcconfig"; sourceTree = "<group>"; };
 		BA4B090B9C9DCC2A2E8F6EED /* libPods-SpiderChase.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SpiderChase.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FD7291F720D23DD700E0253F /* libboost_filesystem.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_filesystem.a; path = ../SDK/Boost/arm64/libboost_filesystem.a; sourceTree = "<group>"; };
+		FD7291F820D23DD700E0253F /* libboost_system.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_system.a; path = ../SDK/Boost/arm64/libboost_system.a; sourceTree = "<group>"; };
 		FDE1794B20CF9C830056EAE0 /* SpiderChase.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpiderChase.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDE1794E20CF9C830056EAE0 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		FDE1794F20CF9C830056EAE0 /* AppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
@@ -50,6 +54,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FD7291F920D23DD800E0253F /* libboost_filesystem.a in Frameworks */,
+				FD7291FA20D23DD800E0253F /* libboost_system.a in Frameworks */,
 				FDE1796820CF9CE20056EAE0 /* QuartzCore.framework in Frameworks */,
 				FDE1796620CF9CD10056EAE0 /* OpenGLES.framework in Frameworks */,
 				59F1F22D06F8B076550DD834 /* libPods-SpiderChase.a in Frameworks */,
@@ -89,6 +95,8 @@
 		FDE1796420CF9CD10056EAE0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FD7291F720D23DD700E0253F /* libboost_filesystem.a */,
+				FD7291F820D23DD700E0253F /* libboost_system.a */,
 				FDE1796720CF9CE20056EAE0 /* QuartzCore.framework */,
 				FDE1796520CF9CD10056EAE0 /* OpenGLES.framework */,
 				BA4B090B9C9DCC2A2E8F6EED /* libPods-SpiderChase.a */,
@@ -322,6 +330,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/../SDK/Boost/arm64";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -374,6 +383,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/../SDK/Boost/arm64";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
