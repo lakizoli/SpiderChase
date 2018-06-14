@@ -2,9 +2,9 @@
 #include "StartScene.hpp"
 #include "input.hpp"
 
-#ifdef _WINDOWS
+#ifdef PLATFORM_WINDOWS
 #	include "EglContext.h"
-#endif //_WINDOWS
+#endif
 
 IMPLEMENT_SCENE (StartScene, "start");
 

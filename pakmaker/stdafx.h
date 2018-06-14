@@ -5,9 +5,13 @@
 
 #pragma once
 
-#ifdef _WINDOWS
+#if defined(_WIN32) || defined (_WIN64)
+#	define PLATFORM_WINDOWS
+#endif //Windows detection
+
+#ifdef PLATFORM_WINDOWS
 #	define _CRT_SECURE_NO_WARNINGS
-#endif //_WINDOWS
+#endif
 
 #include <string>
 #include <vector>
@@ -24,7 +28,7 @@
 #include <cctype>
 #include <memory>
 
-#ifdef _WINDOWS
+#ifdef PLATFORM_WINDOWS
 
 #	include <filesystem>
 	namespace fs = std::experimental::filesystem;

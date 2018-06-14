@@ -212,7 +212,8 @@
     <ClInclude Include="Script\scene.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="Scenes\Start\pak.list">
+    <None Include="Scenes\Start\start.frag" />
+    <CustomBuild Include="Scenes\Start\start.paklist">
       <FileType>Document</FileType>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(OutputPath)pakmaker pack $(OutputPath)start.pak %(FullPath)</Command>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(OutputPath)pakmaker pack $(OutputPath)start.pak %(FullPath)</Command>
@@ -223,7 +224,6 @@
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(OutputPath)start.pak</Outputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutputPath)start.pak</Outputs>
     </CustomBuild>
-    <None Include="Scenes\Start\start.frag" />
     <None Include="Scenes\Start\start.program" />
     <None Include="Scenes\Start\start.vert" />
   </ItemGroup>

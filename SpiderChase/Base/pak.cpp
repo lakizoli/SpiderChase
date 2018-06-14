@@ -262,7 +262,7 @@ bool Pak::DeleteMarkedFiles (const std::string& path) {
 	fs::path delSourcePath (path);
 	delSourcePath += ".delSource";
 
-#ifdef _WINDOWS
+#ifdef PLATFORM_WINDOWS
 	std::error_code err;
 	fs::rename (fs::path (path), delSourcePath, err);
 	if (err) {

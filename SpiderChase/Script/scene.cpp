@@ -9,7 +9,7 @@
 #include <assimp/Importer.hpp>
 #include <assimp/postprocess.h>
 
-#ifdef _WINDOWS
+#ifdef PLATFORM_WINDOWS
 #	include "EglContext.h"
 #	include <windows.h>
 #	include <wincodec.h>
@@ -30,9 +30,9 @@ public:
 
 #	include "Platform.hpp"
 
-#else //_WINDOWS
+#else
 #	error OS not implemented!
-#endif //_WINDOWS
+#endif
 
 std::map<std::string, Scene::SceneCreator>& Scene::GetCreatorMap () {
 	static std::map<std::string, SceneCreator> creators;
@@ -232,7 +232,7 @@ std::shared_ptr<Texture> Scene::LoadTexture (const std::string& name, std::istre
 
 	std::shared_ptr<Texture> result;
 
-#ifdef _WINDOWS
+#ifdef PLATFORM_WINDOWS
 
 	CComPtr<IWICImagingFactory> wicImagingFactory;
 	if (FAILED (wicImagingFactory.CoCreateInstance (CLSID_WICImagingFactory))) {
@@ -326,7 +326,7 @@ std::shared_ptr<Texture> Scene::LoadTexture (const std::string& name, std::istre
 
 	result = std::make_shared<Texture> (name, texPixelFormat, width, height, texData);
 
-#elif defined(__APPLE__) //_WINDOWS
+#elif defined(__APPLE__)
 	
 	uint32_t width = 0;
 	uint32_t height = 0;
@@ -349,7 +349,7 @@ std::shared_ptr<Texture> Scene::LoadTexture (const std::string& name, std::istre
 	
 #else
 #	error OS not implemented!
-#endif //_WINDOWS
+#endif
 
 	return result;
 }
@@ -375,7 +375,7 @@ std::shared_ptr<Scene::Assets> Scene::LoadPak (const std::string& name, const Sc
 	Log (LogLevel::Information, "*** loading pak file (%s.pak) ***", name.c_str ());
 	
 	std::string pakPath;
-#ifdef _WINDOWS
+#ifdef PLATFORM_WINDOWS
 	pakPath = name + ".pak";
 #elif defined(__APPLE__)
 	pakPath = PathForResource (name, "pak");

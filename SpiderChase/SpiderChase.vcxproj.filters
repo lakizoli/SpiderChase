@@ -113,10 +113,8 @@
     <None Include="Scenes\Start\start.vert">
       <Filter>Scenes\Start</Filter>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <CustomBuild Include="Scenes\Start\pak.list">
+    <None Include="Scenes\Start\start.paklist">
       <Filter>Scenes\Start</Filter>
-    </CustomBuild>
+    </None>
   </ItemGroup>
 </Project>

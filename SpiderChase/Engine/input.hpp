@@ -1,6 +1,6 @@
 #pragma once
 
-#ifdef _WINDOWS
+#ifdef PLATFORM_WINDOWS
 #	include <PVRShell/Shell.h>
 #elif defined(__APPLE__)
 
