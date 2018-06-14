@@ -1,6 +1,6 @@
 #pragma once
 
-#include <assimp\IOStream.hpp>
+#include <assimp/IOStream.hpp>
 #include "pak.hpp"
 
 class PakIOStream : public Assimp::IOStream {

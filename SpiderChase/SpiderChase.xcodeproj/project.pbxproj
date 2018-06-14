@@ -10,6 +10,11 @@
 		59F1F22D06F8B076550DD834 /* libPods-SpiderChase.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BA4B090B9C9DCC2A2E8F6EED /* libPods-SpiderChase.a */; };
 		FD7291F920D23DD800E0253F /* libboost_filesystem.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FD7291F720D23DD700E0253F /* libboost_filesystem.a */; };
 		FD7291FA20D23DD800E0253F /* libboost_system.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FD7291F820D23DD700E0253F /* libboost_system.a */; };
+		FD72920320D24FC000E0253F /* libzlibstatic.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FD72920120D24FC000E0253F /* libzlibstatic.a */; };
+		FD72920420D24FC000E0253F /* libassimp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FD72920220D24FC000E0253F /* libassimp.a */; };
+		FD72920920D2501400E0253F /* pakiostream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD72920620D2501400E0253F /* pakiostream.cpp */; };
+		FD72920A20D2501400E0253F /* pakiosystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD72920720D2501400E0253F /* pakiosystem.cpp */; };
+		FD72920C20D251FF00E0253F /* libIrrXML.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FD72920B20D251FF00E0253F /* libIrrXML.a */; };
 		FDE1795020CF9C830056EAE0 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = FDE1794F20CF9C830056EAE0 /* AppDelegate.mm */; };
 		FDE1795320CF9C830056EAE0 /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = FDE1795220CF9C830056EAE0 /* ViewController.mm */; };
 		FDE1795820CF9C850056EAE0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FDE1795720CF9C850056EAE0 /* Assets.xcassets */; };
@@ -28,6 +33,13 @@
 		BA4B090B9C9DCC2A2E8F6EED /* libPods-SpiderChase.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SpiderChase.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD7291F720D23DD700E0253F /* libboost_filesystem.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_filesystem.a; path = ../SDK/Boost/arm64/libboost_filesystem.a; sourceTree = "<group>"; };
 		FD7291F820D23DD700E0253F /* libboost_system.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_system.a; path = ../SDK/Boost/arm64/libboost_system.a; sourceTree = "<group>"; };
+		FD72920120D24FC000E0253F /* libzlibstatic.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libzlibstatic.a; path = ../Assimp/iOS/lib/libzlibstatic.a; sourceTree = "<group>"; };
+		FD72920220D24FC000E0253F /* libassimp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libassimp.a; path = ../Assimp/iOS/lib/libassimp.a; sourceTree = "<group>"; };
+		FD72920520D2501300E0253F /* pakiostream.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = pakiostream.hpp; sourceTree = "<group>"; };
+		FD72920620D2501400E0253F /* pakiostream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = pakiostream.cpp; sourceTree = "<group>"; };
+		FD72920720D2501400E0253F /* pakiosystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = pakiosystem.cpp; sourceTree = "<group>"; };
+		FD72920820D2501400E0253F /* pakiosystem.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = pakiosystem.hpp; sourceTree = "<group>"; };
+		FD72920B20D251FF00E0253F /* libIrrXML.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libIrrXML.a; path = ../Assimp/iOS/lib/libIrrXML.a; sourceTree = "<group>"; };
 		FDE1794B20CF9C830056EAE0 /* SpiderChase.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpiderChase.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDE1794E20CF9C830056EAE0 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		FDE1794F20CF9C830056EAE0 /* AppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
@@ -54,6 +66,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FD72920C20D251FF00E0253F /* libIrrXML.a in Frameworks */,
+				FD72920320D24FC000E0253F /* libzlibstatic.a in Frameworks */,
+				FD72920420D24FC000E0253F /* libassimp.a in Frameworks */,
 				FD7291F920D23DD800E0253F /* libboost_filesystem.a in Frameworks */,
 				FD7291FA20D23DD800E0253F /* libboost_system.a in Frameworks */,
 				FDE1796820CF9CE20056EAE0 /* QuartzCore.framework in Frameworks */,
@@ -95,6 +110,9 @@
 		FDE1796420CF9CD10056EAE0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FD72920B20D251FF00E0253F /* libIrrXML.a */,
+				FD72920220D24FC000E0253F /* libassimp.a */,
+				FD72920120D24FC000E0253F /* libzlibstatic.a */,
 				FD7291F720D23DD700E0253F /* libboost_filesystem.a */,
 				FD7291F820D23DD700E0253F /* libboost_system.a */,
 				FDE1796720CF9CE20056EAE0 /* QuartzCore.framework */,
@@ -137,6 +155,10 @@
 		FDE179A120CFABE40056EAE0 /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				FD72920620D2501400E0253F /* pakiostream.cpp */,
+				FD72920520D2501300E0253F /* pakiostream.hpp */,
+				FD72920720D2501400E0253F /* pakiosystem.cpp */,
+				FD72920820D2501400E0253F /* pakiosystem.hpp */,
 				FDE17A1120D147D20056EAE0 /* pak.cpp */,
 				FDE17A1020D147D20056EAE0 /* pak.hpp */,
 				FDE17A0D20D146B90056EAE0 /* stdafx.cpp */,
@@ -267,8 +289,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				FDE17A1220D147D20056EAE0 /* pak.cpp in Sources */,
+				FD72920A20D2501400E0253F /* pakiosystem.cpp in Sources */,
 				FDE1795320CF9C830056EAE0 /* ViewController.mm in Sources */,
 				FDE1795E20CF9C850056EAE0 /* main.m in Sources */,
+				FD72920920D2501400E0253F /* pakiostream.cpp in Sources */,
 				FDE1795020CF9C830056EAE0 /* AppDelegate.mm in Sources */,
 				FDE1797720CFA4130056EAE0 /* OpenGLView.mm in Sources */,
 				FDE17A0F20D146B90056EAE0 /* stdafx.cpp in Sources */,
@@ -329,8 +353,12 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../Assimp/iOS/Include";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
-				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/../SDK/Boost/arm64";
+				LIBRARY_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/../SDK/Boost/arm64",
+					"$(PROJECT_DIR)/../Assimp/iOS/lib",
+				);
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -382,8 +410,12 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../Assimp/iOS/Include";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
-				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/../SDK/Boost/arm64";
+				LIBRARY_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/../SDK/Boost/arm64",
+					"$(PROJECT_DIR)/../Assimp/iOS/lib",
+				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
