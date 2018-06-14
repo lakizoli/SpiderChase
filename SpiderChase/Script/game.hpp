@@ -1,7 +1,7 @@
 #pragma once
 
 #include "scene.hpp"
-#include "Input.hpp"
+#include "input.hpp"
 
 class Game {
 	InputHandler _inputHandler; ///< The input handler of the game.

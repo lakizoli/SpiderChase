@@ -1,18 +1,18 @@
 #include "stdafx.h"
-#include "Input.hpp"
+#include "input.hpp"
 
 void InputState::StepKeys (const std::set<pvr::Keys> keys) {
 	_lastDownKeys = _downKeys;
 	_downKeys = keys;
 }
 
-void InputState::StepPointer (bool dragging, pvr::Shell::PointerNormalisedLocation pointerLocation) {
-	_lastDragging = _dragging;
-	_dragging = dragging;
-
-	_lastPointerLocation = _pointerLocation;
-	_pointerLocation = pointerLocation;
-}
+//void InputState::StepPointer (bool dragging, pvr::Shell::PointerNormalisedLocation pointerLocation) {
+//	_lastDragging = _dragging;
+//	_dragging = dragging;
+//
+//	_lastPointerLocation = _pointerLocation;
+//	_pointerLocation = pointerLocation;
+//}
 
 InputHandler::InputHandler () :
 	_usedKeys ({
@@ -49,7 +49,7 @@ InputHandler::InputHandler () :
 
 void InputHandler::Update (double currentTimeInSec) {
 	_state.StepKeys (_downKeys);
-	_state.StepPointer (_dragging, _pointerLocationGetter());
+//	_state.StepPointer (_dragging, _pointerLocationGetter());
 }
 
 void InputHandler::OnKeyDown (pvr::Keys key) {
@@ -68,14 +68,14 @@ void InputHandler::OnKeyUp (pvr::Keys key) {
 	_downKeys.erase (key);
 }
 
-void InputHandler::DragStart() {
-	_dragging = true;
-}
-
-void InputHandler::DragFinished () {
-	_dragging = false;
-}
-
-void InputHandler::SetPointerLocationGetter(std::function <pvr::Shell::PointerNormalisedLocation(void)> getter) {
-	_pointerLocationGetter = getter;
-}
+//void InputHandler::DragStart() {
+//	_dragging = true;
+//}
+//
+//void InputHandler::DragFinished () {
+//	_dragging = false;
+//}
+//
+//void InputHandler::SetPointerLocationGetter(std::function <pvr::Shell::PointerNormalisedLocation(void)> getter) {
+//	_pointerLocationGetter = getter;
+//}

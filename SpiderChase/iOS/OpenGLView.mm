@@ -47,8 +47,15 @@
 							  GL_RENDERBUFFER, _colorRenderBuffer);
 }
 
-- (void)render {
-	glClearColor(0, 104.0/255.0, 55.0/255.0, 1.0);
+- (void)setupDisplayLink {
+	CADisplayLink* displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(render:)];
+	[displayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+}
+
+- (void)render:(CADisplayLink*)displayLink {
+	static double add = 0;
+	add += 0.1;
+	glClearColor(0, (104.0 + add)/255.0, 55.0/255.0, 1.0);
 	glClear(GL_COLOR_BUFFER_BIT);
 	[_context presentRenderbuffer:GL_RENDERBUFFER];
 }
@@ -60,7 +67,7 @@
 		[self setupContext];
 		[self setupRenderBuffer];
 		[self setupFrameBuffer];
-		[self render];
+		[self setupDisplayLink];
 	}
 	return self;
 }
@@ -73,7 +80,7 @@
 		[self setupContext];
 		[self setupRenderBuffer];
 		[self setupFrameBuffer];
-		[self render];
+		[self setupDisplayLink];
 	}
 	return self;
 }

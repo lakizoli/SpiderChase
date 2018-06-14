@@ -29,7 +29,7 @@
 #	include <filesystem>
 	namespace fs = std::experimental::filesystem;
 
-#elif __APPLE__
+#elif defined(__APPLE__)
 
 #	include <boost/filesystem.hpp>
 	namespace fs = boost::filesystem;

@@ -4,6 +4,44 @@
 
 #include "stdafx.h"
 
+#ifdef __APPLE__
+
+void Log (LogLevel severity, const char* formatString, ...) {
+	va_list argumentList;
+	va_start(argumentList, formatString);
+	
+	switch (severity) {
+		case LogLevel::Verbose:
+			printf ("Verbose: ");
+			break;
+		case LogLevel::Debug:
+			printf ("Debug: ");
+			break;
+		case LogLevel::Information:
+			printf ("Info: ");
+			break;
+		case LogLevel::Warning:
+			printf ("Warning: ");
+			break;
+		case LogLevel::Error:
+			printf ("Error: ");
+			break;
+		case LogLevel::Critical:
+			printf ("Critical: ");
+			break;
+		case LogLevel::None:
+		default:
+			break;
+	}
+	
+	vprintf (formatString, argumentList);
+	printf ("\n");
+	
+	va_end(argumentList);
+}
+
+#endif //__APPLE__
+
 std::string Trim (const std::string& src) {
 	if (src.empty ()) {
 		return std::string ();

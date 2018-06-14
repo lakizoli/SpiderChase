@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "Game.hpp"
+#include "game.hpp"
 #include <DynamicEgl.h>
 #include <DynamicGles.h>
 

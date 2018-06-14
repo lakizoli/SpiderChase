@@ -1,5 +1,9 @@
 #pragma once
 
+#	define GLM_FORCE_RADIANS
+#	include <glm/glm.hpp>
+#	include <glm/ext.hpp>
+
 #define DECLARE_SCENE(cls)								\
 	static std::shared_ptr<Scene> __create () {			\
 		return std::make_shared<cls> ();				\

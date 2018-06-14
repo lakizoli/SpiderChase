@@ -142,7 +142,7 @@ void Material::Render () const {
 		_diffuseMap->texture->Render ();
 
 		if (_shader > 0) {			
-			//gl::BindTexture(GL_TEXTURE_2D, _diffuseMap->texture->_tex);
+			gl::BindTexture(GL_TEXTURE_2D, _diffuseMap->texture->_tex);
 
 			GLint toggleID = gl::GetUniformLocation(_shader, "hasDiffuseMap");
 			gl::Uniform1i(toggleID, 1);

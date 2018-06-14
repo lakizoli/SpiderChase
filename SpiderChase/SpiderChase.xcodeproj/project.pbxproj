@@ -15,6 +15,15 @@
 		FD72920920D2501400E0253F /* pakiostream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD72920620D2501400E0253F /* pakiostream.cpp */; };
 		FD72920A20D2501400E0253F /* pakiosystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD72920720D2501400E0253F /* pakiosystem.cpp */; };
 		FD72920C20D251FF00E0253F /* libIrrXML.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FD72920B20D251FF00E0253F /* libIrrXML.a */; };
+		FD72921620D253CF00E0253F /* firstpersoncamera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD72920D20D253CE00E0253F /* firstpersoncamera.cpp */; };
+		FD72921720D253CF00E0253F /* material.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD72920F20D253CE00E0253F /* material.cpp */; };
+		FD72921820D253CF00E0253F /* texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD72921320D253CE00E0253F /* texture.cpp */; };
+		FD72921920D253CF00E0253F /* mesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD72921520D253CF00E0253F /* mesh.cpp */; };
+		FD72922120D2562200E0253F /* scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD72921F20D2562200E0253F /* scene.cpp */; };
+		FD72922220D2562200E0253F /* game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD72922020D2562200E0253F /* game.cpp */; };
+		FD72922520D2591300E0253F /* input.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD72922320D2591200E0253F /* input.cpp */; };
+		FD72922A20D25C1900E0253F /* ImageReader.mm in Sources */ = {isa = PBXBuildFile; fileRef = FD72922920D25C1900E0253F /* ImageReader.mm */; };
+		FD72922D20D2650500E0253F /* StartScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD72922B20D2650500E0253F /* StartScene.cpp */; };
 		FDE1795020CF9C830056EAE0 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = FDE1794F20CF9C830056EAE0 /* AppDelegate.mm */; };
 		FDE1795320CF9C830056EAE0 /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = FDE1795220CF9C830056EAE0 /* ViewController.mm */; };
 		FDE1795820CF9C850056EAE0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FDE1795720CF9C850056EAE0 /* Assets.xcassets */; };
@@ -40,6 +49,29 @@
 		FD72920720D2501400E0253F /* pakiosystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = pakiosystem.cpp; sourceTree = "<group>"; };
 		FD72920820D2501400E0253F /* pakiosystem.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = pakiosystem.hpp; sourceTree = "<group>"; };
 		FD72920B20D251FF00E0253F /* libIrrXML.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libIrrXML.a; path = ../Assimp/iOS/lib/libIrrXML.a; sourceTree = "<group>"; };
+		FD72920D20D253CE00E0253F /* firstpersoncamera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = firstpersoncamera.cpp; sourceTree = "<group>"; };
+		FD72920E20D253CE00E0253F /* mesh.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = mesh.hpp; sourceTree = "<group>"; };
+		FD72920F20D253CE00E0253F /* material.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = material.cpp; sourceTree = "<group>"; };
+		FD72921020D253CE00E0253F /* material.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = material.hpp; sourceTree = "<group>"; };
+		FD72921120D253CE00E0253F /* texture.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = texture.hpp; sourceTree = "<group>"; };
+		FD72921220D253CE00E0253F /* firstpersoncamera.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = firstpersoncamera.hpp; sourceTree = "<group>"; };
+		FD72921320D253CE00E0253F /* texture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = texture.cpp; sourceTree = "<group>"; };
+		FD72921420D253CF00E0253F /* flagsenum.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = flagsenum.hpp; sourceTree = "<group>"; };
+		FD72921520D253CF00E0253F /* mesh.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mesh.cpp; sourceTree = "<group>"; };
+		FD72921D20D2562100E0253F /* scene.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = scene.hpp; sourceTree = "<group>"; };
+		FD72921E20D2562200E0253F /* game.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = game.hpp; sourceTree = "<group>"; };
+		FD72921F20D2562200E0253F /* scene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = scene.cpp; sourceTree = "<group>"; };
+		FD72922020D2562200E0253F /* game.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = game.cpp; sourceTree = "<group>"; };
+		FD72922320D2591200E0253F /* input.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = input.cpp; sourceTree = "<group>"; };
+		FD72922420D2591200E0253F /* input.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = input.hpp; sourceTree = "<group>"; };
+		FD72922820D25C1900E0253F /* ImageReader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ImageReader.hpp; sourceTree = "<group>"; };
+		FD72922920D25C1900E0253F /* ImageReader.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ImageReader.mm; sourceTree = "<group>"; };
+		FD72922B20D2650500E0253F /* StartScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StartScene.cpp; sourceTree = "<group>"; };
+		FD72922C20D2650500E0253F /* StartScene.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = StartScene.hpp; sourceTree = "<group>"; };
+		FD72923020D2668600E0253F /* start.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = start.frag; sourceTree = "<group>"; };
+		FD72923120D2668700E0253F /* start.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = start.vert; sourceTree = "<group>"; };
+		FD72923220D2668700E0253F /* start.program */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = start.program; sourceTree = "<group>"; };
+		FD72923820D2727100E0253F /* start.paklist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = start.paklist; sourceTree = "<group>"; };
 		FDE1794B20CF9C830056EAE0 /* SpiderChase.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpiderChase.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDE1794E20CF9C830056EAE0 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		FDE1794F20CF9C830056EAE0 /* AppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
@@ -148,6 +180,8 @@
 				FDE1795D20CF9C850056EAE0 /* main.m */,
 				FDE1797520CFA4130056EAE0 /* OpenGLView.hpp */,
 				FDE1797620CFA4130056EAE0 /* OpenGLView.mm */,
+				FD72922820D25C1900E0253F /* ImageReader.hpp */,
+				FD72922920D25C1900E0253F /* ImageReader.mm */,
 			);
 			path = iOS;
 			sourceTree = "<group>";
@@ -170,6 +204,17 @@
 		FDE179A220CFABEB0056EAE0 /* Engine */ = {
 			isa = PBXGroup;
 			children = (
+				FD72922320D2591200E0253F /* input.cpp */,
+				FD72922420D2591200E0253F /* input.hpp */,
+				FD72920D20D253CE00E0253F /* firstpersoncamera.cpp */,
+				FD72921220D253CE00E0253F /* firstpersoncamera.hpp */,
+				FD72921420D253CF00E0253F /* flagsenum.hpp */,
+				FD72920F20D253CE00E0253F /* material.cpp */,
+				FD72921020D253CE00E0253F /* material.hpp */,
+				FD72921520D253CF00E0253F /* mesh.cpp */,
+				FD72920E20D253CE00E0253F /* mesh.hpp */,
+				FD72921320D253CE00E0253F /* texture.cpp */,
+				FD72921120D253CE00E0253F /* texture.hpp */,
 			);
 			path = Engine;
 			sourceTree = "<group>";
@@ -185,6 +230,10 @@
 		FDE179A420CFABFF0056EAE0 /* Script */ = {
 			isa = PBXGroup;
 			children = (
+				FD72922020D2562200E0253F /* game.cpp */,
+				FD72921E20D2562200E0253F /* game.hpp */,
+				FD72921F20D2562200E0253F /* scene.cpp */,
+				FD72921D20D2562100E0253F /* scene.hpp */,
 			);
 			path = Script;
 			sourceTree = "<group>";
@@ -192,6 +241,12 @@
 		FDE179A520CFAC290056EAE0 /* Start */ = {
 			isa = PBXGroup;
 			children = (
+				FD72923820D2727100E0253F /* start.paklist */,
+				FD72923020D2668600E0253F /* start.frag */,
+				FD72923220D2668700E0253F /* start.program */,
+				FD72923120D2668700E0253F /* start.vert */,
+				FD72922B20D2650500E0253F /* StartScene.cpp */,
+				FD72922C20D2650500E0253F /* StartScene.hpp */,
 			);
 			path = Start;
 			sourceTree = "<group>";
@@ -204,6 +259,7 @@
 			buildConfigurationList = FDE1796120CF9C850056EAE0 /* Build configuration list for PBXNativeTarget "SpiderChase" */;
 			buildPhases = (
 				29B41535A28CAF354C90F72E /* [CP] Check Pods Manifest.lock */,
+				FD72923620D269CC00E0253F /* ShellScript */,
 				FDE1794720CF9C830056EAE0 /* Sources */,
 				FDE1794820CF9C830056EAE0 /* Frameworks */,
 				FDE1794920CF9C830056EAE0 /* Resources */,
@@ -281,6 +337,20 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		FD72923620D269CC00E0253F /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "for i in $(find ${PROJECT_DIR} -name \"*.paklist\"); do # Not recommended, will break on whitespace\n    filename=$(basename \"$i\")\n    filepath=$(dirname \"$i\")\n    filename=\"${filename%.*}\"\n    pakname=\"$filename.pak\"\n    pakpath=\"${TEMP_DIR}/$pakname\"\n    echo \"$filename\" \"$pakname\" \"$filepath\" \"$pakpath\"\n    ${PROJECT_DIR}/../tools/pakmaker pack ${pakpath} \"$i\"\n    cp \"$pakpath\" \"${BUILT_PRODUCTS_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/$pakname\"\ndone";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -290,12 +360,21 @@
 			files = (
 				FDE17A1220D147D20056EAE0 /* pak.cpp in Sources */,
 				FD72920A20D2501400E0253F /* pakiosystem.cpp in Sources */,
+				FD72922520D2591300E0253F /* input.cpp in Sources */,
+				FD72921920D253CF00E0253F /* mesh.cpp in Sources */,
 				FDE1795320CF9C830056EAE0 /* ViewController.mm in Sources */,
 				FDE1795E20CF9C850056EAE0 /* main.m in Sources */,
+				FD72921720D253CF00E0253F /* material.cpp in Sources */,
 				FD72920920D2501400E0253F /* pakiostream.cpp in Sources */,
+				FD72922D20D2650500E0253F /* StartScene.cpp in Sources */,
+				FD72922120D2562200E0253F /* scene.cpp in Sources */,
+				FD72921620D253CF00E0253F /* firstpersoncamera.cpp in Sources */,
+				FD72922220D2562200E0253F /* game.cpp in Sources */,
 				FDE1795020CF9C830056EAE0 /* AppDelegate.mm in Sources */,
 				FDE1797720CFA4130056EAE0 /* OpenGLView.mm in Sources */,
 				FDE17A0F20D146B90056EAE0 /* stdafx.cpp in Sources */,
+				FD72922A20D25C1900E0253F /* ImageReader.mm in Sources */,
+				FD72921820D253CF00E0253F /* texture.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -319,7 +398,6 @@
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
@@ -353,7 +431,11 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../Assimp/iOS/Include";
+				HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/../Assimp/iOS/Include",
+					"$(PROJECT_DIR)/../SDK/External",
+					"$(PROJECT_DIR)/../SDK/Builds/Include",
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
 				LIBRARY_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/../SDK/Boost/arm64",
@@ -382,7 +464,6 @@
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
@@ -410,7 +491,11 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../Assimp/iOS/Include";
+				HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/../Assimp/iOS/Include",
+					"$(PROJECT_DIR)/../SDK/External",
+					"$(PROJECT_DIR)/../SDK/Builds/Include",
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
 				LIBRARY_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/../SDK/Boost/arm64",

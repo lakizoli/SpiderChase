@@ -1,6 +1,6 @@
 #include "stdafx.h"
-#include "Mesh.hpp"
-#include "Material.hpp"
+#include "mesh.hpp"
+#include "material.hpp"
 #include <assimp/mesh.h>
 
 Mesh::Mesh (const std::string& name, const aiMesh* colladaMesh, const std::vector<std::shared_ptr<Material>>& materials) {

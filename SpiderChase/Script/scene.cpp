@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "scene.hpp"
 #include "pak.hpp"
-#include "EglContext.h"
 #include "input.hpp"
 #include "texture.hpp"
 #include "material.hpp"
@@ -11,6 +10,7 @@
 #include <assimp/postprocess.h>
 
 #ifdef _WINDOWS
+#	include "EglContext.h"
 #	include <windows.h>
 #	include <wincodec.h>
 #	include <atlbase.h>
@@ -25,6 +25,10 @@ public:
 		CoUninitialize ();
 	}
 } g_technologyIniter;
+
+#elif defined(__APPLE__)
+
+#include "ImageReader.hpp"
 
 #else //_WINDOWS
 #	error OS not implemented!
@@ -322,7 +326,28 @@ std::shared_ptr<Texture> Scene::LoadTexture (const std::string& name, std::istre
 
 	result = std::make_shared<Texture> (name, texPixelFormat, width, height, texData);
 
-#else //_WINDOWS
+#elif defined(__APPLE__) //_WINDOWS
+	
+	uint32_t width = 0;
+	uint32_t height = 0;
+	uint32_t channelCount = 0;
+	std::vector<uint8_t> texData;
+	if (!ReadImage (data, width, height, channelCount, texData)) {
+		return nullptr;
+	}
+	
+	Texture::PixelFormat texPixelFormat;
+	if (channelCount == 1) { //ALPHA only
+		texPixelFormat = Texture::PixelFormat::ALPHA_8;
+	} else if (channelCount == 3) { //RGB
+		texPixelFormat = Texture::PixelFormat::RGB_888;
+	} else { //RGBA
+		texPixelFormat = Texture::PixelFormat::RGBA_8888;
+	}
+	
+	result = std::make_shared<Texture> (name, texPixelFormat, width, height, texData);
+	
+#else
 #	error OS not implemented!
 #endif //_WINDOWS
 

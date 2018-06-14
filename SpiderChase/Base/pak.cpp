@@ -268,7 +268,7 @@ bool Pak::DeleteMarkedFiles (const std::string& path) {
 	if (err) {
 		return false;
 	}
-#elif __APPLE__
+#elif defined(__APPLE__)
 	boost::system::error_code err;
 	try {
 		fs::rename (fs::path (path), delSourcePath);
