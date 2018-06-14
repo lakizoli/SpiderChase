@@ -22,7 +22,7 @@
 		FD72922120D2562200E0253F /* scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD72921F20D2562200E0253F /* scene.cpp */; };
 		FD72922220D2562200E0253F /* game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD72922020D2562200E0253F /* game.cpp */; };
 		FD72922520D2591300E0253F /* input.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD72922320D2591200E0253F /* input.cpp */; };
-		FD72922A20D25C1900E0253F /* ImageReader.mm in Sources */ = {isa = PBXBuildFile; fileRef = FD72922920D25C1900E0253F /* ImageReader.mm */; };
+		FD72922A20D25C1900E0253F /* Platform.mm in Sources */ = {isa = PBXBuildFile; fileRef = FD72922920D25C1900E0253F /* Platform.mm */; };
 		FD72922D20D2650500E0253F /* StartScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FD72922B20D2650500E0253F /* StartScene.cpp */; };
 		FDE1795020CF9C830056EAE0 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = FDE1794F20CF9C830056EAE0 /* AppDelegate.mm */; };
 		FDE1795320CF9C830056EAE0 /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = FDE1795220CF9C830056EAE0 /* ViewController.mm */; };
@@ -64,8 +64,8 @@
 		FD72922020D2562200E0253F /* game.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = game.cpp; sourceTree = "<group>"; };
 		FD72922320D2591200E0253F /* input.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = input.cpp; sourceTree = "<group>"; };
 		FD72922420D2591200E0253F /* input.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = input.hpp; sourceTree = "<group>"; };
-		FD72922820D25C1900E0253F /* ImageReader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ImageReader.hpp; sourceTree = "<group>"; };
-		FD72922920D25C1900E0253F /* ImageReader.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ImageReader.mm; sourceTree = "<group>"; };
+		FD72922820D25C1900E0253F /* Platform.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Platform.hpp; sourceTree = "<group>"; };
+		FD72922920D25C1900E0253F /* Platform.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = Platform.mm; sourceTree = "<group>"; };
 		FD72922B20D2650500E0253F /* StartScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StartScene.cpp; sourceTree = "<group>"; };
 		FD72922C20D2650500E0253F /* StartScene.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = StartScene.hpp; sourceTree = "<group>"; };
 		FD72923020D2668600E0253F /* start.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = start.frag; sourceTree = "<group>"; };
@@ -180,8 +180,8 @@
 				FDE1795D20CF9C850056EAE0 /* main.m */,
 				FDE1797520CFA4130056EAE0 /* OpenGLView.hpp */,
 				FDE1797620CFA4130056EAE0 /* OpenGLView.mm */,
-				FD72922820D25C1900E0253F /* ImageReader.hpp */,
-				FD72922920D25C1900E0253F /* ImageReader.mm */,
+				FD72922820D25C1900E0253F /* Platform.hpp */,
+				FD72922920D25C1900E0253F /* Platform.mm */,
 			);
 			path = iOS;
 			sourceTree = "<group>";
@@ -373,7 +373,7 @@
 				FDE1795020CF9C830056EAE0 /* AppDelegate.mm in Sources */,
 				FDE1797720CFA4130056EAE0 /* OpenGLView.mm in Sources */,
 				FDE17A0F20D146B90056EAE0 /* stdafx.cpp in Sources */,
-				FD72922A20D25C1900E0253F /* ImageReader.mm in Sources */,
+				FD72922A20D25C1900E0253F /* Platform.mm in Sources */,
 				FD72921820D253CF00E0253F /* texture.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -28,7 +28,7 @@ public:
 
 #elif defined(__APPLE__)
 
-#include "ImageReader.hpp"
+#	include "Platform.hpp"
 
 #else //_WINDOWS
 #	error OS not implemented!
@@ -373,8 +373,17 @@ std::shared_ptr<Scene::ColladaSceneInfo> Scene::GetOrCreateSceneInfo (const std:
 
 std::shared_ptr<Scene::Assets> Scene::LoadPak (const std::string& name, const SceneMaterialShaders& sceneMaterialShaders, ShaderBindCallback shaderBindCallback) {
 	Log (LogLevel::Information, "*** loading pak file (%s.pak) ***", name.c_str ());
+	
+	std::string pakPath;
+#ifdef _WINDOWS
+	pakPath = name + ".pak";
+#elif defined(__APPLE__)
+	pakPath = PathForResource (name, "pak");
+#else
+#	error "OS not implemented!"
+#endif
 
-	std::shared_ptr<Pak> pak = Pak::OpenForRead (name + ".pak");
+	std::shared_ptr<Pak> pak = Pak::OpenForRead (pakPath);
 	if (pak == nullptr) {
 		Log (LogLevel::Error, "Pak not found!");
 		return nullptr;

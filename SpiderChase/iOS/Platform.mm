@@ -1,5 +1,5 @@
 //
-//  ImageReader.m
+//  Platform.mm
 //  SpiderChase
 //
 //  Created by Laki, Zoltan on 2018. 06. 14..
@@ -7,8 +7,17 @@
 //
 
 #include "stdafx.h"
-#import "ImageReader.hpp"
+#import "Platform.hpp"
 #import <UIKit/UIKit.h>
+
+std::string PathForResource (const std::string& resourceName, const std::string& resourceExtension) {
+	@autoreleasepool {
+		NSString* resName = [NSString stringWithUTF8String:resourceName.c_str ()];
+		NSString* resType = [NSString stringWithUTF8String:resourceExtension.c_str ()];
+		NSString* filePath = [[NSBundle mainBundle] pathForResource:resName ofType:resType];
+		return [filePath UTF8String];
+	}
+}
 
 @implementation ImageReader
 
@@ -51,7 +60,8 @@ bool ReadImage (const std::vector<uint8_t>& imageData, uint32_t& width, uint32_t
 		}
 
 		// Alloc data that the image data will be put into
-		pixels.resize (height * stride * channelCount);
+		uint64_t size = height * stride * channelCount;
+		pixels.resize (size);
 		
 		// Setup color space
 		CGColorSpaceRef colorSpace = channelCount == 1 ? CGColorSpaceCreateDeviceGray () : CGColorSpaceCreateDeviceRGB ();
@@ -65,8 +75,6 @@ bool ReadImage (const std::vector<uint8_t>& imageData, uint32_t& width, uint32_t
 		CGContextDrawImage (context, CGRectMake (0, 0, width, height), imageRef);
 		CGContextRelease (context);
 		
-		CGImageRelease (imageRef);
-		
-		return false;
+		return true;
 	}
 }

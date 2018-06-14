@@ -6,7 +6,9 @@
 //  Copyright © 2018. Immortal Games. All rights reserved.
 //
 
+#include "stdafx.h"
 #import "OpenGLView.hpp"
+#include "game.hpp"
 
 @implementation OpenGLView
 
@@ -43,8 +45,19 @@
 	GLuint framebuffer;
 	glGenFramebuffers(1, &framebuffer);
 	glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
-	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0,
-							  GL_RENDERBUFFER, _colorRenderBuffer);
+	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER, _colorRenderBuffer);
+}
+
+- (void)setupDepthBuffer {
+	GLint framebufferWidth, framebufferHeight;
+	glGetRenderbufferParameteriv(GL_RENDERBUFFER, GL_RENDERBUFFER_WIDTH, &framebufferWidth);
+	glGetRenderbufferParameteriv(GL_RENDERBUFFER, GL_RENDERBUFFER_HEIGHT, &framebufferHeight);
+
+	GLuint depthBuffer;
+	glGenRenderbuffers(1, &depthBuffer);
+	glBindRenderbuffer(GL_RENDERBUFFER, depthBuffer);
+	glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT24_OES, framebufferWidth, framebufferHeight);
+	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, depthBuffer);
 }
 
 - (void)setupDisplayLink {
@@ -52,11 +65,37 @@
 	[displayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
 }
 
+- (double)getTimeInMillisec {
+	static std::chrono::high_resolution_clock::time_point start = std::chrono::high_resolution_clock::now ();
+	static bool firstCall = true;
+	
+	if (firstCall) {
+		firstCall = false;
+		return 0;
+	}
+	
+	//after first frame
+	std::chrono::high_resolution_clock::time_point curTime = std::chrono::high_resolution_clock::now ();
+	std::chrono::duration<double, std::milli> diff = curTime - start;
+	return diff.count ();
+}
+
 - (void)render:(CADisplayLink*)displayLink {
+	
 	static double add = 0;
 	add += 0.1;
 	glClearColor(0, (104.0 + add)/255.0, 55.0/255.0, 1.0);
 	glClear(GL_COLOR_BUFFER_BIT);
+	
+//	//Run the game
+//	Game& game = Game::Get ();
+//
+//	double timeInSec = [self getTimeInMillisec] / 1000.0;
+//	if (!game.Step (timeInSec)) {
+//		//return pvr::Result::ExitRenderFrame;
+//		return; //Exit game
+//	}
+
 	[_context presentRenderbuffer:GL_RENDERBUFFER];
 }
 
@@ -67,6 +106,13 @@
 		[self setupContext];
 		[self setupRenderBuffer];
 		[self setupFrameBuffer];
+		//[self setupDepthBuffer];
+		
+		if(glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
+			NSLog(@"failed to make complete framebuffer object %x", glCheckFramebufferStatus(GL_FRAMEBUFFER));
+			return nil;
+		}
+		
 		[self setupDisplayLink];
 	}
 	return self;
@@ -80,6 +126,13 @@
 		[self setupContext];
 		[self setupRenderBuffer];
 		[self setupFrameBuffer];
+		//[self setupDepthBuffer];
+		
+		if(glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
+			NSLog(@"failed to make complete framebuffer object %x", glCheckFramebufferStatus(GL_FRAMEBUFFER));
+			return nil;
+		}
+
 		[self setupDisplayLink];
 	}
 	return self;
