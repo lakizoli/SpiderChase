@@ -12,6 +12,8 @@
 
 @implementation OpenGLView
 
+GLuint programObject;
+
 + (Class)layerClass {
 	return [CAEAGLLayer class];
 }
@@ -87,15 +89,19 @@
 	glClearColor(0, (104.0 + add)/255.0, 55.0/255.0, 1.0);
 	glClear(GL_COLOR_BUFFER_BIT);
 	
-//	//Run the game
-//	Game& game = Game::Get ();
-//
-//	double timeInSec = [self getTimeInMillisec] / 1000.0;
-//	if (!game.Step (timeInSec)) {
-//		//return pvr::Result::ExitRenderFrame;
-//		return; //Exit game
-//	}
+	glDisable (GL_DEPTH_TEST);
+	
+	glViewport (0, 0, 320, 480);
+	
+	//Run the game
+	Game& game = Game::Get ();
 
+	double timeInSec = [self getTimeInMillisec] / 1000.0;
+	if (!game.Step (timeInSec)) {
+		//return pvr::Result::ExitRenderFrame;
+		return; //Exit game
+	}
+	
 	[_context presentRenderbuffer:GL_RENDERBUFFER];
 }
 
