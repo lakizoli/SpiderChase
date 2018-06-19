@@ -22,5 +22,5 @@ void main (void) {
 	} else {
 		diffColor = vec4 (1.0, 1.0, 0.66  ,1.0);
 	}
-	gl_FragColor = vec4 (diffColor.xyz, 1.0);
+	gl_FragColor = vec4 (diffColor.xyz * lightDotNorm, 1.0);
 }
