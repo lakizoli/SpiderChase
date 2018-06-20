@@ -2,7 +2,7 @@
 
 #ifdef PLATFORM_WINDOWS
 #	include <PVRShell/Shell.h>
-#elif defined(__APPLE__)
+#elif defined (PLATFORM_MACOS) || defined (PLATFORM_IOS)
 
 namespace pvr {
 	
@@ -62,9 +62,9 @@ enum class Keys : uint8_t
 	
 }//namespace pvr
 
-#else
+#else //PLATFORM
 #	error "Os not implemented!"
-#endif
+#endif //PLATFORM
 
 class InputState {
 	std::set<pvr::Keys> _lastDownKeys; ///< The list of the keys was down in the last state.

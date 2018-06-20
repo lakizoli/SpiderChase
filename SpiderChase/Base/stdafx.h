@@ -5,13 +5,8 @@
 
 #pragma once
 
-#if defined(_WIN32) || defined (_WIN64)
-#	define PLATFORM_WINDOWS
-#endif //Windows detection
-
-#ifdef PLATFORM_WINDOWS
-#	define _CRT_SECURE_NO_WARNINGS
-#endif
+//Have to be the first include!
+#include "platformconfig.hpp"
 
 #include <string>
 #include <vector>
@@ -33,7 +28,7 @@
 #	include <filesystem>
 	namespace fs = std::experimental::filesystem;
 
-#elif defined(__APPLE__)
+#elif defined (PLATFORM_MACOS) || defined (PLATFORM_IOS)
 
 #	include <boost/filesystem.hpp>
 namespace fs = boost::filesystem;

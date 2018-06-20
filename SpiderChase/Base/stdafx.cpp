@@ -4,7 +4,7 @@
 
 #include "stdafx.h"
 
-#ifdef __APPLE__
+#if defined (PLATFORM_MACOS) || defined (PLATFORM_IOS)
 
 void Log (LogLevel severity, const char* formatString, ...) {
 	va_list argumentList;
@@ -40,7 +40,7 @@ void Log (LogLevel severity, const char* formatString, ...) {
 	va_end(argumentList);
 }
 
-#endif //__APPLE__
+#endif //PLATFORM_MACOS || PLATFORM_IOS
 
 std::string Trim (const std::string& src) {
 	if (src.empty ()) {

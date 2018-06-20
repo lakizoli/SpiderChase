@@ -72,6 +72,7 @@
 		FD72923120D2668700E0253F /* start.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = start.vert; sourceTree = "<group>"; };
 		FD72923220D2668700E0253F /* start.program */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = start.program; sourceTree = "<group>"; };
 		FD72923820D2727100E0253F /* start.paklist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = start.paklist; sourceTree = "<group>"; };
+		FDAF7F3D20DA286A009E6257 /* platformconfig.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = platformconfig.hpp; sourceTree = "<group>"; };
 		FDE1794B20CF9C830056EAE0 /* SpiderChase.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpiderChase.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDE1794E20CF9C830056EAE0 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		FDE1794F20CF9C830056EAE0 /* AppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
@@ -189,6 +190,7 @@
 		FDE179A120CFABE40056EAE0 /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				FDAF7F3D20DA286A009E6257 /* platformconfig.hpp */,
 				FD72920620D2501400E0253F /* pakiostream.cpp */,
 				FD72920520D2501300E0253F /* pakiostream.hpp */,
 				FD72920720D2501400E0253F /* pakiosystem.cpp */,

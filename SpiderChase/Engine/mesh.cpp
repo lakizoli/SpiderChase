@@ -7,7 +7,7 @@ Mesh::Mesh (const std::string& name, const aiMesh* colladaMesh, const std::vecto
 	//Management
 	_name = name;
 
-	if (colladaMesh->mMaterialIndex >= 0 && colladaMesh->mMaterialIndex < materials.size ()) {
+	if (colladaMesh->mMaterialIndex < materials.size ()) {
 		_material = materials[colladaMesh->mMaterialIndex];
 	}
 

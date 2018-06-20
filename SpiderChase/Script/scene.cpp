@@ -26,7 +26,7 @@ public:
 	}
 } g_technologyIniter;
 
-#elif defined(__APPLE__)
+#elif defined (PLATFORM_MACOS) || defined (PLATFORM_IOS)
 
 #	include "Platform.hpp"
 
@@ -326,7 +326,7 @@ std::shared_ptr<Texture> Scene::LoadTexture (const std::string& name, std::istre
 
 	result = std::make_shared<Texture> (name, texPixelFormat, width, height, texData);
 
-#elif defined(__APPLE__)
+#elif defined (PLATFORM_MACOS) || defined (PLATFORM_IOS)
 	
 	uint32_t width = 0;
 	uint32_t height = 0;
@@ -401,7 +401,7 @@ std::shared_ptr<Scene::Assets> Scene::LoadPak (const std::string& name, const Sc
 	std::string pakPath;
 #ifdef PLATFORM_WINDOWS
 	pakPath = name + ".pak";
-#elif defined(__APPLE__)
+#elif defined (PLATFORM_MACOS) || defined (PLATFORM_IOS)
 	pakPath = PathForResource (name, "pak");
 #else
 #	error "OS not implemented!"

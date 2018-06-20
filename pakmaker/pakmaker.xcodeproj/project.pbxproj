@@ -37,6 +37,7 @@
 		5EA7D6D9A5F180D83F74026D /* Pods-pakmaker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pakmaker.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-pakmaker/Pods-pakmaker.debug.xcconfig"; sourceTree = "<group>"; };
 		7F858CEC0EC2DA5DA0609290 /* libPods-pakmaker.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-pakmaker.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		920B44612487B646A325C786 /* Pods-pakmaker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pakmaker.release.xcconfig"; path = "../Pods/Target Support Files/Pods-pakmaker/Pods-pakmaker.release.xcconfig"; sourceTree = "<group>"; };
+		FDAF7F3E20DA287F009E6257 /* platformconfig.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = platformconfig.hpp; path = ../SpiderChase/Base/platformconfig.hpp; sourceTree = "<group>"; };
 		FDE179D520D0F10D0056EAE0 /* pakmaker */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = pakmaker; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDE179DF20D0F1760056EAE0 /* addtopak.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = addtopak.cpp; sourceTree = "<group>"; };
 		FDE179E020D0F1760056EAE0 /* list.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = list.cpp; sourceTree = "<group>"; };
@@ -107,6 +108,7 @@
 		FDE179D720D0F10D0056EAE0 /* pakmaker */ = {
 			isa = PBXGroup;
 			children = (
+				FDAF7F3E20DA287F009E6257 /* platformconfig.hpp */,
 				FDE17A0B20D11F4B0056EAE0 /* pak.cpp */,
 				FDE17A0A20D11F4B0056EAE0 /* pak.hpp */,
 				FDE179DF20D0F1760056EAE0 /* addtopak.cpp */,
