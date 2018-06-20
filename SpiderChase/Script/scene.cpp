@@ -332,7 +332,7 @@ std::shared_ptr<Texture> Scene::LoadTexture (const std::string& name, std::istre
 	uint32_t height = 0;
 	uint32_t channelCount = 0;
 	std::vector<uint8_t> texData;
-	if (!ReadImage (data, width, height, channelCount, texData)) {
+	if (!ReadPixels (data, width, height, channelCount, texData)) {
 		return nullptr;
 	}
 	
@@ -344,30 +344,6 @@ std::shared_ptr<Texture> Scene::LoadTexture (const std::string& name, std::istre
 	} else { //RGBA
 		texPixelFormat = Texture::PixelFormat::RGBA_8888;
 	}
-	
-	//TODO: I think this will be a boring texture :D
-	//I think the loading is wrong because full /0 char
-	texData.resize(1024 * 1024 * 4);
-	for (int i = 0; i < 1024 * 1024 * 4; i += 4) {
-		int x = i % 1024;
-		int y = i / 1024;
-		
-		if (x / 32 % 2 == 0 ^ y / 32 % 2 == 0) {
-			texData[i] = 0xff;
-			texData[i + 1] = 0x00;
-			texData[i + 2] = 0x00;
-			texData[i + 3] = 0xff;
-			
-		}
-		else {
-			texData[i] = 0x00;
-			texData[i + 1] = 0xff;
-			texData[i + 2] = 0x00;
-			texData[i + 3] = 0xff;
-			
-		}
-	}
-	
 	
 	result = std::make_shared<Texture> (name, texPixelFormat, width, height, texData);
 	
