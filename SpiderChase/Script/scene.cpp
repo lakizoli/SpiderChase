@@ -8,31 +8,7 @@
 #include <assimp/scene.h>
 #include <assimp/Importer.hpp>
 #include <assimp/postprocess.h>
-
-#ifdef PLATFORM_WINDOWS
-#	include "EglContext.h"
-#	include <windows.h>
-#	include <wincodec.h>
-#	include <atlbase.h>
-
-class TechnologyIniter {
-public:
-	TechnologyIniter () {
-		CoInitialize (nullptr);
-	}
-
-	~TechnologyIniter () {
-		CoUninitialize ();
-	}
-} g_technologyIniter;
-
-#elif defined (PLATFORM_MACOS) || defined (PLATFORM_IOS)
-
-#	include "Platform.hpp"
-
-#else
-#	error OS not implemented!
-#endif
+#include "Platform.hpp"
 
 std::map<std::string, Scene::SceneCreator>& Scene::GetCreatorMap () {
 	static std::map<std::string, SceneCreator> creators;
@@ -230,104 +206,6 @@ std::shared_ptr<Texture> Scene::LoadTexture (const std::string& name, std::istre
 		return nullptr;
 	}
 
-	std::shared_ptr<Texture> result;
-
-#ifdef PLATFORM_WINDOWS
-
-	CComPtr<IWICImagingFactory> wicImagingFactory;
-	if (FAILED (wicImagingFactory.CoCreateInstance (CLSID_WICImagingFactory))) {
-		return nullptr;
-	}
-
-	CComPtr<IWICStream> wicStream;
-	if (FAILED (wicImagingFactory->CreateStream (&wicStream))) {
-		return nullptr;
-	}
-
-	if (FAILED (wicStream->InitializeFromMemory (&data[0], (DWORD) data.size ()))) {
-		return nullptr;
-	}
-
-	CComPtr<IWICBitmapDecoder> wicDecoder;
-	if (FAILED (wicImagingFactory->CreateDecoderFromStream (wicStream, nullptr, WICDecodeMetadataCacheOnLoad, &wicDecoder))) {
-		return nullptr;
-	}
-
-	uint32_t frameCount = 0;
-	if (FAILED (wicDecoder->GetFrameCount (&frameCount))) {
-		return nullptr;
-	}
-
-	if (frameCount < 1) {
-		return nullptr;
-	}
-
-	CComPtr<IWICBitmapFrameDecode> wicFrame;
-	if (FAILED (wicDecoder->GetFrame (0, &wicFrame))) {
-		return nullptr;
-	}
-
-	uint32_t width = 0;
-	uint32_t height = 0;
-	if (FAILED (wicFrame->GetSize (&width, &height))) {
-		return nullptr;
-	}
-
-	WICPixelFormatGUID pixelFormatID;
-	if (FAILED (wicFrame->GetPixelFormat (&pixelFormatID))) {
-		return nullptr;
-	}
-
-	CComPtr<IWICComponentInfo> componentInfo;
-	if (FAILED (wicImagingFactory->CreateComponentInfo (pixelFormatID, &componentInfo))) {
-		return nullptr;
-	}
-
-	CComPtr<IWICPixelFormatInfo> pixelFormatInfo;
-	if (FAILED (componentInfo->QueryInterface (IID_IWICPixelFormatInfo, (LPVOID*) &pixelFormatInfo))) {
-		return nullptr;
-	}
-
-	uint32_t channelCount = 0;
-	if (FAILED (pixelFormatInfo->GetChannelCount (&channelCount))) {
-		return nullptr;
-	}
-
-	Texture::PixelFormat texPixelFormat;
-	uint32_t stride;
-	WICPixelFormatGUID desiredWicPixelFormat;
-	if (channelCount == 1) { //ALPHA only
-		texPixelFormat = Texture::PixelFormat::ALPHA_8;
-		desiredWicPixelFormat = GUID_WICPixelFormat8bppGray;
-		stride = 4 * ((width + 3) / 4);
-	} else if (channelCount == 3) { //RGB
-		texPixelFormat = Texture::PixelFormat::RGB_888;
-		desiredWicPixelFormat = GUID_WICPixelFormat24bppRGB;
-		stride = 4 * ((width * 3 + 3) / 4);
-	} else { //RGBA
-		texPixelFormat = Texture::PixelFormat::RGBA_8888;
-		desiredWicPixelFormat = GUID_WICPixelFormat32bppRGBA;
-		stride = 4 * width;
-	}
-
-	CComPtr<IWICFormatConverter> wicConverter;
-	if (FAILED (wicImagingFactory->CreateFormatConverter (&wicConverter))) {
-		return nullptr;
-	}
-
-	if (FAILED (wicConverter->Initialize (wicFrame, desiredWicPixelFormat, WICBitmapDitherTypeNone, nullptr, 0.0f, WICBitmapPaletteTypeCustom))) {
-		return nullptr;
-	}
-
-	std::vector<uint8_t> texData (height * stride);
-	if (FAILED (wicConverter->CopyPixels (nullptr, stride, (uint32_t)texData.size (), &texData[0]))) {
-		return nullptr;
-	}
-
-	result = std::make_shared<Texture> (name, texPixelFormat, width, height, texData);
-
-#elif defined (PLATFORM_MACOS) || defined (PLATFORM_IOS)
-	
 	uint32_t width = 0;
 	uint32_t height = 0;
 	uint32_t channelCount = 0;
@@ -345,13 +223,7 @@ std::shared_ptr<Texture> Scene::LoadTexture (const std::string& name, std::istre
 		texPixelFormat = Texture::PixelFormat::RGBA_8888;
 	}
 	
-	result = std::make_shared<Texture> (name, texPixelFormat, width, height, texData);
-	
-#else
-#	error OS not implemented!
-#endif
-
-	return result;
+	return std::make_shared<Texture> (name, texPixelFormat, width, height, texData);
 }
 
 std::shared_ptr<Scene::ColladaSceneInfo> Scene::GetOrCreateSceneInfo (const std::string& name, std::map<std::string, std::shared_ptr<ColladaSceneInfo>>& scenes) {
@@ -374,15 +246,7 @@ std::shared_ptr<Scene::ColladaSceneInfo> Scene::GetOrCreateSceneInfo (const std:
 std::shared_ptr<Scene::Assets> Scene::LoadPak (const std::string& name, const SceneMaterialShaders& sceneMaterialShaders, ShaderBindCallback shaderBindCallback) {
 	Log (LogLevel::Information, "*** loading pak file (%s.pak) ***", name.c_str ());
 	
-	std::string pakPath;
-#ifdef PLATFORM_WINDOWS
-	pakPath = name + ".pak";
-#elif defined (PLATFORM_MACOS) || defined (PLATFORM_IOS)
-	pakPath = PathForResource (name, "pak");
-#else
-#	error "OS not implemented!"
-#endif
-
+	std::string pakPath = PathForResource (name, "pak");
 	std::shared_ptr<Pak> pak = Pak::OpenForRead (pakPath);
 	if (pak == nullptr) {
 		Log (LogLevel::Error, "Pak not found!");

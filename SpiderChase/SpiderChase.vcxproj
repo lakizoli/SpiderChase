@@ -90,7 +90,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Assimp\Include;$(SolutionDir)SDK\Framework;$(SolutionDir)SDK\External;$(SolutionDir)SDK\Builds\Include;$(ProjectDir)Base;$(ProjectDir)Script;$(ProjectDir)Engine;$(ProjectDir)Scenes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Assimp\Include;$(SolutionDir)SDK\Framework;$(SolutionDir)SDK\External;$(SolutionDir)SDK\Builds\Include;$(ProjectDir)Base;$(ProjectDir)Script;$(ProjectDir)Engine;$(ProjectDir)Scenes;$(ProjectDir)Win;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -111,7 +111,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Assimp\Include;$(SolutionDir)SDK\Framework;$(SolutionDir)SDK\External;$(SolutionDir)SDK\Builds\Include;$(ProjectDir)Base;$(ProjectDir)Script;$(ProjectDir)Engine;$(ProjectDir)Scenes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Assimp\Include;$(SolutionDir)SDK\Framework;$(SolutionDir)SDK\External;$(SolutionDir)SDK\Builds\Include;$(ProjectDir)Base;$(ProjectDir)Script;$(ProjectDir)Engine;$(ProjectDir)Scenes;$(ProjectDir)Win;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -134,7 +134,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Assimp\Include;$(SolutionDir)SDK\Framework;$(SolutionDir)SDK\External;$(SolutionDir)SDK\Builds\Include;$(ProjectDir)Base;$(ProjectDir)Script;$(ProjectDir)Engine;$(ProjectDir)Scenes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Assimp\Include;$(SolutionDir)SDK\Framework;$(SolutionDir)SDK\External;$(SolutionDir)SDK\Builds\Include;$(ProjectDir)Base;$(ProjectDir)Script;$(ProjectDir)Engine;$(ProjectDir)Scenes;$(ProjectDir)Win;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -159,7 +159,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Assimp\Include;$(SolutionDir)SDK\Framework;$(SolutionDir)SDK\External;$(SolutionDir)SDK\Builds\Include;$(ProjectDir)Base;$(ProjectDir)Script;$(ProjectDir)Engine;$(ProjectDir)Scenes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Assimp\Include;$(SolutionDir)SDK\Framework;$(SolutionDir)SDK\External;$(SolutionDir)SDK\Builds\Include;$(ProjectDir)Base;$(ProjectDir)Script;$(ProjectDir)Engine;$(ProjectDir)Scenes;$(ProjectDir)Win;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -194,6 +194,7 @@
     <ClCompile Include="Scenes\Start\StartScene.cpp" />
     <ClCompile Include="Script\game.cpp" />
     <ClCompile Include="Script\scene.cpp" />
+    <ClCompile Include="Win\Platform.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Base\EglContext.h" />
@@ -210,6 +211,7 @@
     <ClInclude Include="Scenes\Start\StartScene.hpp" />
     <ClInclude Include="Script\game.hpp" />
     <ClInclude Include="Script\scene.hpp" />
+    <ClInclude Include="Win\Platform.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Scenes\Start\start.frag" />

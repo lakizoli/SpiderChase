@@ -41,6 +41,9 @@
     <ClCompile Include="Engine\texture.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
+    <ClCompile Include="Win\Platform.cpp">
+      <Filter>Win</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Base">
@@ -57,6 +60,9 @@
     </Filter>
     <Filter Include="Engine">
       <UniqueIdentifier>{8ffa1585-74e8-4c34-8671-65b3c843c511}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Win">
+      <UniqueIdentifier>{a353c0e0-2080-4e5c-8502-5ca3ae726e09}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -102,6 +108,9 @@
     <ClInclude Include="Engine\texture.hpp">
       <Filter>Engine</Filter>
     </ClInclude>
+    <ClInclude Include="Win\Platform.hpp">
+      <Filter>Win</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Scenes\Start\start.program">
@@ -113,8 +122,8 @@
     <None Include="Scenes\Start\start.vert">
       <Filter>Scenes\Start</Filter>
     </None>
-    <None Include="Scenes\Start\start.paklist">
-      <Filter>Scenes\Start</Filter>
-    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="Scenes\Start\start.paklist" />
   </ItemGroup>
 </Project>
