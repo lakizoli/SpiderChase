@@ -93,12 +93,22 @@ bool ReadPixels (const std::vector<uint8_t>& imageData, uint32_t& width, uint32_
 		stride = 4 * width;
 	}
 
+	CComPtr<IWICBitmapFlipRotator> wicRotator;
+	if (FAILED (wicImagingFactory->CreateBitmapFlipRotator (&wicRotator))) { //Create flip/rotator
+		return false;
+	}
+
+	//Have to flip the image vertically because of difference in blender's UV system (+Y upside down) and OpenGL's UV system (+Y bottom up)!
+	if (FAILED (wicRotator->Initialize (wicFrame, WICBitmapTransformFlipVertical))) {
+		return false;
+	}
+
 	CComPtr<IWICFormatConverter> wicConverter;
 	if (FAILED (wicImagingFactory->CreateFormatConverter (&wicConverter))) {
 		return false;
 	}
 
-	if (FAILED (wicConverter->Initialize (wicFrame, desiredWicPixelFormat, WICBitmapDitherTypeNone, nullptr, 0.0f, WICBitmapPaletteTypeCustom))) {
+	if (FAILED (wicConverter->Initialize (wicRotator, desiredWicPixelFormat, WICBitmapDitherTypeNone, nullptr, 0.0f, WICBitmapPaletteTypeCustom))) {
 		return false;
 	}
 

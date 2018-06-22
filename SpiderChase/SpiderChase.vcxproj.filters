@@ -124,6 +124,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="Scenes\Start\start.paklist" />
+    <CustomBuild Include="Scenes\Start\start.paklist">
+      <Filter>Scenes\Start</Filter>
+    </CustomBuild>
   </ItemGroup>
 </Project>
