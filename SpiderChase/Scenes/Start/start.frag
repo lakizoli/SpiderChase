@@ -18,7 +18,7 @@ void main (void) {
 
 	vec4 diffColor;
 	if (hasDiffuseMap == 1) {
-		diffColor = texture2D (diffuseMap, fUV);
+		diffColor = texture2D (diffuseMap, fUV) * 3.0; //Debug light
 	} else {
 		diffColor = vec4 (1.0, 1.0, 0.66  ,1.0);
 	}

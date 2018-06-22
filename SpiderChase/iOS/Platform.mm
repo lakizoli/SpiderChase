@@ -50,6 +50,10 @@
 												  colorSpace, //CG RGB color space
 												  kCGImageAlphaNoneSkipLast); //RRRRRRRR_GGGGGGGG_BBBBBBBB_........
 	
+	//Have to flip the image vertically because of difference in blender's UV system (+Y upside down) and OpenGL's UV system (+Y bottom up)!
+	CGContextTranslateCTM (context, 0, imageSize.height);
+	CGContextScaleCTM (context, 1.0, -1.0);
+
 	CGContextDrawImage (context, CGRectMake (0, 0, imageSize.width, imageSize.height), [image CGImage]);
 	CGContextRelease (context);
 	CGColorSpaceRelease (colorSpace);
@@ -67,6 +71,10 @@
 												  1 * imageSize.width, //bytes per row
 												  colorSpace, //CG RGB color space
 												  kCGImageAlphaOnly); //AAAAAAAA
+	
+	//Have to flip the image vertically because of difference in blender's UV system (+Y upside down) and OpenGL's UV system (+Y bottom up)!
+	CGContextTranslateCTM (context, 0, imageSize.height);
+	CGContextScaleCTM (context, 1.0, -1.0);
 	
 	CGContextDrawImage (context, CGRectMake (0, 0, imageSize.width, imageSize.height), [image CGImage]);
 	CGContextRelease (context);
