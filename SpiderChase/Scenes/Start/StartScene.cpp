@@ -32,7 +32,7 @@ void StartScene::Init () {
 	gl::ClearColor (0.00f, 0.70f, 0.67f, 1.0f);
 
 	// Get mesh to show
-	_mesh = _assets->meshes["texbox.dae"];
+	_mesh = _assets->meshes["spiderbad.dae"];
 
 	// Create camera
 	_camera = std::make_shared<FirstPersonCamera> ();
@@ -111,7 +111,7 @@ void StartScene::Render () {
 	//  Clears the color buffer. glClear() can also be used to clear the depth or stencil buffer
 	//  (GL_DEPTH_BUFFER_BIT or GL_STENCIL_BUFFER_BIT)
 	gl::Clear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
+	glEnable (GL_DEPTH_TEST);
 	{
 		//  Bind the projection model view matrix (PMVMatrix) to
 		//  the associated uniform variable in the shader
@@ -150,7 +150,7 @@ void StartScene::Render () {
 		invalidateAttachments[0] = GL_DEPTH;
 		invalidateAttachments[1] = GL_STENCIL;
 
-		gl::InvalidateFramebuffer (GL_FRAMEBUFFER, 2, &invalidateAttachments[0]);
+		//gl::InvalidateFramebuffer (GL_FRAMEBUFFER, 2, &invalidateAttachments[0]);
 //	} else if (gl::isGlExtensionSupported ("GL_EXT_discard_framebuffer")) {
 //		GLenum invalidateAttachments[2];
 //		invalidateAttachments[0] = GL_DEPTH_EXT;

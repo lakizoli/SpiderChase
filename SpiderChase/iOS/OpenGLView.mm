@@ -64,34 +64,28 @@
 }
 
 - (void) setup {
-	//Clear state
+	// Clear state
 	_colorRenderBuffer = 0;
 	_depthRenderBuffer = 0;
-	_frameBuffer = 0;
-	_framebufferHeight = 0;
-	_framebufferWidth = 0;
-	
-	//Render buffer
+	_frameBuffer = 0;	
+	_framebufferWidth = self.frame.size.width;
+	_framebufferHeight = self.frame.size.height;
+
+	//Setup Depth buffer
+	glGenRenderbuffers(1, &_depthRenderBuffer);
+	glBindRenderbuffer(GL_RENDERBUFFER, _depthRenderBuffer);
+	glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT16, _framebufferWidth, _framebufferHeight);
+
+	// Setup Render buffer
 	glGenRenderbuffers (1, &_colorRenderBuffer);
 	glBindRenderbuffer (GL_RENDERBUFFER, _colorRenderBuffer);
-
-	//Frame buffer
+	[_context renderbufferStorage:GL_RENDERBUFFER fromDrawable:_eaglLayer];
+	
+	// Setup Frame buffer
 	glGenFramebuffers (1, &_frameBuffer);
 	glBindFramebuffer (GL_FRAMEBUFFER, _frameBuffer);
-
-	//Setup context
-	[_context renderbufferStorage:GL_RENDERBUFFER fromDrawable:_eaglLayer];
-	glFramebufferRenderbuffer (GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER, _colorRenderBuffer);
-	
-	glGetRenderbufferParameteriv (GL_RENDERBUFFER, GL_RENDERBUFFER_WIDTH, &_framebufferWidth);
-	glGetRenderbufferParameteriv (GL_RENDERBUFFER, GL_RENDERBUFFER_HEIGHT, &_framebufferHeight);
-
-	//Depth buffer
-//	GLuint depthBuffer;
-//	glGenRenderbuffers (1, &depthBuffer);
-//	glBindRenderbuffer (GL_RENDERBUFFER, depthBuffer);
-//	glRenderbufferStorage (GL_RENDERBUFFER, GL_DEPTH_COMPONENT24_OES, _framebufferWidth, _framebufferHeight);
-//	glFramebufferRenderbuffer (GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, depthBuffer);
+	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER, _colorRenderBuffer);
+	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, _depthRenderBuffer);
 
 	//Check frame buffer status
 	if (glCheckFramebufferStatus (GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
@@ -128,9 +122,7 @@
 	static double add = 0;
 	add += 0.1;
 	glClearColor(0, (104.0 + add)/255.0, 55.0/255.0, 1.0);
-	glClear(GL_COLOR_BUFFER_BIT);
-	
-	glDisable (GL_DEPTH_TEST);
+	//glClear(GL_COLOR_BUFFER_BIT);
 	
 	//Run the game
 	Game& game = Game::Get ();
