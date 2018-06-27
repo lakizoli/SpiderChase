@@ -247,7 +247,7 @@ namespace glm
 		ivec2 & lsb
 	)
 	{
-		imulExtended(x[0], y[0], msb[0], lsb[0]),
+		imulExtended(x[0], y[0], msb[0], lsb[0]);
 		imulExtended(x[1], y[1], msb[1], lsb[1]);
 	}
 
@@ -260,7 +260,7 @@ namespace glm
 		ivec3 & lsb
 	)
 	{
-		imulExtended(x[0], y[0], msb[0], lsb[0]),
+		imulExtended(x[0], y[0], msb[0], lsb[0]);
 		imulExtended(x[1], y[1], msb[1], lsb[1]);
 		imulExtended(x[2], y[2], msb[2], lsb[2]);
 	}
@@ -274,7 +274,7 @@ namespace glm
 		ivec4 & lsb
 	)
 	{
-		imulExtended(x[0], y[0], msb[0], lsb[0]),
+		imulExtended(x[0], y[0], msb[0], lsb[0]);
 		imulExtended(x[1], y[1], msb[1], lsb[1]);
 		imulExtended(x[2], y[2], msb[2], lsb[2]);
 		imulExtended(x[3], y[3], msb[3], lsb[3]);

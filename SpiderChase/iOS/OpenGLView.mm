@@ -150,6 +150,7 @@
 	if (self) {
 		[self createContext];
 		[self setup];
+		[self setMultipleTouchEnabled: YES];
 	}
 	return self;
 }
@@ -160,6 +161,7 @@
 	if (self) {
 		[self createContext];
 		[self setup];
+		[self setMultipleTouchEnabled: YES];
 	}
 	return self;
 }
@@ -176,6 +178,39 @@
 	_context = nil;
 }
 
+- (IBAction)handlePan:(UIPanGestureRecognizer*)recognizer {
+	CGPoint trans = [recognizer translationInView:self];
+	NSLog (@"pan... -> trans: %@", NSStringFromCGPoint (trans));
+}
+
+- (IBAction)handlePinch:(UIPinchGestureRecognizer*)recognizer {
+//	NSUInteger countOfPoints = [recognizer numberOfTouches];
+//	if (countOfPoints < 2) {
+//		return;
+//	}
+//
+//	CGPoint startTouch = [recognizer locationOfTouch:0 inView:self];
+//	CGPoint endTouch = [recognizer locationOfTouch:1 inView:self];
+//
+//	glm::vec2 start (startTouch.x, startTouch.y);
+//	glm::vec2 end (endTouch.x, endTouch.y);
+//
+//	CGFloat distance = (end - start).length ();
+	CGFloat scale = [recognizer scale];
+	CGFloat velocity = [recognizer velocity];
+	NSLog (@"pinch... -> scale: %.3f, velocity: %.3f scale/sec", scale, velocity);
+}
+
+- (IBAction)handleRotation:(UIRotationGestureRecognizer*)recognizer {
+	CGFloat rotation = [recognizer rotation];
+	CGFloat velocity = [recognizer velocity];
+	NSLog (@"rotate... -> rotation: %.3f rad, velocity: %.3f rad/sec", rotation, velocity);
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
+{
+	return YES;
+}
 
 /*
 // Only override drawRect: if you perform custom drawing.

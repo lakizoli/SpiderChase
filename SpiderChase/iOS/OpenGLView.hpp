@@ -11,6 +11,6 @@
 #include <OpenGLES/ES2/gl.h>
 #include <OpenGLES/ES2/glext.h>
 
-@interface OpenGLView : UIView
+@interface OpenGLView : UIView<UIGestureRecognizerDelegate>
 
 @end
