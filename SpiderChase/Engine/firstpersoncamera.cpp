@@ -4,7 +4,7 @@
 #include "firstpersoncamera.hpp"
 
 FirstPersonCamera::FirstPersonCamera () {
-	_position = glm::vec3 (0.0f, 0.0f, -1.0f);
+	_position = glm::vec3 (0.0f, 0.0f, -5.0f);
 	_ahead = glm::vec3 (0.0f, 0.0f, 1.0f);
 	_right = glm::vec3 (1.0f, 0.0f, 0.0f);
 	_yaw = 0.0;

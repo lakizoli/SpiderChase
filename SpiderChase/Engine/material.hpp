@@ -59,4 +59,9 @@ public:
 	void Render () const;
 
 	void Release ();
+	
+	const uint32_t GetShader ()
+	{
+		return _shader;
+	}
 };

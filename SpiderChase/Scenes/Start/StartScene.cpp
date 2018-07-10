@@ -21,6 +21,8 @@ void StartScene::Init () {
 			gl::BindAttribLocation (programID, 0, "pos");
 			gl::BindAttribLocation (programID, 1, "vNorm");
 			gl::BindAttribLocation (programID, 2, "vUV");
+			gl::BindAttribLocation (programID, 3, "blendIndices");
+			gl::BindAttribLocation (programID, 4, "blendWeights");
 		}
 	});
 
@@ -32,7 +34,7 @@ void StartScene::Init () {
 	gl::ClearColor (0.00f, 0.70f, 0.67f, 1.0f);
 
 	// Get mesh to show
-	_mesh = _assets->meshes["spiderbad.dae"];
+	_mesh = _assets->meshes["texbox.dae"];
 
 	// Create camera
 	_camera = std::make_shared<FirstPersonCamera> ();
@@ -95,7 +97,7 @@ Scene::SceneResults StartScene::Update (double currentTimeInSec, const InputStat
 
 		//Rotate test mesh
 		float velocity = 2.0f * glm::pi<float> () / 5.0f;
-		_xRot += velocity * deltaTime;
+		_xRot += velocity * deltaTime * 100.0f;
 	}
 
 	//TODO: ...
@@ -106,7 +108,7 @@ Scene::SceneResults StartScene::Update (double currentTimeInSec, const InputStat
 void StartScene::Render () {
 	// Matrix used for view projection
 	glm::mat4x4 viewProjection = glm::scale (glm::mat4 (1.0f), { .2f, .2f, .2f });
-	viewProjection = glm::rotate (viewProjection, _xRot, { 1.0f, 0.0f, 0.0f });
+	viewProjection = glm::rotate (viewProjection, _xRot, { 0.0f, 1.0f, 0.0f });
 
 	//  Clears the color buffer. glClear() can also be used to clear the depth or stencil buffer
 	//  (GL_DEPTH_BUFFER_BIT or GL_STENCIL_BUFFER_BIT)
@@ -142,7 +144,7 @@ void StartScene::Render () {
 //	}
 
 	// Render our mesh
-	_mesh->Render ();
+	_mesh->Render (_assets->programs["start.program"]);
 
 	//Ez itt miert volt igy? Mert egy fuggveny sose lehet nullptr!
 //	if (gl::InvalidateFramebuffer != nullptr) {
