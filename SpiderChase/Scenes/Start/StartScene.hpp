@@ -13,6 +13,9 @@ class StartScene : public Scene {
 
 	double _lastTime;
 	float _xRot;
+	
+	bool _hasLastPos;
+	glm::vec2 _lastPos;
 
 public:
 	StartScene ();

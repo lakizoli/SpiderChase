@@ -10,7 +10,9 @@ IMPLEMENT_SCENE (StartScene, "start");
 
 StartScene::StartScene () :
 	_lastTime (-1),
-	_xRot (0) {
+	_xRot (0),
+	_hasLastPos (false)
+{
 }
 
 void StartScene::Init () {
@@ -66,6 +68,7 @@ Scene::SceneResults StartScene::Update (double currentTimeInSec, const InputStat
 
 	if (deltaTime > 0) {
 		//Animate camera
+#ifdef INPUT_KEYBOARD_AVAILABLE
 		FPSCameraAnimDirs cameraAnimDirs = FPSCameraAnimDirs::None;
 		if (_inputState.IsKeyDown (pvr::Keys::Left) || _inputState.IsKeyDown (pvr::Keys::A)) {
 			cameraAnimDirs |= FPSCameraAnimDirs::Left;
@@ -94,7 +97,26 @@ Scene::SceneResults StartScene::Update (double currentTimeInSec, const InputStat
 //		Log(LogLevel::Information, "Start %f : %f /n", _inputState.GetPointerDelta().x, _inputState.GetPointerDelta().y);
 //
 //		_camera->Animate (deltaTime, cameraAnimDirs, _inputState.GetPointerDelta (), _inputState.IsKeyDown (pvr::Keys::Shift) ? 5.0f : 1.0f);
-
+#endif //INPUT_KEYBOARD_AVAILABLE
+		
+#ifdef INPUT_TOUCH_AVAILABLE
+		glm::vec2 diff;
+		_inputState.EnumerateTouches ([&] (uint64_t touchID, const glm::vec2& pos) -> void {
+			_hasLastPos = true;
+			_lastPos = pos;
+		}, [&] (uint64_t touchID, const glm::vec2& pos) -> void {
+			if (_hasLastPos) {
+				diff = _lastPos - pos;
+			}
+			_lastPos = pos;
+		}, [&] (uint64_t touchID, const glm::vec2& pos) -> void {
+			_hasLastPos = false;
+			_lastPos = glm::vec2 ();
+		});
+		
+		_camera->Animate (deltaTime, FPSCameraAnimDirs::None, diff / 1024.0f);
+#endif //INPUT_TOUCH_AVAILABLE
+		
 		//Rotate test mesh
 		float velocity = 2.0f * glm::pi<float> () / 5.0f;
 		_xRot += velocity * deltaTime * 100.0f;

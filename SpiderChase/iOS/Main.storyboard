@@ -20,32 +20,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <gestureRecognizers/>
                         <viewLayoutGuide key="safeArea" id="P4c-hl-a89"/>
-                        <connections>
-                            <outletCollection property="gestureRecognizers" destination="NtU-Vf-ZwC" appends="YES" id="M29-ff-YCy"/>
-                            <outletCollection property="gestureRecognizers" destination="Pdy-lZ-WCi" appends="YES" id="9cR-oY-y9V"/>
-                            <outletCollection property="gestureRecognizers" destination="ijC-hg-xAv" appends="YES" id="yWC-XF-CvZ"/>
-                        </connections>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3DW-A2-tpk" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <panGestureRecognizer minimumNumberOfTouches="1" id="NtU-Vf-ZwC">
-                    <connections>
-                        <action selector="handlePan:" destination="0f1-mt-hYo" id="LUf-Df-sZn"/>
-                        <outlet property="delegate" destination="0f1-mt-hYo" id="gQA-5J-ux3"/>
-                    </connections>
-                </panGestureRecognizer>
-                <pinchGestureRecognizer id="Pdy-lZ-WCi">
-                    <connections>
-                        <action selector="handlePinch:" destination="0f1-mt-hYo" id="QQj-j0-wih"/>
-                        <outlet property="delegate" destination="0f1-mt-hYo" id="s5s-I5-0em"/>
-                    </connections>
-                </pinchGestureRecognizer>
-                <rotationGestureRecognizer id="ijC-hg-xAv">
-                    <connections>
-                        <action selector="handleRotation:" destination="0f1-mt-hYo" id="tOs-zU-E2v"/>
-                        <outlet property="delegate" destination="0f1-mt-hYo" id="GmR-Og-M07"/>
-                    </connections>
-                </rotationGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="572" y="-170"/>
         </scene>

@@ -21,7 +21,7 @@
 	GLint _framebufferHeight;
 }
 
-#pragma mark - Setup functions
+#pragma mark - Setup OpenGL functions
 
 + (Class) layerClass {
 	return [CAEAGLLayer class];
@@ -63,7 +63,7 @@
 	}
 }
 
-- (void) setup {
+- (void) setupOpenGL {
 	// Clear state
 	_colorRenderBuffer = 0;
 	_depthRenderBuffer = 0;
@@ -141,7 +141,7 @@
 	self = [super initWithCoder:aDecoder];
 	if (self) {
 		[self createContext];
-		[self setup];
+		[self setupOpenGL];
 		[self setMultipleTouchEnabled: YES];
 	}
 	return self;
@@ -152,7 +152,7 @@
 	self = [super initWithFrame:frame];
 	if (self) {
 		[self createContext];
-		[self setup];
+		[self setupOpenGL];
 		[self setMultipleTouchEnabled: YES];
 	}
 	return self;
@@ -163,45 +163,56 @@
 	
 	[EAGLContext setCurrentContext:_context];
 	[self destroy];
-	[self setup];
+	[self setupOpenGL];
 }
 
 - (void)dealloc {
 	_context = nil;
 }
 
-- (IBAction)handlePan:(UIPanGestureRecognizer*)recognizer {
-	CGPoint trans = [recognizer translationInView:self];
-	NSLog (@"pan... -> trans: %@", NSStringFromCGPoint (trans));
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+	Game& game = Game::Get ();
+	InputHandler& input = game.GetInputHandler ();
+
+	[touches enumerateObjectsUsingBlock:^(UITouch * _Nonnull obj, BOOL * _Nonnull stop) {
+		uint64_t touchID = (uint64_t) obj;
+		CGPoint pt = [obj locationInView:self];
+		input.OnTouchBegan (touchID, glm::vec2 (pt.x, pt.y));
+	}];
 }
 
-- (IBAction)handlePinch:(UIPinchGestureRecognizer*)recognizer {
-//	NSUInteger countOfPoints = [recognizer numberOfTouches];
-//	if (countOfPoints < 2) {
-//		return;
-//	}
-//
-//	CGPoint startTouch = [recognizer locationOfTouch:0 inView:self];
-//	CGPoint endTouch = [recognizer locationOfTouch:1 inView:self];
-//
-//	glm::vec2 start (startTouch.x, startTouch.y);
-//	glm::vec2 end (endTouch.x, endTouch.y);
-//
-//	CGFloat distance = (end - start).length ();
-	CGFloat scale = [recognizer scale];
-	CGFloat velocity = [recognizer velocity];
-	NSLog (@"pinch... -> scale: %.3f, velocity: %.3f scale/sec", scale, velocity);
+- (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+	Game& game = Game::Get ();
+	InputHandler& input = game.GetInputHandler ();
+	
+	[touches enumerateObjectsUsingBlock:^(UITouch * _Nonnull obj, BOOL * _Nonnull stop) {
+		uint64_t touchID = (uint64_t) obj;
+		CGPoint pt = [obj locationInView:self];
+		input.OnTouchMoved (touchID, glm::vec2 (pt.x, pt.y));
+	}];
 }
 
-- (IBAction)handleRotation:(UIRotationGestureRecognizer*)recognizer {
-	CGFloat rotation = [recognizer rotation];
-	CGFloat velocity = [recognizer velocity];
-	NSLog (@"rotate... -> rotation: %.3f rad, velocity: %.3f rad/sec", rotation, velocity);
+- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+	Game& game = Game::Get ();
+	InputHandler& input = game.GetInputHandler ();
+	
+	[touches enumerateObjectsUsingBlock:^(UITouch * _Nonnull obj, BOOL * _Nonnull stop) {
+		uint64_t touchID = (uint64_t) obj;
+		CGPoint pt = [obj locationInView:self];
+		input.OnTouchEnded (touchID, glm::vec2 (pt.x, pt.y));
+	}];
+
 }
 
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
-{
-	return YES;
+- (void)touchesCancelled:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+	Game& game = Game::Get ();
+	InputHandler& input = game.GetInputHandler ();
+	
+	[touches enumerateObjectsUsingBlock:^(UITouch * _Nonnull obj, BOOL * _Nonnull stop) {
+		uint64_t touchID = (uint64_t) obj;
+		CGPoint pt = [obj locationInView:self];
+		input.OnTouchEnded (touchID, glm::vec2 (pt.x, pt.y));
+	}];
 }
 
 /*
