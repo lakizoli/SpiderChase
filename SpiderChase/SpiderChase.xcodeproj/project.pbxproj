@@ -494,7 +494,6 @@
 		};
 		FDE1796220CF9C850056EAE0 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FF1449866298AE0BD6142696 /* Pods-SpiderChase.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -512,7 +511,6 @@
 		};
 		FDE1796320CF9C850056EAE0 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7D9CFA7A7D6DE403370B1FFF /* Pods-SpiderChase.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
