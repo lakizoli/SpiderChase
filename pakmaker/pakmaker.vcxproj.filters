@@ -2,7 +2,6 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="stdafx.cpp" />
-    <ClCompile Include="..\SpiderChase\Base\pak.cpp" />
     <ClCompile Include="pack.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="list.cpp" />
@@ -10,9 +9,12 @@
     <ClCompile Include="addtopak.cpp" />
     <ClCompile Include="delfrompak.cpp" />
     <ClCompile Include="extractfrompak.cpp" />
+    <ClCompile Include="Platform.cpp" />
+    <ClCompile Include="..\SpiderChase\Pak\pak.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
-    <ClInclude Include="..\SpiderChase\Base\pak.hpp" />
+    <ClInclude Include="Platform.hpp" />
+    <ClInclude Include="..\SpiderChase\Pak\pak.hpp" />
   </ItemGroup>
 </Project>

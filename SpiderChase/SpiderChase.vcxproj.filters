@@ -17,9 +17,6 @@
     <ClCompile Include="Scenes\Start\StartScene.cpp">
       <Filter>Scenes\Start</Filter>
     </ClCompile>
-    <ClCompile Include="Base\pak.cpp">
-      <Filter>Base</Filter>
-    </ClCompile>
     <ClCompile Include="Engine\firstpersoncamera.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
@@ -32,17 +29,20 @@
     <ClCompile Include="Engine\material.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
-    <ClCompile Include="Base\pakiostream.cpp">
-      <Filter>Base</Filter>
-    </ClCompile>
-    <ClCompile Include="Base\pakiosystem.cpp">
-      <Filter>Base</Filter>
-    </ClCompile>
     <ClCompile Include="Engine\texture.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
     <ClCompile Include="Win\Platform.cpp">
       <Filter>Win</Filter>
+    </ClCompile>
+    <ClCompile Include="Pak\pak.cpp">
+      <Filter>Pak</Filter>
+    </ClCompile>
+    <ClCompile Include="Pak\pakiostream.cpp">
+      <Filter>Pak</Filter>
+    </ClCompile>
+    <ClCompile Include="Pak\pakiosystem.cpp">
+      <Filter>Pak</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -64,6 +64,9 @@
     <Filter Include="Win">
       <UniqueIdentifier>{a353c0e0-2080-4e5c-8502-5ca3ae726e09}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Pak">
+      <UniqueIdentifier>{e21e88aa-7d3e-45c1-83b6-15e8505d23d5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Base\EglContext.h">
@@ -81,9 +84,6 @@
     <ClInclude Include="Scenes\Start\StartScene.hpp">
       <Filter>Scenes\Start</Filter>
     </ClInclude>
-    <ClInclude Include="Base\pak.hpp">
-      <Filter>Base</Filter>
-    </ClInclude>
     <ClInclude Include="Engine\firstpersoncamera.hpp">
       <Filter>Engine</Filter>
     </ClInclude>
@@ -99,17 +99,20 @@
     <ClInclude Include="Engine\material.hpp">
       <Filter>Engine</Filter>
     </ClInclude>
-    <ClInclude Include="Base\pakiostream.hpp">
-      <Filter>Base</Filter>
-    </ClInclude>
-    <ClInclude Include="Base\pakiosystem.hpp">
-      <Filter>Base</Filter>
-    </ClInclude>
     <ClInclude Include="Engine\texture.hpp">
       <Filter>Engine</Filter>
     </ClInclude>
     <ClInclude Include="Win\Platform.hpp">
       <Filter>Win</Filter>
+    </ClInclude>
+    <ClInclude Include="Pak\pak.hpp">
+      <Filter>Pak</Filter>
+    </ClInclude>
+    <ClInclude Include="Pak\pakiostream.hpp">
+      <Filter>Pak</Filter>
+    </ClInclude>
+    <ClInclude Include="Pak\pakiosystem.hpp">
+      <Filter>Pak</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -135,7 +135,7 @@ void StartScene::Render () {
 	//  Clears the color buffer. glClear() can also be used to clear the depth or stencil buffer
 	//  (GL_DEPTH_BUFFER_BIT or GL_STENCIL_BUFFER_BIT)
 	gl::Clear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glEnable (GL_DEPTH_TEST);
+	gl::Enable (GL_DEPTH_TEST);
 	{
 		//  Bind the projection model view matrix (PMVMatrix) to
 		//  the associated uniform variable in the shader

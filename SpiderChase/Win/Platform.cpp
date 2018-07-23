@@ -6,9 +6,10 @@
 #include <wincodec.h>
 #include <atlbase.h>
 
-// #	include <filesystem>
-	// namespace fs = std::experimental::filesystem;
+#include <filesystem>
+namespace fs = std::experimental::filesystem;
 
+namespace Platform {
 
 class TechnologyIniter {
 public:
@@ -38,7 +39,7 @@ bool ReadPixels (const std::vector<uint8_t>& imageData, uint32_t& width, uint32_
 		return false;
 	}
 
-	if (FAILED (wicStream->InitializeFromMemory ((WICInProcPointer) &imageData[0], (DWORD)imageData.size ()))) {
+	if (FAILED (wicStream->InitializeFromMemory ((WICInProcPointer)&imageData[0], (DWORD)imageData.size ()))) {
 		return false;
 	}
 
@@ -123,3 +124,40 @@ bool ReadPixels (const std::vector<uint8_t>& imageData, uint32_t& width, uint32_
 
 	return true;
 }
+
+std::string FileNameFromPath (const std::string& path) {
+	fs::path fsPath (path);
+	return fsPath.filename ().string ();
+}
+
+std::string ExtensionFromPath (const std::string& path) {
+	fs::path fsPath (path);
+	return fsPath.extension ().string ();
+}
+
+std::string ParentOfPath (const std::string& path) {
+	fs::path fsPath (path);
+	return fsPath.parent_path ().string ();
+}
+
+bool RenameFile (const std::string& srcPath, const std::string& destPath) {
+	std::error_code err;
+	fs::rename (fs::path (srcPath), fs::path (destPath), err);
+	if (err) {
+		return false;
+	}
+
+	return true;
+}
+
+bool RemoveFile (const std::string& path) {
+	std::error_code err;
+	fs::remove (fs::path (path), err);
+	if (err) {
+		return false;
+	}
+
+	return false;
+}
+
+} //namespace Platform
