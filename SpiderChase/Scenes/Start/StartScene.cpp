@@ -119,7 +119,7 @@ Scene::SceneResults StartScene::Update (double currentTimeInSec, const InputStat
 		
 		//Rotate test mesh
 		float velocity = 2.0f * glm::pi<float> () / 5.0f;
-		_xRot += velocity * deltaTime * 100.0f;
+		_xRot += velocity * deltaTime;
 	}
 
 	//TODO: ...

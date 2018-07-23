@@ -29,6 +29,10 @@
 
 #elif defined (PLATFORM_MACOS) || defined (PLATFORM_IOS)
 
+#define GLM_FORCE_RADIANS
+#include <glm/glm.hpp>
+#include <glm/ext.hpp>
+
 enum class LogLevel
 {
 	Verbose = 0,

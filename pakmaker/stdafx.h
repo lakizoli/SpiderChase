@@ -28,7 +28,7 @@
 #	include <filesystem>
 	namespace fs = std::experimental::filesystem;
 
-#elif defined (PLATFORM_MACOS) || defined (PLATFORM_IOS)
+#elif defined (PLATFORM_MACOS)
 
 #	include <boost/filesystem.hpp>
 	namespace fs = boost::filesystem;
