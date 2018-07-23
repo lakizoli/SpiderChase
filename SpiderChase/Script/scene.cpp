@@ -161,12 +161,12 @@ bool Scene::LoadProgram (const std::string& programName, std::istream& stream, u
 
 	std::stringstream prg (source);
 	for (std::string line; std::getline (prg, line);) {
-		std::string fileName = Trim (line);
+		std::string fileName = Helper::Trim (line);
 		std::transform (fileName.begin (), fileName.end (), fileName.begin (), ::tolower);
 
-		if (StringEndsWith (fileName, ".frag")) {
+		if (Helper::StringEndsWith (fileName, ".frag")) {
 			fragmentShaders.push_back (fileName);
-		} else if (StringEndsWith (fileName, ".vert")) {
+		} else if (Helper::StringEndsWith (fileName, ".vert")) {
 			vertexShaders.push_back (fileName);
 		}
 	}
@@ -210,7 +210,7 @@ std::shared_ptr<Texture> Scene::LoadTexture (const std::string& name, std::istre
 	uint32_t height = 0;
 	uint32_t channelCount = 0;
 	std::vector<uint8_t> texData;
-	if (!ReadPixels (data, width, height, channelCount, texData)) {
+	if (!Platform::ReadPixels (data, width, height, channelCount, texData)) {
 		return nullptr;
 	}
 	
@@ -246,7 +246,7 @@ std::shared_ptr<Scene::ColladaSceneInfo> Scene::GetOrCreateSceneInfo (const std:
 std::shared_ptr<Scene::Assets> Scene::LoadPak (const std::string& name, const SceneMaterialShaders& sceneMaterialShaders, ShaderBindCallback shaderBindCallback) {
 	Log (LogLevel::Information, "*** loading pak file (%s.pak) ***", name.c_str ());
 	
-	std::string pakPath = PathForResource (name, "pak");
+	std::string pakPath = Platform::PathForResource (name, "pak");
 	std::shared_ptr<Pak> pak = Pak::OpenForRead (pakPath);
 	if (pak == nullptr) {
 		Log (LogLevel::Error, "Pak not found!");
@@ -268,43 +268,44 @@ std::shared_ptr<Scene::Assets> Scene::LoadPak (const std::string& name, const Sc
 	std::map<std::string, std::shared_ptr<ColladaSceneInfo>> scenes;
 
 	for (const Pak::FileEntry& entry : entries) {
-		fs::path entryPath (entry.path);
-		Log (LogLevel::Information, "Load: %s", entryPath.string ().c_str ());
+		std::string entryPath (entry.path);
+		Log (LogLevel::Information, "Load: %s", entryPath.c_str ());
 
-		std::string ext = entryPath.extension ().string ();
+		std::string entryFileName = Platform::FileNameFromPath (entryPath);
+		std::string ext = Platform::ExtensionFromPath (entryPath);
 		if (ext == ".program") {
-			if (!pak->ReadFile (entry, [&entryPath, &entry, &programs, &programVertexShaders, &programFragmentShaders] (std::istream& stream) -> bool {
+			if (!pak->ReadFile (entry, [&entryFileName, &entry, &programs, &programVertexShaders, &programFragmentShaders] (std::istream& stream) -> bool {
 				std::vector<std::string> vertexShaders;
 				std::vector<std::string> fragmentShaders;
-				if (!LoadProgram (entryPath.filename ().string (), stream, entry.size, vertexShaders, fragmentShaders)) {
+				if (!LoadProgram (entryFileName, stream, entry.size, vertexShaders, fragmentShaders)) {
 					return false;
 				}
 
-				std::string programName = entryPath.filename ().string ();
+				std::string programName = entryFileName;
 				programs.insert (programName);
 				programVertexShaders.emplace (programName, vertexShaders);
 				programFragmentShaders.emplace (programName, fragmentShaders);
 				return true;
 			})) {
-				Log (LogLevel::Error, "Cannot load program: %s from %s pak!", entryPath.filename ().string ().c_str (), name.c_str ());
+				Log (LogLevel::Error, "Cannot load program: %s from %s pak!", entryFileName.c_str (), name.c_str ());
 				return nullptr;
 			}
 		} else if (ext == ".frag" || ext == ".vert") {
 			uint32_t shaderType = ext == ".vert" ? GL_VERTEX_SHADER : GL_FRAGMENT_SHADER;
-			if (!pak->ReadFile (entry, [&entryPath, &entry, shaderType, assets] (std::istream& stream) -> bool {
-				return LoadShader (entryPath.filename ().string (), shaderType, stream, entry.size, assets);
+			if (!pak->ReadFile (entry, [&entryFileName, &entry, shaderType, assets] (std::istream& stream) -> bool {
+				return LoadShader (entryFileName, shaderType, stream, entry.size, assets);
 			})) {
-				Log (LogLevel::Error, "Cannot load shader: %s from %s pak!", entryPath.filename ().string ().c_str (), name.c_str ());
+				Log (LogLevel::Error, "Cannot load shader: %s from %s pak!", entryFileName.c_str (), name.c_str ());
 				return nullptr;
 			}
 		} else if (ext == ".dae") {
-			if (!pak->ReadFile (entry, [&entryPath, &entry, &scenes] (std::istream& stream) -> bool {
+			if (!pak->ReadFile (entry, [&entryFileName, &entry, &scenes] (std::istream& stream) -> bool {
 				std::shared_ptr<aiScene> scene = LoadCollada (stream, entry.size);
 				if (scene == nullptr) {
 					return false;
 				}
 
-				std::shared_ptr<ColladaSceneInfo> sceneInfo = GetOrCreateSceneInfo (entryPath.filename ().string (), scenes);
+				std::shared_ptr<ColladaSceneInfo> sceneInfo = GetOrCreateSceneInfo (entryFileName, scenes);
 				if (sceneInfo == nullptr) {
 					return false;
 				}
@@ -312,18 +313,18 @@ std::shared_ptr<Scene::Assets> Scene::LoadPak (const std::string& name, const Sc
 				sceneInfo->scene = scene;
 				return true;
 			})) {
-				Log (LogLevel::Error, "Cannot load collada: %s from %s pak!", entryPath.filename ().string ().c_str (), name.c_str ());
+				Log (LogLevel::Error, "Cannot load collada: %s from %s pak!", entryFileName.c_str (), name.c_str ());
 				return nullptr;
 			}
 		} else if (ext == ".png") {
-			if (!pak->ReadFile (entry, [&entryPath, &entry, &scenes](std::istream& stream) -> bool {
-				std::string texName = entryPath.filename ().string ();
+			if (!pak->ReadFile (entry, [&entryPath, &entryFileName, &entry, &scenes](std::istream& stream) -> bool {
+				std::string texName = entryFileName;
 				std::shared_ptr<Texture> tex = LoadTexture (texName, stream, entry.size);
 				if (tex == nullptr) {
 					return false;
 				}
 
-				std::shared_ptr<ColladaSceneInfo> sceneInfo = GetOrCreateSceneInfo (entryPath.parent_path ().string (), scenes);
+				std::shared_ptr<ColladaSceneInfo> sceneInfo = GetOrCreateSceneInfo (Platform::ParentOfPath (entryPath), scenes);
 				if (sceneInfo == nullptr) {
 					return false;
 				}
@@ -331,7 +332,7 @@ std::shared_ptr<Scene::Assets> Scene::LoadPak (const std::string& name, const Sc
 				sceneInfo->textures.emplace (texName, tex);
 				return true;
 			})) {
-				Log (LogLevel::Error, "Cannot load png texture: %s from %s pak!", entryPath.filename ().string ().c_str (), name.c_str ());
+				Log (LogLevel::Error, "Cannot load png texture: %s from %s pak!", entryFileName.c_str (), name.c_str ());
 				return nullptr;
 			}
 		}

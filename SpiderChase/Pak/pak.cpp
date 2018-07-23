@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "pak.hpp"
+#include "Platform.hpp"
 
 static std::istream& operator >> (std::istream& stream, Pak::Header& header) {
 	stream.read (header.mimeID, 4);
@@ -259,25 +260,12 @@ bool Pak::MarkFilesToDelete (const std::string& path, const std::set<std::string
 
 bool Pak::DeleteMarkedFiles (const std::string& path) {
 	//Move the pak to the copy source
-	fs::path delSourcePath (path);
+	std::string delSourcePath (path);
 	delSourcePath += ".delSource";
 
-#ifdef PLATFORM_WINDOWS
-	std::error_code err;
-	fs::rename (fs::path (path), delSourcePath, err);
-	if (err) {
+	if (!Platform::RenameFile (path, delSourcePath)) {
 		return false;
 	}
-#elif defined (PLATFORM_MACOS) || defined (PLATFORM_IOS)
-	boost::system::error_code err;
-	try {
-		fs::rename (fs::path (path), delSourcePath);
-	} catch (...) {
-		return false;
-	}
-#else
-#	error "OS not implemented!"
-#endif
 
 	//Create empty pak
 	if (!CreateEmpty (path)) {
@@ -287,7 +275,7 @@ bool Pak::DeleteMarkedFiles (const std::string& path) {
 	//Open old pak and read header
 	std::fstream stream;
 	Header header;
-	if (!OpenPakAndReadHeader (delSourcePath.string (), stream, header)) {
+	if (!OpenPakAndReadHeader (delSourcePath, stream, header)) {
 		return false;
 	}
 
@@ -358,8 +346,7 @@ bool Pak::DeleteMarkedFiles (const std::string& path) {
 
 	//Delete old pak
 	stream.close ();
-	fs::remove (delSourcePath, err);
-	if (err) {
+	if (!Platform::RemoveFile (delSourcePath)) {
 		return false;
 	}
 

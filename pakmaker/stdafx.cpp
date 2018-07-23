@@ -4,6 +4,8 @@
 
 #include "stdafx.h"
 
+namespace Helper {
+
 std::string Trim (const std::string& src) {
 	if (src.empty ()) {
 		return std::string ();
@@ -114,3 +116,5 @@ bool CopyFile (const fs::path& path, std::ostream& stream) {
 
 	return CopyFile (src, stream, srcLen);
 }
+
+} //namespace Helper

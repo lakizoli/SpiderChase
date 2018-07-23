@@ -21,8 +21,8 @@ struct PackFile {
 			return;
 		}
 
-		path = Trim (line.substr (0, pos));
-		name = Trim (line.substr (pos + 1));
+		path = Helper::Trim (line.substr (0, pos));
+		name = Helper::Trim (line.substr (pos + 1));
 	}
 
 	void ConvertRelativePathToAbsolute (const fs::path& basePath) {
@@ -106,7 +106,7 @@ int Pack (const std::string& pakPath, const std::string& listFilePath) {
 
 		//Add file to the pak
 		const PackFile& file = it->second;
-		return CopyFile (file.path, stream);
+		return Helper::CopyFile (file.path, stream);
 	})) {
 		std::cout << "Error during add files to pak at path -> " << pathPak << std::endl << std::endl;
 		return EXIT_FAILURE;

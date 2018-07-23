@@ -42,8 +42,12 @@
 
 //Helper functions
 
+namespace Helper {
+
 std::string Trim (const std::string& src);
 uint64_t GetFileLength (std::istream& stream);
 bool CopyFile (std::istream& src, std::ostream& dest, uint64_t byteCount);
 bool CopyFile (std::istream& stream, uint64_t byteCount, const fs::path& path);
 bool CopyFile (const fs::path& path, std::ostream& stream);
+
+} //namespace Helper

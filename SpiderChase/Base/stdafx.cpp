@@ -42,6 +42,8 @@ void Log (LogLevel severity, const char* formatString, ...) {
 
 #endif //PLATFORM_MACOS || PLATFORM_IOS
 
+namespace Helper {
+	
 std::string Trim (const std::string& src) {
 	if (src.empty ()) {
 		return std::string ();
@@ -84,3 +86,5 @@ bool StringStartsWith (const std::string& str, const std::string& find) {
 bool StringEndsWith (const std::string& str, const std::string& find) {
 	return str.rfind (find) == str.length () - find.length ();
 }
+
+} //namespace Helper

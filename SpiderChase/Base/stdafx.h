@@ -25,13 +25,9 @@
 
 #ifdef PLATFORM_WINDOWS
 
-#	include <filesystem>
-	namespace fs = std::experimental::filesystem;
+//...
 
 #elif defined (PLATFORM_MACOS) || defined (PLATFORM_IOS)
-
-#	include <boost/filesystem.hpp>
-namespace fs = boost::filesystem;
 
 enum class LogLevel
 {
@@ -52,6 +48,10 @@ void Log (LogLevel severity, const char* formatString, ...);
 
 //Helper functions
 
+namespace Helper {
+	
 std::string Trim (const std::string& src);
 bool StringStartsWith (const std::string& str, const std::string& find);
 bool StringEndsWith (const std::string& str, const std::string& find);
+
+} //namespace Helper

@@ -51,7 +51,7 @@ int ExtractFromPak (const std::string& pakPath, const std::string& destPath, con
 			}
 
 			if (!pak->ReadFile (file, [&file, &filePath] (std::istream& stream) -> bool {
-				return CopyFile (stream, file.size, filePath);
+				return Helper::CopyFile (stream, file.size, filePath);
 			})) {
 				std::cout << "Error: cannot extract file -> " << std::string (file.path) << std::endl << std::endl;
 				return EXIT_FAILURE;

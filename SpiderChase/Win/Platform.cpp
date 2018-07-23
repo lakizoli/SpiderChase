@@ -6,6 +6,10 @@
 #include <wincodec.h>
 #include <atlbase.h>
 
+// #	include <filesystem>
+	// namespace fs = std::experimental::filesystem;
+
+
 class TechnologyIniter {
 public:
 	TechnologyIniter () {

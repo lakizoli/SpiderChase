@@ -104,6 +104,8 @@
 
 @end
 
+namespace Platform {
+	
 std::string PathForResource (const std::string& resourceName, const std::string& resourceExtension) {
 	@autoreleasepool {
 		NSString* resName = [NSString stringWithUTF8String:resourceName.c_str ()];
@@ -170,3 +172,58 @@ bool ReadPixels (const std::vector<uint8_t>& imageData, uint32_t& width, uint32_
 		return true;
 	}
 }
+
+std::string FileNameFromPath (const std::string& path) {
+	@autoreleasepool {
+		NSString* nsPath = [NSString stringWithUTF8String:path.c_str ()];
+		NSString* fileName = [nsPath lastPathComponent];
+		return [fileName UTF8String];
+	}
+}
+
+std::string ExtensionFromPath (const std::string& path) {
+	@autoreleasepool {
+		NSString* nsPath = [NSString stringWithUTF8String:path.c_str ()];
+		NSString* ext = [nsPath pathExtension];
+		return std::string (".") + [ext UTF8String];
+	}
+}
+	
+std::string ParentOfPath (const std::string& path) {
+	@autoreleasepool {
+		NSString* nsPath = [NSString stringWithUTF8String:path.c_str ()];
+		NSString* parentPath = [nsPath stringByDeletingLastPathComponent];
+		return [parentPath UTF8String];
+	}
+}
+
+bool RenameFile (const std::string& srcPath, const std::string& destPath) {
+	@autoreleasepool {
+		NSString* fromPath = [NSString stringWithUTF8String:srcPath.c_str ()];
+		NSString* toPath = [NSString stringWithUTF8String:destPath.c_str ()];
+		NSError* error = nil;
+		if ([[NSFileManager defaultManager] moveItemAtPath:fromPath toPath:toPath error:&error] != YES) {
+			if (error) {
+				Log (LogLevel::Error, "RenameFile () - error: %s", [[error description] UTF8String]);
+			}
+			return false;
+		}
+		return true;
+	}
+}
+
+bool RemoveFile (const std::string& path) {
+	@autoreleasepool {
+		NSString* delPath = [NSString stringWithUTF8String:path.c_str ()];
+		NSError* error = nil;
+		if ([[NSFileManager defaultManager] removeItemAtPath:delPath error:&error] != YES) {
+			if (error) {
+				Log (LogLevel::Error, "RemoveFile () - error: %s", [[error description] UTF8String]);
+			}
+			return false;
+		}
+		return true;
+	}
+}
+
+} //namespace Platform

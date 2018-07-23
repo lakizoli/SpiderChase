@@ -5,9 +5,3 @@ target 'pakmaker' do
 	platform :osx, '10.13'
 	pod 'boost'
 end
-
-target 'SpiderChase' do
-	project 'SpiderChase/SpiderChase.xcodeproj'
-	platform :ios, '11.3'
-	pod 'boost'
-end

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		0DC1CED7A907E4FEBDCA177D /* libPods-pakmaker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F858CEC0EC2DA5DA0609290 /* libPods-pakmaker.a */; };
+		FDCD52072105A76B0081FE4D /* pak.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDCD52062105A76B0081FE4D /* pak.cpp */; };
+		FDCD520A2105AA130081FE4D /* Platform.mm in Sources */ = {isa = PBXBuildFile; fileRef = FDCD52092105AA130081FE4D /* Platform.mm */; };
 		FDE179E820D0F1760056EAE0 /* addtopak.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE179DF20D0F1760056EAE0 /* addtopak.cpp */; };
 		FDE179E920D0F1760056EAE0 /* list.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE179E020D0F1760056EAE0 /* list.cpp */; };
 		FDE179EA20D0F1760056EAE0 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE179E120D0F1760056EAE0 /* main.cpp */; };
@@ -16,7 +18,6 @@
 		FDE179ED20D0F1760056EAE0 /* pack.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE179E520D0F1760056EAE0 /* pack.cpp */; };
 		FDE179EE20D0F1760056EAE0 /* unpack.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE179E620D0F1760056EAE0 /* unpack.cpp */; };
 		FDE179EF20D0F1760056EAE0 /* delfrompak.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE179E720D0F1760056EAE0 /* delfrompak.cpp */; };
-		FDE17A0C20D11F4B0056EAE0 /* pak.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FDE17A0B20D11F4B0056EAE0 /* pak.cpp */; };
 		FDE17A1520D149BF0056EAE0 /* libboost_filesystem.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FDE17A1320D149BE0056EAE0 /* libboost_filesystem.a */; };
 		FDE17A1620D149BF0056EAE0 /* libboost_system.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FDE17A1420D149BF0056EAE0 /* libboost_system.a */; };
 /* End PBXBuildFile section */
@@ -38,6 +39,10 @@
 		7F858CEC0EC2DA5DA0609290 /* libPods-pakmaker.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-pakmaker.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		920B44612487B646A325C786 /* Pods-pakmaker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pakmaker.release.xcconfig"; path = "../Pods/Target Support Files/Pods-pakmaker/Pods-pakmaker.release.xcconfig"; sourceTree = "<group>"; };
 		FDAF7F3E20DA287F009E6257 /* platformconfig.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = platformconfig.hpp; path = ../SpiderChase/Base/platformconfig.hpp; sourceTree = "<group>"; };
+		FDCD52052105A76B0081FE4D /* pak.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = pak.hpp; path = ../SpiderChase/Pak/pak.hpp; sourceTree = "<group>"; };
+		FDCD52062105A76B0081FE4D /* pak.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = pak.cpp; path = ../SpiderChase/Pak/pak.cpp; sourceTree = "<group>"; };
+		FDCD52082105AA120081FE4D /* Platform.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Platform.hpp; sourceTree = "<group>"; };
+		FDCD52092105AA130081FE4D /* Platform.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Platform.mm; sourceTree = "<group>"; };
 		FDE179D520D0F10D0056EAE0 /* pakmaker */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = pakmaker; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDE179DF20D0F1760056EAE0 /* addtopak.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = addtopak.cpp; sourceTree = "<group>"; };
 		FDE179E020D0F1760056EAE0 /* list.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = list.cpp; sourceTree = "<group>"; };
@@ -48,8 +53,6 @@
 		FDE179E520D0F1760056EAE0 /* pack.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = pack.cpp; sourceTree = "<group>"; };
 		FDE179E620D0F1760056EAE0 /* unpack.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = unpack.cpp; sourceTree = "<group>"; };
 		FDE179E720D0F1760056EAE0 /* delfrompak.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = delfrompak.cpp; sourceTree = "<group>"; };
-		FDE17A0A20D11F4B0056EAE0 /* pak.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = pak.hpp; path = ../SpiderChase/Base/pak.hpp; sourceTree = "<group>"; };
-		FDE17A0B20D11F4B0056EAE0 /* pak.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = pak.cpp; path = ../SpiderChase/Base/pak.cpp; sourceTree = "<group>"; };
 		FDE17A1320D149BE0056EAE0 /* libboost_filesystem.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_filesystem.a; path = ../SDK/Boost/libboost_filesystem.a; sourceTree = "<group>"; };
 		FDE17A1420D149BF0056EAE0 /* libboost_system.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_system.a; path = ../SDK/Boost/libboost_system.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -109,8 +112,8 @@
 			isa = PBXGroup;
 			children = (
 				FDAF7F3E20DA287F009E6257 /* platformconfig.hpp */,
-				FDE17A0B20D11F4B0056EAE0 /* pak.cpp */,
-				FDE17A0A20D11F4B0056EAE0 /* pak.hpp */,
+				FDCD52062105A76B0081FE4D /* pak.cpp */,
+				FDCD52052105A76B0081FE4D /* pak.hpp */,
 				FDE179DF20D0F1760056EAE0 /* addtopak.cpp */,
 				FDE179E720D0F1760056EAE0 /* delfrompak.cpp */,
 				FDE179E320D0F1760056EAE0 /* extractfrompak.cpp */,
@@ -119,6 +122,8 @@
 				FDE179E520D0F1760056EAE0 /* pack.cpp */,
 				FDE179E220D0F1760056EAE0 /* stdafx.cpp */,
 				FDE179E420D0F1760056EAE0 /* stdafx.h */,
+				FDCD52082105AA120081FE4D /* Platform.hpp */,
+				FDCD52092105AA130081FE4D /* Platform.mm */,
 				FDE179E620D0F1760056EAE0 /* unpack.cpp */,
 			);
 			name = pakmaker;
@@ -219,11 +224,12 @@
 				FDE179EE20D0F1760056EAE0 /* unpack.cpp in Sources */,
 				FDE179E820D0F1760056EAE0 /* addtopak.cpp in Sources */,
 				FDE179EB20D0F1760056EAE0 /* stdafx.cpp in Sources */,
-				FDE17A0C20D11F4B0056EAE0 /* pak.cpp in Sources */,
+				FDCD52072105A76B0081FE4D /* pak.cpp in Sources */,
 				FDE179ED20D0F1760056EAE0 /* pack.cpp in Sources */,
 				FDE179EF20D0F1760056EAE0 /* delfrompak.cpp in Sources */,
 				FDE179E920D0F1760056EAE0 /* list.cpp in Sources */,
 				FDE179EC20D0F1760056EAE0 /* extractfrompak.cpp in Sources */,
+				FDCD520A2105AA130081FE4D /* Platform.mm in Sources */,
 				FDE179EA20D0F1760056EAE0 /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

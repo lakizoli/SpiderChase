@@ -60,7 +60,7 @@ int AddToPak (const std::string& pakPath, const std::vector<std::string>& addFil
 
 		//Add file to the pak
 		const fs::path& filePath = it->second;
-		return CopyFile (filePath, stream);
+		return Helper::CopyFile (filePath, stream);
 	})) {
 		std::cout << "Error during add files to pak at path -> " << pathPak << std::endl << std::endl;
 		return EXIT_FAILURE;
